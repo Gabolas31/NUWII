@@ -42,8 +42,9 @@ function SideBar({ isOpen, setIsOpen }: SideBarProps) {
       onClose={toggleDrawer(false)}
       sx={{
       '& .MuiDrawer-paper': {
-        backgroundColor: BusinessColors.Black,
-        color: '#fff',
+        backgroundColor: 'var(--color-white)',
+        color: 'var(--color-text-primary)',
+        boxShadow: 'var(--shadow-lg)',
       }
     }}>
       <Box
@@ -54,7 +55,7 @@ function SideBar({ isOpen, setIsOpen }: SideBarProps) {
       >
         <ListItem key={'logo'} disablePadding>
           <div
-            style={{ background: BusinessColors.Black, display: 'flex', width: '100%', paddingLeft: '50px', paddingBlock: '30px' }}
+            style={{ background: 'var(--color-white)', display: 'flex', width: '100%', paddingLeft: '50px', paddingBlock: '30px' }}
           >
             <Image src="/logo-icon.png" alt="Logo" className={styles.sideBarLogo} />
           </div>

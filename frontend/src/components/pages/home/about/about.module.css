@@ -1,90 +1,251 @@
+/* Seção Principal */
 .root {
   position: relative;
   display: flex;
   flex-grow: 1;
   width: 100%;
-  background: #fff;
+  background: var(--color-background);
   align-items: center;
   justify-content: center;
-}
-
-.darkRoot {
-  background: linear-gradient(#2c2c2e, #1c1c1e);
-  position: relative;
-  display: flex;
-  flex-grow: 1;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-}
-
-.darkRoot::after {
-  content: "";
-  display: block;
-  position: absolute;
-  left: 0;
-  bottom: -40px;
-  width: 100%;
-  height: 40px;
-  background: url('data:image/svg+xml;utf8,<svg width="100%" height="40" viewBox="0 0 100 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 20 Q 25 40 50 20 T 100 20 V40 H0 Z" fill="%231c1c1e"/></svg>') no-repeat bottom;
-  background-size: 100% 100%;
-  pointer-events: none;
-  z-index: 2;
-  transform: scaleX(-1) scaleY(-1) scale(1.1);
+  padding: var(--spacing-3xl) 0;
 }
 
 .container {
   display: flex;
   flex-grow: 1;
-  max-width: 1250px;
-  padding: 50px;
-  padding-bottom: 20px;
+  max-width: 1200px;
+  padding: 0 var(--spacing-lg);
   flex-direction: column;
 }
 
-.fade {
-  background: linear-gradient(#00000080, #00000000);
+/* Layout Principal - Imagem à esquerda, conteúdo à direita */
+.mainLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-3xl);
+  align-items: start;
   width: 100%;
-  min-height: 30px;
 }
 
-.headerTitle {
-  justify-content: center;
-  width: 100%;
+.leftSection {
   display: flex;
-  font-family: LinearGrotesk-Black, sans-serif;
-  margin-bottom: min(5vh, 50px);
+  justify-content: center;
+  align-items: center;
+  min-height: 700px;
+  padding: var(--spacing-xl);
+  position: relative;
 }
 
-.headerTitleDetails {
-  width: 90%;
-  text-align: center;
-  font-family: LinearGrotesk-Light, sans-serif;
-  margin-bottom: 2vh;
+.rightSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
 }
 
-.headerTitleDetails2 {
-  width: 100%;
-  text-align: center;
-  font-family: LinearGrotesk-Light, sans-serif;
-  margin-bottom: 2vh;
+.mainTitle {
+  font-family: var(--font-family-black);
+  font-size: var(--text-5xl);
+  font-weight: 900;
+  color: var(--color-text-primary);
+  line-height: var(--leading-tight);
+  margin: 0;
+  text-align: left;
 }
 
+.mainSubtitle {
+  font-family: var(--font-family-sans);
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+  text-align: left;
+}
+
+/* Imagem da Equipe - Lado Esquerdo */
 .teamImage {
-  width: calc(1022px * 0.5);
-  height: calc(767px * 0.5);
+  width: 100%;
+  height: 100%;
+  min-height: 700px;
+  max-height: 800px;
+  object-fit: contain;
+  object-position: left center;
+  filter: 
+    drop-shadow(0 20px 40px rgba(68, 203, 198, 0.3))
+    drop-shadow(0 10px 20px rgba(68, 203, 198, 0.2))
+    drop-shadow(0 5px 10px rgba(68, 203, 198, 0.1));
+  transition: all var(--transition-normal);
+  position: relative;
+  z-index: 2;
 }
 
-.notesImage {
-  width: calc(1024px * 0.25);
-  height: calc(1536px * 0.25);
+.teamImage:hover {
+  transform: scale(1.02);
+  filter: 
+    drop-shadow(0 25px 50px rgba(68, 203, 198, 0.4))
+    drop-shadow(0 15px 30px rgba(68, 203, 198, 0.3))
+    drop-shadow(0 8px 15px rgba(68, 203, 198, 0.2));
 }
 
-.circleItem {
+/* Grid de Benefícios - Layout 2x2 */
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+  width: 100%;
+}
+
+.benefitCard {
+  background: var(--color-white);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+  transition: all var(--transition-normal);
+  border: 1px solid var(--color-border-light);
+}
+
+.benefitCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary-light);
+}
+
+.benefitIcon {
+  margin-bottom: var(--spacing-sm);
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-block: 15px;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-primary);
+  transition: all var(--transition-normal);
+}
+
+.benefitIcon:hover {
+  background: rgba(68, 203, 198, 0.05);
+  border-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+.benefitTitle {
+  font-family: var(--font-family-bold);
+  font-size: var(--text-base);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.benefitDescription {
+  font-family: var(--font-family-sans);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
+/* Seção de Estatísticas - Números maiores */
+.statsSection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-xl);
+  width: 100%;
+  margin: var(--spacing-xl) 0;
+}
+
+.statItem {
+  text-align: center;
+  padding: var(--spacing-md);
+}
+
+.statNumber {
+  font-family: var(--font-family-black);
+  font-size: var(--text-5xl);
+  font-weight: 900;
+  color: var(--color-primary);
+  line-height: var(--leading-tight);
+  margin-bottom: var(--spacing-sm);
+}
+
+.statLabel {
+  font-family: var(--font-family-sans);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-normal);
+  text-align: center;
+}
+
+/* CTA Section */
+.ctaSection {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-xl);
+}
+
+.ctaButton {
+  transition: all var(--transition-normal);
+}
+
+/* Seção do Brasil */
+.brazilSection {
+  background: var(--color-gray-50);
+  padding: var(--spacing-3xl) 0;
+}
+
+.brazilContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+.brazilContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-3xl);
+  align-items: center;
+}
+
+.brazilText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.brazilTitle {
+  font-family: var(--font-family-bold);
+  font-size: var(--text-3xl);
+  color: var(--color-text-primary);
+  line-height: var(--leading-tight);
+  margin: 0;
+}
+
+.brazilDescription {
+  font-family: var(--font-family-sans);
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
+.brazilImageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.brazilImage {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+/* Seção de História */
+.storySection {
+  background: var(--color-background-dark);
+  color: var(--color-text-light);
+  padding: var(--spacing-3xl) 0;
 }
 
 .storyContainer {
@@ -96,173 +257,354 @@
 }
 
 .storyContent {
-  flex-direction: row;
-}
-
-.metricsText {
-  font-size: 22px;
-  text-align: left;
-  font-family: LinearGrotesk-Bold, sans-serif;
-}
-
-.storyText {
-  margin-top: min(10vh, 50px);
-  margin-left: 3vw;
-  text-align: justify;
-  font-family: LinearGrotesk-Bold, sans-serif;
-  margin-bottom: 2vh;
-}
-
-.storyLargeText {
-  color: #fff;
-  margin-left: min(3vw, 40px);
-  text-align: left;
-  font-family: LinearGrotesk-Bold, sans-serif;
-  font-size: 25px;
-  margin-bottom: 2vh;
-  text-align: justify;
+  width: 100%;
 }
 
 .heroContainer {
-  gap: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-3xl);
   align-items: center;
-  max-width: 930px; 
-  justify-content: space-between;
+  max-width: 1000px;
+}
+
+.storyText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.storyTitle {
+  font-family: var(--font-family-bold);
+  font-size: var(--text-2xl);
+  color: var(--color-text-light);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
+.storyDescription {
+  font-family: var(--font-family-sans);
+  font-size: var(--text-lg);
+  color: var(--color-text-light);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+  opacity: 0.9;
+}
+
+.heroImageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .heroImage {
-  width: calc(1536px * 0.32);
-  height: calc(1536px * 0.25);
-  border-radius: 5%;
-}
-
-.brazilContainer {
-  background: linear-gradient(#fff, #EDEEEE, #f9fafb);
   width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
 }
 
-.brazilContainer::after {
-  content: "";
-  display: block;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 40px;
-  background: url('data:image/svg+xml;utf8,<svg width="100%" height="40" viewBox="0 0 100 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 20 Q 25 40 50 20 T 100 20 V40 H0 Z" fill="%232c2c2e"/></svg>') no-repeat bottom;
-  background-size: 100% 100%;
-  pointer-events: none;
-  z-index: 2;
-  transform: scaleY(1.1);
-}
-
-.brazilImage {
-  width: 768px;
-  height: 512px;
-}
-
-.servicesButton {
-  text-align: left;
-}
-
-@media (max-width: 1170px) {
-  .storyText {
-    margin-top: min(5vh, 70px);
+/* Tablet */
+@media (max-width: 1023px) {
+  .mainLayout {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+    text-align: center;
   }
-  .storyContainer {
-    max-width: 660px;
+  
+  .mainTitle {
+    font-size: var(--text-4xl);
+    text-align: center;
   }
-  .storyContent {
-    flex-direction: column;
-    align-items: center;
+  
+  .mainSubtitle {
+    font-size: var(--text-lg);
+    text-align: center;
   }
-  .notesImage {
-    width: calc(1024px * 0.2);
-    height: calc(1536px * 0.2);
+  
+  .benefitsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
   }
+  
+  .statsSection {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  .statNumber {
+    font-size: var(--text-4xl);
+  }
+  
+  .brazilContent {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+    text-align: center;
+  }
+  
   .heroContainer {
-    flex-direction: column;
-  }
-  .heroImage {
-    width: calc(1536px * 0.4);
-    height: calc(1024px * 0.4);
-  }
-  .brazilImage {
-    width: calc(768px * 0.7);
-    height: calc(512px * 0.7);
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+    text-align: center;
   }
 }
 
-@media (max-width: 650px) {
-  .metricsText {
-    font-size: 17px;
+/* Mobile */
+@media (max-width: 767px) {
+  .container {
+    padding: 0 var(--spacing-md);
   }
-  .storyText {
-    margin-top: 3vh;
+  
+  .mainTitle {
+    font-size: var(--text-3xl);
   }
-  .storyLargeText {
-    font-size: 25px;
-    margin: 0;
+  
+  .mainSubtitle {
+    font-size: var(--text-base);
   }
-  .storyContainer {
-    max-width: 400px;
-  }
+  
   .teamImage {
-    width: calc(1022px * 0.3);
-    height: calc(767px * 0.3);
+    width: 100%;
+    min-height: 600px;
+    max-height: 700px;
   }
-  .notesImage {
-    width: calc(1024px * 0.15);
-    height: calc(1536px * 0.15);
+  
+  .leftSection {
+    min-height: 700px;
+    padding: var(--spacing-lg);
   }
-  .heroImage {
-    width: calc(1536px * 0.3);
-    height: calc(1024px * 0.3);
+  
+  .benefitsGrid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
   }
-  .brazilImage {
-    width: calc(768px * 0.5);
-    height: calc(512px * 0.5);
+  
+  .benefitCard {
+    padding: var(--spacing-md);
   }
-  .servicesButton {
-    font-size: 10px;
+  
+  .statsSection {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+  
+  .statNumber {
+    font-size: var(--text-4xl);
+  }
+  
+  .brazilTitle {
+    font-size: var(--text-2xl);
+  }
+  
+  .brazilDescription {
+    font-size: var(--text-base);
+  }
+  
+  .storyTitle {
+    font-size: var(--text-xl);
+  }
+  
+  .storyDescription {
+    font-size: var(--text-base);
   }
 }
 
-@media (max-width: 500px) {
-  .storyText {
-    font-size: 11px;
+/* Small Mobile */
+@media (max-width: 480px) {
+  .mainTitle {
+    font-size: var(--text-2xl);
   }
-  .metricsText {
-    font-size: 12px;
+  
+  .mainSubtitle {
+    font-size: var(--text-sm);
   }
-  .heroImage {
-    width: calc(1536px * 0.24);
-    height: calc(1024px * 0.24);
-  }
-}
-
-@media (max-width: 469px) {
-  .servicesButton {
-    font-size: 9px;
-  }
-}
-
-@media (max-width: 389px) {
-  .metricsText {
-    font-size: 12px;
-  }
-  .storyContainer {
-    max-width: 300px;
-  }
+  
   .teamImage {
-    width: calc(1022px * 0.3);
-    height: calc(767px * 0.3);
+    width: 100%;
+    min-height: 500px;
+    max-height: 600px;
   }
-  .storyLargeText {
-    font-size: 20px;
+  
+  .leftSection {
+    min-height: 600px;
+    padding: var(--spacing-md);
   }
-  .brazilImage {
-    width: calc(768px * 0.4);
-    height: calc(512px * 0.4);
+  
+  .benefitTitle {
+    font-size: var(--text-sm);
+  }
+  
+  .benefitDescription {
+    font-size: var(--text-xs);
+  }
+  
+  .statNumber {
+    font-size: var(--text-3xl);
+  }
+  
+  .statLabel {
+    font-size: var(--text-xs);
+  }
+  
+  .brazilTitle {
+    font-size: var(--text-xl);
+  }
+  
+  .brazilDescription {
+    font-size: var(--text-sm);
+  }
+  
+  .storyTitle {
+    font-size: var(--text-lg);
+  }
+  
+  .storyDescription {
+    font-size: var(--text-sm);
   }
 }
+
+/* Animações baseadas no webdecoded */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Classes de animação */
+.animateFadeInUp {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animateFadeInLeft {
+  animation: fadeInLeft 0.8s ease-out forwards;
+}
+
+.animateFadeInRight {
+  animation: fadeInRight 0.8s ease-out forwards;
+}
+
+.animateFadeInScale {
+  animation: fadeInScale 0.6s ease-out forwards;
+}
+
+.animateSlideInFromBottom {
+  animation: slideInFromBottom 1s ease-out forwards;
+}
+
+.animatePulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Delays para animações escalonadas */
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.delay-400 {
+  animation-delay: 0.4s;
+}
+
+.delay-500 {
+  animation-delay: 0.5s;
+}
+
+.delay-600 {
+  animation-delay: 0.6s;
+}
+
+/* Estado inicial para elementos animados */
+.animateOnScroll {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.animateOnScroll.animated {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s ease-out;
+}
+
+/* Efeito de seta embaixo do texto - igual ao Hero */
+.arrowText {
+  position: relative;
+  display: inline-block;
+}
+
+.arrowText::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+  border-radius: var(--radius-full);
+  opacity: 0.8;
+} 

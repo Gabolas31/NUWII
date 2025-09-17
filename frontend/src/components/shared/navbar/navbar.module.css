@@ -1,58 +1,97 @@
 .root {
   flex-direction: column;
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .container {
   width: 100%;
-  padding-inline: 1%;
-  padding-block: 1.2%;
-  font-size: 13px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--text-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .mobileContainer {
   display: none;
   width: 100%;
-  padding-inline: 1%;
-  padding-block: 1.2%;
-  font-size: 13px;
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--text-sm);
+  align-items: center;
+  justify-content: space-between;
 }
 
 .logo {
   display: flex;
   flex-grow: 1;
+  align-items: center;
 }
 
 .logoImg {
   width: 180px;
   height: 45px;
+  transition: transform var(--transition-fast);
+}
+
+.logoImg:hover {
+  transform: scale(1.05);
 }
 
 .dropDownMenu a {
   text-decoration: none;
-  color: #636363;
+  color: var(--color-text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.dropDownMenu a:hover {
+  color: var(--color-primary);
 }
 
 .loginButton {
   cursor: pointer;
-  color: #44cbc6;
-  border-color: #44cbc6;
-  transition: font-size 0.2s ease;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  background-color: transparent;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-full);
+  font-family: var(--font-family-bold);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all var(--transition-fast);
 }
 
 .loginButton:hover {
-  color: #44cbc6;
-  font-size: 16px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 .tabNavLink {
-  border-right: 1px solid #ccc;
-  font-size: 13px;
-  transition: font-size 0.2s ease;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  text-decoration: none;
 }
 
 .tabNavLink:hover {
-  font-size: 16px;
-  color: #44cbc6;
+  color: var(--color-primary);
+  background-color: var(--color-gray-50);
+  transform: translateY(-1px);
 }
 
 .sideBarLogo {
@@ -68,7 +107,20 @@
     display: none;
   }
   .loginButton {
-    margin-right: 10px;
-    font-size: 10px;
+    margin-right: var(--spacing-sm);
+    font-size: var(--text-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .container,
+  .mobileContainer {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  
+  .loginButton {
+    font-size: var(--text-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
   }
 }

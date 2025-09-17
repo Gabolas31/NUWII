@@ -9,22 +9,41 @@ import benefitsImg from "./assets/benefits.png";
 import heroImg from "./assets/hero.jpg";
 import styles from "./hero.module.css";
 
-const AnimatedShadowButton = styled(Button)({
-  color: BusinessColors.Blue,
-  borderColor: BusinessColors.Blue,
-  paddingBlock: '20px',
-  paddingInline: '100px',
-  boxShadow: '0 0 10px 0 #1976d2',
-  borderRadius: '100px',
-  marginBottom: '1vh',
-  animation: 'shadow-move 2s ease-in-out infinite alternate',
-  '@keyframes shadow-move': {
-    '0%': {
-      boxShadow: '0 0 15px 0 #1976d2',
-    },
-    '100%': {
-      boxShadow: '0 0 20px 5px #1976d2',
-    },
+const ModernButton = styled(Button)({
+  background: 'linear-gradient(135deg, #44cbc6, #2a9d98)',
+  color: '#ffffff',
+  border: 'none',
+  padding: '16px 32px',
+  borderRadius: '50px',
+  fontFamily: 'LinearGrotesk-Bold, sans-serif',
+  fontSize: '18px',
+  fontWeight: 600,
+  textTransform: 'uppercase',
+  letterSpacing: '0.5px',
+  cursor: 'pointer',
+  transition: 'all 0.3s ease',
+  boxShadow: '0 4px 15px rgba(68, 203, 198, 0.3)',
+  position: 'relative',
+  overflow: 'hidden',
+  '&:hover': {
+    transform: 'translateY(-2px)',
+    boxShadow: '0 8px 25px rgba(68, 203, 198, 0.4)',
+  },
+  '&:active': {
+    transform: 'translateY(0)',
+  },
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: '-100%',
+    width: '100%',
+    height: '100%',
+    background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)',
+    transition: 'left 0.5s ease',
+  },
+  '&:hover::before': {
+    left: '100%',
   },
 });
 
@@ -109,15 +128,16 @@ export function Hero({ onLoaded }: HeroProps) {
     }
   }, []);
 
-  const description1 = `Nós transformamos números em crescimento com propósito...`;
-  const description2 = `Acreditamos que cada empresa carrega uma história única. E é com responsabilidade, conhecimento e tecnologia que ajudamos você a escrever os próximos capítulos.`;
-  const description3 = `Oferecemos soluções empresariais alinhadas aos seus propósitos, com menos burocracia e mais eficiência, para que possa focar no que realmente importa: O crescimento da sua empresa.`;
+  const description1 = `Transformamos números em crescimento com propósito.`;
+  const description2 = `Acreditamos que cada empresa carrega uma história única. Com responsabilidade, conhecimento e tecnologia, ajudamos você a escrever os próximos capítulos.`;
+  const description3 = `Oferecemos soluções empresariais alinhadas aos seus propósitos, com menos burocracia e mais eficiência, para que você possa focar no que realmente importa: o crescimento da sua empresa.`;
 
   const getMotivationText = () => {
     return (
-      <span className={ styles.lightingText }>
-        <span className={ styles.glowingText }>
-          Todos querem <span style={{color: BusinessColors.Blue}}>chegar</span> ao topo...
+      <span className={styles.lightingText}>
+        <span className={styles.glowingText}>
+          Você cuida da sua empresa.<br />
+          A gente cuida da sua <span style={{color: BusinessColors.Primary}}>contabilidade</span>.
         </span>
       </span>
     );
@@ -137,36 +157,36 @@ export function Hero({ onLoaded }: HeroProps) {
               <div>{highlightText(description3, ["soluções empresariais alinhadas aos seus propósitos", "O crescimento da sua empresa"])}</div>
             </div>
             <div className={styles.benefitsContainer}>
-              <div className={ styles.mobileButton }>
+              <div className={styles.mobileButton}>
                 <a
                   href={`https://wa.me/${config.phoneNumber}?text=Olá! Venho pelo site da NUWII, e possuo interesse em saber mais sobre os serviços :)`}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ textDecoration: "none" }}
                 >
-                  <AnimatedShadowButton variant="outlined">
-                    <span className={ styles.mobileButtonText }>QUERO DESCOMPLICAR MINHA CONTABILIDADE</span>
-                  </AnimatedShadowButton>
+                  <ModernButton>
+                    Quero descomplicar minha contabilidade
+                  </ModernButton>
                 </a>
               </div>
-              <Image className={styles.benefitsImage} src={benefitsImg} alt="Benefits"/>
+              <Image className={styles.benefitsImage} src={benefitsImg} alt="Benefícios da NUWII"/>
             </div>
           </div>
           <div className={ styles.rightComponent }>
             <div className={ styles.mobileMotivationText }>
               {getMotivationText()}
             </div>
-            <Image className={styles.heroImage} src={heroImg} alt="Hero"/>
-            <div className={ styles.desktopButton }>
+            <Image className={styles.heroImage} src={heroImg} alt="Contabilidade NUWII"/>
+            <div className={styles.desktopButton}>
               <a
                 href={`https://wa.me/${config.phoneNumber}?text=Olá! Venho pelo site da NUWII, e possuo interesse em saber mais sobre os serviços :)`}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ textDecoration: "none" }}
               >
-                <AnimatedShadowButton variant="outlined">
-                  QUERO DESCOMPLICAR MINHA CONTABILIDADE
-                </AnimatedShadowButton>
+                <ModernButton>
+                  Quero descomplicar minha contabilidade
+                </ModernButton>
               </a>
             </div>
           </div>
