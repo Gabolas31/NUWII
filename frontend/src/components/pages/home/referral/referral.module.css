@@ -2,8 +2,8 @@
   width: 100%;
   position: relative;
   overflow: hidden;
-  background-color: var(--color-white);
-  padding: var(--spacing-3xl) 0;
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, rgba(161, 231, 229, 0.3) 100%);
+  padding: var(--spacing-5xl) 0;
 }
 
 .root::after {
@@ -47,12 +47,12 @@
 
 .title {
   color: var(--color-gray-900);
-  font-family: var(--font-family-bold);
-  font-size: var(--text-4xl);
-  font-weight: 700;
+  font-family: var(--font-family-black);
+  font-size: var(--text-5xl);
+  font-weight: 900;
   line-height: var(--leading-tight);
   margin: 0 0 var(--spacing-xl) 0;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 .title strong {
@@ -87,18 +87,24 @@
 .stepCard {
   background-color: var(--color-white);
   border: 2px solid var(--color-gray-300);
-  border-radius: var(--radius-xl);
-  padding: var(--spacing-2xl);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  border-radius: var(--radius-2xl);
+  padding: var(--spacing-3xl);
+  box-shadow: var(--shadow-lg);
   text-align: center;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-xl);
   flex: 1;
-  transition: all var(--transition-fast);
-  min-height: 280px;
+  transition: all var(--transition-normal);
+  min-height: 300px;
+}
+
+.stepCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--color-primary);
 }
 
 .stepNumberWrapper {
@@ -111,25 +117,23 @@
 }
 
 .stepNumberCircle {
-  width: 120px;
-  height: 120px;
-  background-color: rgba(68, 203, 198, 0.05);
+  width: 100px;
+  height: 100px;
+  background-color: var(--color-primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   z-index: 2;
+  box-shadow: var(--shadow-primary);
 }
 
 .stepNumber {
-  font-family: var(--font-family-bold);
-  font-size: 48px;
-  font-weight: 800;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-family: var(--font-family-black);
+  font-size: 40px;
+  font-weight: 900;
+  color: var(--color-white);
   line-height: 1;
   position: relative;
   z-index: 3;

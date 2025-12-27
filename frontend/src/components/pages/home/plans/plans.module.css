@@ -64,7 +64,7 @@
   background-color: var(--color-gray-50);
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-3xl) 0;
+  padding: var(--spacing-5xl) 0;
 }
 
 .root::before {
@@ -99,22 +99,22 @@
 }
 
 .mainTitle {
-  color: var(--color-primary);
-  font-family: var(--font-family-bold);
-  font-size: var(--text-4xl);
-  font-weight: 700;
+  color: var(--color-gray-900);
+  font-family: var(--font-family-black);
+  font-size: var(--text-5xl);
+  font-weight: 900;
   line-height: var(--leading-tight);
-  margin: 0 0 var(--spacing-lg) 0;
-  letter-spacing: -0.02em;
+  margin: 0 0 var(--spacing-xl) 0;
+  letter-spacing: -0.03em;
 }
 
 .mainDescription {
   color: var(--color-gray-600);
   font-family: var(--font-family-sans);
-  font-size: var(--text-lg);
+  font-size: var(--text-xl);
   line-height: var(--leading-relaxed);
-  margin: 0 0 var(--spacing-2xl) 0;
-  max-width: 800px;
+  margin: 0 0 var(--spacing-3xl) 0;
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -174,9 +174,10 @@
 
 .plansContainer {
   display: grid;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-2xl);
   grid-template-columns: repeat(3, 1fr);
-  margin-top: var(--spacing-3xl);
+  margin-top: var(--spacing-4xl);
+  align-items: start;
 }
 
 .planCard {
@@ -185,12 +186,29 @@
 }
 
 .planCardHighlighted {
-  transform: translateY(-8px);
+  transform: translateY(-20px);
+  border: 2px solid var(--color-primary) !important;
+  box-shadow: var(--shadow-primary-lg) !important;
+  position: relative;
+  z-index: 2;
+}
+
+.planCardHighlighted::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0.1;
 }
 
 .planCardHighlighted:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 8px 24px rgba(68, 203, 198, 0.2) !important;
+  transform: translateY(-24px);
+  box-shadow: var(--shadow-primary-lg) !important;
 }
 
 @media (max-width: 1023px) {

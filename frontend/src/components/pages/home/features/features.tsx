@@ -127,18 +127,33 @@ export function Features({
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
 
-    if (statsRef.current) {
-      observer.observe(statsRef.current);
+    const currentRef = statsRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (statsRef.current) {
-        observer.unobserve(statsRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
+  }, [hasAnimated]);
+
+  // Fallback: se após 3 segundos a animação não disparou, definir valores finais
+  useEffect(() => {
+    const fallbackTimer = setTimeout(() => {
+      if (!hasAnimated) {
+        setYearsCount(5);
+        setEntrepreneursCount(300);
+        setCompaniesCount(400);
+        setHasAnimated(true);
+      }
+    }, 3000);
+
+    return () => clearTimeout(fallbackTimer);
   }, [hasAnimated]);
 
   return (

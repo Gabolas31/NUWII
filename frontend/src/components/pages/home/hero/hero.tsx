@@ -110,6 +110,12 @@ export function Hero({ onLoaded }: HeroProps) {
               <br />
               Da abertura do CNPJ à rotina do dia a dia.
             </h2>
+            <ul className={styles.highlights}>
+              <li className={styles.highlight}>Sua empresa regularizada e sem multas indesejadas</li>
+              <li className={styles.highlight}>Economia no pagamento de impostos</li>
+              <li className={styles.highlight}>Suporte com contadores especialistas</li>
+              <li className={styles.highlight}>Atendimento 100% online e humanizado</li>
+            </ul>
             <div className={styles.ctaContainer}>
               <a
                 href={`https://wa.me/${config.phoneNumber}?text=Olá! Venho pelo site da NUWII, e possuo interesse em abrir minha empresa :)`}
