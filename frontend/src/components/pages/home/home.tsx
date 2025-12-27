@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { Flex } from "@radix-ui/themes";
 import Header from "@/pages/header";
-import { About } from "./about";
 import { Contact } from "./contact";
 import { Hero } from "./hero";
 import { LoadingScreen } from "./hero/LoadingScreen";
 import styles from "./home.module.css";
 import { Plans } from "./plans";
-import { Services } from "./services";
+import { Features } from "./features";
+import { Process } from "./process";
+import { Location } from "./location";
+import { Referral } from "./referral";
+import { Partners } from "./partners";
 
 export function HomePage() {
   const [heroLoaded, setHeroLoaded] = useState(false);
@@ -24,15 +27,16 @@ export function HomePage() {
           <main className={styles.homePage}>
             <Flex className={styles.root} direction="column">
               <Hero />
-              <section className={styles.section} id="about">
-                <About />
-              </section>
-              <section className={styles.section} id="services">
-                <Services />
-              </section>
+              <Features imageSrc="/assets/new-images/contabilidade-completa.b08d43d.png" />
+              <Process />
+              <Location />
+              <Referral />
               <section className={styles.section} id="plans">
                 <Plans />
               </section>
+              <div className={styles.colorBreak}>
+                <Partners />
+              </div>
               <section className={styles.section} id="contact">
                 <Contact />
               </section>

@@ -1,7 +1,6 @@
 import { CenterFocusStrong as CenterFocusStrongIcon, InfoOutline as InfoOutlineIcon } from '@mui/icons-material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {  Accordion, AccordionDetails,AccordionSummary,Box, Button,Card, CardContent, List, ListItem, ListItemIcon, ListItemText,
+import { Box, Button,Card, CardContent, List, ListItem, ListItemIcon, ListItemText,
 Typography  } from '@mui/material';
 import { green } from '@mui/material/colors';
 import { Flex } from "@radix-ui/themes";
@@ -14,95 +13,98 @@ import { BusinessColors, config } from "@/lib";
 // import person2Image from "./assets/nadja.png"
 import styles from "./plans.module.css";
 
-const faqData = [
+// Lista de planos por categoria
+const servicoPlans = [
   {
-    question: "O que é uma contabilidade digital?",
-    answer: "A contabilidade digital é um modelo moderno de prestação de serviços contábeis que utiliza tecnologia para automatizar processos, facilitar o acesso às informações e proporcionar maior agilidade no atendimento. Na NUWII, você tem acesso a um portal web e aplicativo para acompanhar sua empresa em tempo real."
+    title: "Business Standard",
+    features: [
+      'Abertura de empresa grátis',
+      'Atendimento via WhatsApp',
+      'Contabilidade completa',
+      'Relatórios contábeis',
+      'Conta PJ gratuita',
+      'Aplicativo e portal do cliente (web)',
+    ],
+    info: "Ideal para quem está começando ou quer uma contabilidade simples e eficiente.",
+    description: "Para quem quer resolver a contabilidade com agilidade e autonomia."
   },
   {
-    question: "Como funciona a abertura de empresa na NUWII?",
-    answer: "O processo é 100% digital e gratuito para clientes dos planos anuais. Nossa equipe cuida de toda a documentação e burocracia necessária. Você apenas fornece as informações básicas e nós cuidamos do resto, desde a consulta de viabilidade até a emissão do CNPJ."
+    title: "Business Unique",
+    features: [
+      'Tudo do plano Standard, mais:',
+      'Certificado digital grátis',
+      'Emissão de notas fiscais: até 5 NFs/mês',
+      'Pró-labore: 1 sócio',
+      'Endereço fiscal',
+    ],
+    info: "Perfeito para quem já tem operação rodando e quer mais estrutura sem ir para um plano avançado.",
+    description: "Para empresas em crescimento que precisam de mais apoio no dia a dia.",
+    isHighlighted: true
   },
   {
-    question: "Quanto custa abrir uma empresa?",
-    answer: "Para clientes que contratam nossos planos anuais, a abertura é totalmente gratuita. Isso inclui todas as taxas de registro, documentação e honorários. Você economiza entre 10% a 20% escolhendo o plano anual e ainda ganha a abertura sem custo adicional."
+    title: "Business Plus",
+    features: [
+      'Tudo do plano Unique, mais:',
+      'Atendimento telefônico',
+      'Reunião mensal via Meet ou Zoom',
+      'Consultoria contábil com especialistas',
+      'Emissão de notas fiscais: até 20 NFs/mês',
+      'Pró-labore: 2 sócios',
+      'Folha de pagamento: até 2 funcionários grátis',
+      'Endereço fiscal',
+      'Gerente de conta exclusivo',
+    ],
+    info: "Indicado para quem precisa de acompanhamento constante e visão financeira mais estratégica.",
+    description: "Para empresas com operação maior e demandas financeiras mais frequentes."
   },
-  {
-    question: "O que é e qual a obrigatoriedade do Certificado Digital?",
-    answer: "O Certificado Digital é uma assinatura eletrônica que garante autenticidade e segurança nas transações digitais com o governo. É obrigatório para empresas do Lucro Presumido e Lucro Real, e opcional para MEI e Simples Nacional. Todos os nossos planos incluem Certificado Digital A1."
-  },
-  {
-    question: "E quando já possuo empresa, mas quero que a NUWII cuide da minha?",
-    answer: "Fazemos a migração da sua empresa de forma gratuita! Nossa equipe especializada cuida de todo o processo de transição, incluindo a organização da documentação contábil anterior e regularização de pendências, se houver. O processo é simples e rápido."
-  },
-  {
-    question: "Quanto tempo demora para trocar de contador?",
-    answer: "O processo de migração geralmente leva de 15 a 30 dias. Durante esse período, nossa equipe faz toda a análise da situação atual da empresa, organiza a documentação e realiza a transição de forma segura, garantindo que não haja interrupção nos serviços."
-  },
-  {
-    question: "A NUWII tem planos para todos os tamanhos?",
-    answer: "Sim! Oferecemos planos desde MEI até empresas de grande porte. Temos o NU MEI, NU Standard, NU Commerce, NU Advanced, Carnê Leão para autônomos e planos personalizados para empresas com faturamento acima de R$ 4,8 milhões anuais."
-  },
-  {
-    question: "Quanto tempo dura meu contrato com a NUWII?",
-    answer: "Oferecemos contratos anuais com desconto (economia de 10% a 20%) e mensais. Não há fidelidade obrigatória - você pode cancelar quando desejar. Recomendamos o plano anual pelos benefícios adicionais, como abertura gratuita da empresa."
-  }
 ];
 
-// Lista de planos
-const plans = [
+const comercioPlans = [
   {
-    title: "NU Standard*",
+    title: "Commerce Standard",
     features: [
+      'Abertura de empresa grátis',
+      'Atendimento via WhatsApp',
       'Contabilidade completa',
-      'Simples Nacional, Lucro Presumido ou Lucro Real',
-      'Pró-labore dos sócios',
-      'Abertura ou migração ou desenquadramento grátis',
-      'Apuração de impostos e calendário',
-      'Certificado digital A1',
-      'Aplicativo e portal do cliente web',
+      'Relatórios contábeis',
+      'Conta PJ gratuita',
+      'Aplicativo e portal do cliente (web)',
     ],
-    info: "Plano ideal para Empresas de Serviços com faturamento até R$4.800mi/ano."
+    info: "Ideal para quem está começando ou quer uma contabilidade simples e eficiente.",
+    description: "Para quem quer resolver a contabilidade com agilidade e autonomia."
   },
   {
-    title: "NU Commerce*",
+    title: "Commerce Unique",
     features: [
-      'Contabilidade completa',
-      'Simples Nacional, Lucro Presumido ou Lucro Real',
-      'Pró-labore dos sócios',
-      'Abertura ou migração ou desenquadramento grátis',
-      'Apuração de impostos e calendário',
-      'Certificado digital A1',
-      'Aplicativo e portal do cliente web',
+      'Tudo do plano Standard, mais:',
+      'Certificado digital grátis',
+      'Emissão de notas fiscais: até 5 NFs/mês',
+      'Pró-labore: 1 sócio',
+      'Endereço fiscal',
     ],
-    info: "Plano ideal para Empresas de Comércio com faturamento até R$4.800mi/ano."
+    info: "Perfeito para quem já tem operação rodando e quer mais estrutura sem ir para um plano avançado.",
+    description: "Para empresas em crescimento que precisam de mais apoio no dia a dia.",
+    isHighlighted: true
   },
   {
-    title: "NU Advanced*",
+    title: "Commerce Plus",
     features: [
-      'Contabilidade completa',
-      'Simples Nacional, Lucro Presumido ou Lucro Real',
-      'Pró-labore dos sócios',
-      'Abertura ou migração ou desenquadramento grátis',
-      'Apuração de impostos e calendário',
-      'Certificado digital A1',
-      'Aplicativo e portal do cliente web',
+      'Tudo do plano Unique, mais:',
+      'Atendimento telefônico',
+      'Reunião mensal via Meet ou Zoom',
+      'Consultoria contábil com especialistas',
+      'Emissão de notas fiscais: até 20 NFs/mês',
+      'Pró-labore: 2 sócios',
+      'Folha de pagamento: até 2 funcionários grátis',
+      'Endereço fiscal',
+      'Gerente de conta exclusivo',
     ],
-    info: "Plano para Empresas de Atividade Mista (Serviço + Comércio ou Serviço + Indústria), com faturamento até R$4.800mi/ano."
+    info: "Indicado para quem precisa de acompanhamento constante e visão financeira mais estratégica.",
+    description: "Para empresas com operação maior e demandas financeiras mais frequentes."
   },
-  {
-    title: "NU MEI*",
-    features: [
-      'Serviço, Comércio ou Atividade Mista',
-      'Contabilidade completa',
-      'Pró-labore do empresário',
-      'Abertura ou migração grátis',
-      'Desenquadramento e transformação jurídica grátis',
-      'Apuração de impostos e calendário',
-      'Aplicativo e portal do cliente web',
-    ],
-    info: "Plano ideal para Microempreendedor Individual com faturamento até R$81 mil/ano."
-  },
+];
+
+const otherPlans = [
   {
     title: "CARNÊ LEÃO",
     features: [
@@ -172,86 +174,165 @@ interface CardPlanProps {
   title: string;
   items: string[];
   info: string;
+  description?: string;
+  isHighlighted?: boolean;
 }
 
-const CardPlan: React.FC<CardPlanProps> = ({ title, items, info }) => {
+const CardPlan: React.FC<CardPlanProps> = ({ title, items, info, description, isHighlighted }) => {
   const message = `Olá! Venho pelo site da NUWII e estou interessado(a) no plano ${title}.`;
   const whatsappLink = `https://wa.me/${config.phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (
-    <Box className={styles.planCard} sx={{ position: 'relative', borderRadius: 3 }}>
-      {/* Background layer */}
-      <Box
-        sx={{
-          position: 'absolute',
-          top: 8,
-          left: 8,
-          width: '100%',
-          height: '100%',
-          bgcolor: BusinessColors.Blue,
-          borderRadius: 3,
-          border: '2px solid black',
-          zIndex: 0,
-        }}
-      />
-      {/* Foreground card */}
-      <Card
-        sx={{
-          position: 'relative',
-          zIndex: 1,
-          borderRadius: 3,
+    <Card
+      className={`${styles.planCard} ${isHighlighted ? styles.planCardHighlighted : ''}`}
+      sx={{
+        position: 'relative',
+        borderRadius: 3,
+        border: isHighlighted ? `2px solid ${BusinessColors.Primary}` : '1px solid var(--color-border)',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        boxShadow: isHighlighted 
+          ? `0 4px 16px rgba(68, 203, 198, 0.15)` 
+          : '0 2px 8px rgba(0, 0, 0, 0.08)',
+        overflow: 'visible',
+      }}
+    >
+      {isHighlighted && (
+        <Box
+          sx={{
+            position: 'absolute',
+            top: -12,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            bgcolor: BusinessColors.Primary,
+            color: 'white',
+            px: 2,
+            py: 0.5,
+            borderRadius: 2,
+            fontSize: '0.75rem',
+            fontWeight: 'bold',
+            zIndex: 2,
+            letterSpacing: '0.05em',
+          }}
+        >
+          DESTAQUE
+        </Box>
+      )}
+      
+      <CardContent sx={{ flexGrow: 1, p: 3, display: 'flex', flexDirection: 'column' }}>
+        {/* Title */}
+        <Typography 
+          variant="h5" 
+          align="center" 
+          color={BusinessColors.Primary} 
+          fontWeight="bold"
+          sx={{ mb: 1 }}
+        >
+          {title}
+        </Typography>
+
+        {/* Description */}
+        {description && (
+          <Typography 
+            variant="body2" 
+            align="center" 
+            sx={{ 
+              color: 'var(--color-gray-600)', 
+              mb: 2,
+              fontSize: '0.9rem',
+              lineHeight: 1.5
+            }}
+          >
+            {description}
+          </Typography>
+        )}
+
+        {/* Info */}
+        <Box 
+          sx={{ 
+            display: 'flex', 
+            alignItems: 'flex-start', 
+            mb: 3,
+            p: 1.5,
+            bgcolor: 'var(--color-gray-50)',
+            borderRadius: 1,
+          }}
+        >
+          <InfoOutlineIcon sx={{ fontSize: "16px", color: BusinessColors.Primary, mr: 1, mt: 0.5, flexShrink: 0 }} />
+          <Typography variant="body2" sx={{ color: 'var(--color-gray-700)', fontSize: '0.85rem', lineHeight: 1.5 }}>
+            {info}
+          </Typography>
+        </Box>
+
+        {/* Features List */}
+        <List sx={{ flexGrow: 1, py: 0 }}>
+          {items.map((item, index) => {
+            const isHeader = item.startsWith('Tudo do plano');
+            return (
+              <ListItem 
+                key={index} 
+                disableGutters
+                sx={{ 
+                  py: 0.5,
+                  alignItems: isHeader ? 'flex-start' : 'flex-start'
+                }}
+              >
+                {!isHeader && (
+                  <ListItemIcon sx={{ minWidth: 28, mt: 0.5 }}>
+                    <CheckCircleIcon sx={{ color: green[500], fontSize: '20px' }} />
+                  </ListItemIcon>
+                )}
+                <ListItemText 
+                  primary={item}
+                  sx={{
+                    fontWeight: isHeader ? 600 : 400,
+                    color: isHeader ? BusinessColors.Primary : 'var(--color-gray-700)',
+                    fontSize: isHeader ? '0.9rem' : '0.875rem',
+                    '& .MuiListItemText-primary': {
+                      fontSize: isHeader ? '0.9rem' : '0.875rem',
+                      lineHeight: 1.5,
+                    }
+                  }}
+                />
+              </ListItem>
+            );
+          })}
+        </List>
+      </CardContent>
+
+      {/* Footer with Button */}
+      <Box 
+        sx={{ 
+          bgcolor: BusinessColors.Primary,
           p: 2,
-          border: '2px solid black',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          height: "94%"
+          borderBottomLeftRadius: 12,
+          borderBottomRightRadius: 12,
         }}
       >
-        <CardContent sx={{ flexGrow: 1, paddingBottom: 0 }}>
-          <Typography 
-            variant="h5" 
-            align="center" 
-            color={BusinessColors.Blue} 
-            fontWeight="bold"     
-          >
-            {title !== "CARNÊ LEÃO" ? title.split(' ')[0] : <span>CARNÊ <span style={{color: "#000"}}>LEÃO</span></span>}
-          </Typography>
-          <Typography variant="h5" align="center" fontWeight="bold" gutterBottom>
-            {title !== "CARNÊ LEÃO" ? title.split(' ').slice(1).join(' ') : <></>}
-          </Typography>
-          <div className={styles.infoText}>
-            <InfoOutlineIcon sx={{fontSize: "13px", marginLeft: "5px"}}/>
-            <span style={{marginLeft: "5px"}}>
-              {highlightTextBold(info, ["Empresas de Serviços", "Empresas de Comércio", "Empresas de Atividade Mista", "Microempreendedor Individual", "Autônomo PF", "Suporte personalizado."])}
-            </span>
-          </div>
-          <List>
-            {items.map((item, index) => (
-              <ListItem key={index} disableGutters>
-                <ListItemIcon sx={{ minWidth: 32 }}>
-                  <CheckCircleIcon sx={{ color: green[500] }} />
-                </ListItemIcon>
-                <ListItemText primary={item} />
-              </ListItem>
-            ))}
-          </List>
-        </CardContent>
-
-        {/* WhatsApp Button */}
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Button
-            variant="outlined"
-            href={whatsappLink}
-            target="_blank"
-            endIcon={<CenterFocusStrongIcon/>}
-            sx={{ backgroundColor: "#fff", color: "#111", borderColor: "#111", borderRadius: "30px" }}
-          >
-            Saiba mais
-          </Button>
-        </Box>
-      </Card>
-    </Box>
+        <Button
+          fullWidth
+          variant="contained"
+          href={whatsappLink}
+          target="_blank"
+          endIcon={<CenterFocusStrongIcon/>}
+          sx={{ 
+            backgroundColor: "#fff", 
+            color: "#000", 
+            border: '1px solid #000',
+            borderRadius: "30px",
+            textTransform: 'uppercase',
+            fontWeight: 600,
+            fontSize: '0.875rem',
+            '&:hover': {
+              backgroundColor: 'var(--color-gray-50)',
+            }
+          }}
+        >
+          Saiba mais
+        </Button>
+      </Box>
+    </Card>
   );
 };
 
@@ -345,22 +426,45 @@ const GradientBar: React.FC = () => {
 
 
 export function Plans() {
+  const [selectedType, setSelectedType] = React.useState<'servico' | 'comercio'>('servico');
+
   return (
     <Flex className={styles.root}>
       <Flex className={styles.container}>
-        <div className={styles.headerTitle}>
-          <span className={styles.lightingText}>
-            Nossos planos <span style={{ color: BusinessColors.Blue }}>para todos os tamanhos</span>
-          </span>
-        </div>
-        <div className={styles.headerTitleDetails}>
-          <span>
-            Aqui na <span style={{ color: BusinessColors.Blue }}>NUWII</span> ao escolher o <span style={{ color: BusinessColors.Blue }}>plano anual</span> você economiza entre <span style={{ color: BusinessColors.Blue }}>10% a 20%</span> e os honorários contábeis de abertura da sua empresa são por nossa conta
-          </span>
+        <div className={styles.headerSection}>
+          <h2 className={styles.mainTitle}>
+            Escolha o plano que melhor se adequa à sua necessidade!
+          </h2>
+          <p className={styles.mainDescription}>
+            Planos completos, com suporte humano e tecnologia para simplificar sua rotina. Escolha o que mais faz sentido para você:
+          </p>
+          
+          {/* Toggle Selector */}
+          <div className={styles.toggleContainer}>
+            <button
+              className={`${styles.toggleButton} ${selectedType === 'servico' ? styles.toggleActive : ''}`}
+              onClick={() => setSelectedType('servico')}
+            >
+              Serviço
+            </button>
+            <button
+              className={`${styles.toggleButton} ${selectedType === 'comercio' ? styles.toggleActive : ''}`}
+              onClick={() => setSelectedType('comercio')}
+            >
+              Comércio
+            </button>
+          </div>
         </div>
         <Flex className={styles.plansContainer}>
-          {plans.map((plan, index) => (
-            <CardPlan key={index} title={plan.title} items={plan.features} info={plan.info} />
+          {(selectedType === 'servico' ? servicoPlans : comercioPlans).map((plan, index) => (
+            <CardPlan 
+              key={index} 
+              title={plan.title} 
+              items={plan.features} 
+              info={plan.info}
+              description={plan.description}
+              isHighlighted={plan.isHighlighted}
+            />
           ))}
         </Flex>
         <Flex style={{marginTop: "70px", width: "100%", alignItems: "center", justifyContent: "center"}}>
@@ -368,78 +472,6 @@ export function Plans() {
             <GradientBar/>
           </div>
         </Flex>
-        {/* FAQ Section */}
-        <Box sx={{ mt: 8, width: '100%', maxWidth: '800px', mx: 'auto' }}>
-          <Typography 
-            variant="h3" 
-            component="h2"
-            sx={{
-              textAlign: 'center',
-              fontWeight: 700,
-              color: '#fff',
-              mb: 4,
-              fontSize: { xs: '2rem', md: '2.5rem' }
-            }}
-          >
-            <span className={styles.lightingText} style={{paddingBottom: "7px"}}>
-              Perguntas <span style={{color: BusinessColors.Blue}}>Frequentes</span>
-            </span>
-          </Typography>
-          
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            {faqData.map((faq, index) => (
-              <Accordion
-                key={index}
-                elevation={2}
-                sx={{
-                  border: '1px solid #e0e0e0',
-                  borderRadius: '8px !important',
-                  '&:before': { display: 'none' },
-                  '&.Mui-expanded': {
-                    margin: 0,
-                    boxShadow: `0 4px 12px ${BusinessColors.Blue}20`,
-                    border: `1px solid ${BusinessColors.Blue}40`,
-                  }
-                }}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon sx={{ color: BusinessColors.Blue }} />}
-                  sx={{
-                    backgroundColor: '#fafafa',
-                    borderRadius: '8px',
-                    '&.Mui-expanded': {
-                      backgroundColor: `${BusinessColors.Blue}05`,
-                    },
-                    '& .MuiAccordionSummary-content': {
-                      margin: '16px 0',
-                    }
-                  }}
-                >
-                  <Typography 
-                    variant="h6" 
-                    sx={{
-                      color: '#263238',
-                      fontSize: { xs: '1rem', md: '1.1rem' }
-                    }}
-                  >
-                    {faq.question}
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails sx={{ pt: 0, pb: 3 }}>
-                  <Typography 
-                    sx={{ 
-                      color: '#455A64',
-                      lineHeight: 1.7,
-                      fontSize: '1rem'
-                    }}
-                  >
-                    {faq.answer}
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-            ))}
-          </Box>
-        </Box>
         {/* <Flex className={styles.recommendationComponent}>
           <RecommendationCard
             photo={person1Image}

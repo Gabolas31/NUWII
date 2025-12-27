@@ -7,7 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import {
 	HamburgerMenuIcon,
 } from "@radix-ui/react-icons";
-import { Button, Flex, Separator, TabNav } from "@radix-ui/themes";
+import { Button, Flex } from "@radix-ui/themes";
 import { useState } from "react";
 
 import { Image } from "@/components";
@@ -27,11 +27,9 @@ function SideBar({ isOpen, setIsOpen }: SideBarProps) {
   };
 
   const drawerItems = [
-    { label: 'INÍCIO', href: '#home' },
-    { label: 'A NUWII', href: '#about' },
-    { label: 'SERVIÇOS', href: '#services' },
-    { label: 'PLANOS', href: '#plans' },
-    { label: 'CONTATO', href: '#contact' },
+    { label: 'Serviços', href: '#services' },
+    { label: 'Planos', href: '#plans' },
+    { label: 'Sobre', href: '#about' },
   ];
 
   return (
@@ -42,29 +40,55 @@ function SideBar({ isOpen, setIsOpen }: SideBarProps) {
       onClose={toggleDrawer(false)}
       sx={{
       '& .MuiDrawer-paper': {
-        backgroundColor: 'var(--color-white)',
-        color: 'var(--color-text-primary)',
-        boxShadow: 'var(--shadow-lg)',
+        backgroundColor: BusinessColors.White,
+        color: BusinessColors.TextPrimary,
+        boxShadow: `0 1px 3px ${BusinessColors.ShadowLight}`,
       }
     }}>
       <Box
-        sx={{ width: 150 }}
+        sx={{ width: 250 }}
         role='presentation'
         onClick={toggleDrawer(false)}
         onKeyDown={toggleDrawer(false)}
       >
         <ListItem key={'logo'} disablePadding>
           <div
-            style={{ background: 'var(--color-white)', display: 'flex', width: '100%', paddingLeft: '50px', paddingBlock: '30px' }}
+            style={{ 
+              background: BusinessColors.White, 
+              display: 'flex', 
+              width: '100%', 
+              paddingLeft: '24px', 
+              paddingBlock: '24px',
+              borderBottom: `1px solid ${BusinessColors.BorderLight}`
+            }}
           >
             <Image src="/logo-icon.png" alt="Logo" className={styles.sideBarLogo} />
           </div>
         </ListItem>
         <List>
           {drawerItems.map((item) => (
-            <ListItem key={item.label}>
-              <ListItemButton component='a' href={item.href}>
-                <ListItemText primary={item.label} />
+            <ListItem key={item.label} disablePadding>
+              <ListItemButton 
+                component='a' 
+                href={item.href}
+                sx={{
+                  color: BusinessColors.TextPrimary,
+                  '&:hover': {
+                    backgroundColor: BusinessColors.Gray50,
+                    color: BusinessColors.Primary,
+                  }
+                }}
+              >
+                <ListItemText 
+                  primary={item.label}
+                  primaryTypographyProps={{
+                    style: {
+                      fontFamily: 'var(--font-family-sans)',
+                      fontSize: 'var(--text-base)',
+                      fontWeight: 500,
+                    }
+                  }}
+                />
               </ListItemButton>
             </ListItem>
           ))}
@@ -79,49 +103,70 @@ export function NavBar() {
     window.location.href = "https://passport.nibo.com.br/Account/Login?ReturnUrl=%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3DD2CBFE38-9803-4DA0-8E2C-4E67F26BA9F5%26redirect_uri%3Dhttps%253a%252f%252fempresa.nibo.com.br%252fAuth%252fCallback%253forigin%253d%2526returnUrl%253d%25252fOrganization%2526redirectEmail%253d";
   }
 
-  const getLoginButton = () => {
-    return (
-      <Button className={styles.loginButton} variant="surface" onClick={onClickLogin}>
-        ÁREA DO CLIENTE
-      </Button>
-    )
-  }
-
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleButtonClick = () => {
     setSidebarOpen((prev) => !prev);
   };
 
-
-  return <>
-    <Flex className={styles.root}>
+  return (
+    <nav className={styles.root}>
       <div className={styles.mobileContainer}>
         <div className={styles.logo}>
           <WebsiteLogo/>
         </div>
-        {getLoginButton()}
-        <Button variant="outline" color="sky" onClick={handleButtonClick}>
-          <HamburgerMenuIcon />
-        </Button>
+        <div className={styles.mobileActions}>
+          <button 
+            className={styles.ghostButton}
+            onClick={onClickLogin}
+          >
+            Área do Cliente
+          </button>
+          <Button 
+            variant="outline" 
+            onClick={handleButtonClick}
+            className={styles.menuButton}
+          >
+            <HamburgerMenuIcon />
+          </Button>
+        </div>
         <SideBar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
       </div>
 
       <div className={styles.desktopContainer}>
-        <TabNav.Root className={styles.container}>
+        <div className={styles.container}>
           <div className={styles.logo}>
             <WebsiteLogo/>
           </div>
           
-          <TabNav.Link className={styles.tabNavLink} href="#home">INÍCIO</TabNav.Link>
-          <TabNav.Link className={styles.tabNavLink} href="#about">A NUWII</TabNav.Link>
-          <TabNav.Link className={styles.tabNavLink} href="#services">SERVIÇOS</TabNav.Link>
-          <TabNav.Link className={styles.tabNavLink} href="#plans">PLANOS</TabNav.Link>
-          <TabNav.Link className={styles.tabNavLink} href="#contact">CONTATO</TabNav.Link>
-          <TabNav.Link>{getLoginButton()}</TabNav.Link>
-        </TabNav.Root>
+          <div className={styles.navLinks}>
+            <img 
+              src="/logo.png"
+              alt="Logo"
+              className={styles.mainIcon}
+              draggable="false"
+            />
+            <a href="#services" className={styles.navLink}>Serviços</a>
+            <a href="#plans" className={styles.navLink}>Planos</a>
+            <a href="#about" className={styles.navLink}>Sobre</a>
+          </div>
+
+          <div className={styles.actions}>
+            <button 
+              className={styles.ghostButton}
+              onClick={onClickLogin}
+            >
+              Área do Cliente
+            </button>
+            <button 
+              className={styles.primaryButton}
+              onClick={() => window.location.href = '#contact'}
+            >
+              Abra sua empresa
+            </button>
+          </div>
+        </div>
       </div>
-      <Separator size="4" orientation={"horizontal"}/>
-    </Flex>
-  </>
+    </nav>
+  );
 }

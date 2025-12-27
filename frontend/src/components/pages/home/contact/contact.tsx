@@ -16,52 +16,202 @@ const Footer: React.FC = () => {
       component="footer"
       sx={{
         width: '100%',
-        backgroundColor: BusinessColors.Black,
-        py: 3,
+        backgroundColor: BusinessColors.Gray50,
+        py: 5,
         mt: 6,
+        borderTop: `1px solid ${BusinessColors.BorderLight}`,
       }}
     >
       <Container maxWidth="lg">
+        <Grid container spacing={4}>
+          {/* Coluna 1: Empresa */}
+          <Grid item xs={12} sm={6} md={3}>
+            <Typography
+              sx={{
+                color: BusinessColors.TextPrimary,
+                fontFamily: 'var(--font-family-bold)',
+                fontSize: 'var(--text-lg)',
+                fontWeight: 600,
+                mb: 2,
+              }}
+            >
+              {config.website.title}
+            </Typography>
+            <Typography
+              sx={{
+                color: BusinessColors.TextSecondary,
+                fontFamily: 'var(--font-family-sans)',
+                fontSize: 'var(--text-sm)',
+                lineHeight: 1.6,
+              }}
+            >
+              {config.website.subtitle}
+            </Typography>
+          </Grid>
+
+          {/* Coluna 2: Links */}
+          <Grid item xs={12} sm={6} md={3}>
+            <Typography
+              sx={{
+                color: BusinessColors.TextPrimary,
+                fontFamily: 'var(--font-family-bold)',
+                fontSize: 'var(--text-base)',
+                fontWeight: 600,
+                mb: 2,
+              }}
+            >
+              Links
+            </Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+              {[
+                { label: 'Serviços', href: '#services' },
+                { label: 'Planos', href: '#plans' },
+                { label: 'Sobre', href: '#about' },
+                { label: 'Contato', href: '#contact' },
+              ].map((link) => (
+                <Typography
+                  key={link.label}
+                  component="a"
+                  href={link.href}
+                  sx={{
+                    color: BusinessColors.TextSecondary,
+                    fontFamily: 'var(--font-family-sans)',
+                    fontSize: 'var(--text-sm)',
+                    textDecoration: 'none',
+                    transition: 'color var(--transition-fast)',
+                    '&:hover': {
+                      color: BusinessColors.Primary,
+                    },
+                  }}
+                >
+                  {link.label}
+                </Typography>
+              ))}
+            </Box>
+          </Grid>
+
+          {/* Coluna 3: Contato */}
+          <Grid item xs={12} sm={6} md={3}>
+            <Typography
+              sx={{
+                color: BusinessColors.TextPrimary,
+                fontFamily: 'var(--font-family-bold)',
+                fontSize: 'var(--text-base)',
+                fontWeight: 600,
+                mb: 2,
+              }}
+            >
+              Contato
+            </Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <EmailIcon sx={{ fontSize: 16, color: BusinessColors.TextSecondary }} />
+                <Typography
+                  component="a"
+                  href={`mailto:${config.email}`}
+                  sx={{
+                    color: BusinessColors.TextSecondary,
+                    fontFamily: 'var(--font-family-sans)',
+                    fontSize: 'var(--text-sm)',
+                    textDecoration: 'none',
+                    transition: 'color var(--transition-fast)',
+                    '&:hover': {
+                      color: BusinessColors.Primary,
+                    },
+                  }}
+                >
+                  {config.email}
+                </Typography>
+              </Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <PhoneIcon sx={{ fontSize: 16, color: BusinessColors.TextSecondary }} />
+                <Typography
+                  component="a"
+                  href={`https://wa.me/${config.phoneNumber}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    color: BusinessColors.TextSecondary,
+                    fontFamily: 'var(--font-family-sans)',
+                    fontSize: 'var(--text-sm)',
+                    textDecoration: 'none',
+                    transition: 'color var(--transition-fast)',
+                    '&:hover': {
+                      color: BusinessColors.Primary,
+                    },
+                  }}
+                >
+                  {config.formattedPhoneNumber}
+                </Typography>
+              </Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <InstagramIcon sx={{ fontSize: 16, color: BusinessColors.TextSecondary }} />
+                <Typography
+                  component="a"
+                  href={`https://instagram.com/${config.instagram}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    color: BusinessColors.TextSecondary,
+                    fontFamily: 'var(--font-family-sans)',
+                    fontSize: 'var(--text-sm)',
+                    textDecoration: 'none',
+                    transition: 'color var(--transition-fast)',
+                    '&:hover': {
+                      color: BusinessColors.Primary,
+                    },
+                  }}
+                >
+                  @{config.instagram}
+                </Typography>
+              </Box>
+            </Box>
+          </Grid>
+
+          {/* Coluna 4: Endereço */}
+          <Grid item xs={12} sm={6} md={3}>
+            <Typography
+              sx={{
+                color: BusinessColors.TextPrimary,
+                fontFamily: 'var(--font-family-bold)',
+                fontSize: 'var(--text-base)',
+                fontWeight: 600,
+                mb: 2,
+              }}
+            >
+              Endereço
+            </Typography>
+            <Typography
+              sx={{
+                color: BusinessColors.TextSecondary,
+                fontFamily: 'var(--font-family-sans)',
+                fontSize: 'var(--text-sm)',
+                lineHeight: 1.6,
+              }}
+            >
+              {config.address}
+            </Typography>
+          </Grid>
+        </Grid>
+
+        {/* Copyright */}
         <Box
           sx={{
-            color: '#fff',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: 2,
+            mt: 4,
+            pt: 3,
+            borderTop: `1px solid ${BusinessColors.BorderLight}`,
+            textAlign: 'center',
           }}
         >
-          <Typography className={styles.copyright} sx={{ color: '#fff' }}>
-            © {new Date().getFullYear()} <strong>NUWII Contabilidade</strong>. Todos os direitos reservados.
+          <Typography
+            sx={{
+              color: BusinessColors.TextSecondary,
+              fontFamily: 'var(--font-family-sans)',
+              fontSize: 'var(--text-xs)',
+            }}
+          >
+            © {new Date().getFullYear()} <strong>{config.website.title}</strong>. Todos os direitos reservados.
           </Typography>
-
-          <Box sx={{ display: 'flex', gap: 1 }}>
-            {[
-              { icon: <InstagramIcon />, href: `https://instagram.com/${config.instagram}` },
-              { icon: <EmailIcon />, href: `mailto:${config.email}` },
-              { icon: <PhoneIcon />, href: `https://wa.me/${config.phoneNumber}?text=Olá! Venho pelo site da NUWII e preciso de mais informações :)` },
-            ].map((item, index) => (
-              <IconButton
-                key={index}
-                component="a"
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{ 
-                  color: '#fff',
-                  backgroundColor: 'rgba(255,255,255,0.1)',
-                  '&:hover': { 
-                    backgroundColor: '#fff',
-                    color: '#1565C0',
-                    transform: 'scale(1.1)' 
-                  }
-                }}
-              >
-                {item.icon}
-              </IconButton>
-            ))}
-          </Box>
         </Box>
       </Container>
     </Box>

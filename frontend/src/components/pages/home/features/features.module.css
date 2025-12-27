@@ -1,0 +1,440 @@
+.root {
+  width: 100%;
+  background-color: var(--color-gray-50);
+  padding: var(--spacing-3xl) 0;
+  position: relative;
+}
+
+.root::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-border-light) 20%,
+    var(--color-border-light) 80%,
+    transparent 100%
+  );
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--spacing-xl);
+  align-items: start;
+}
+
+.title {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--color-gray-900);
+  font-family: var(--font-family-bold);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  margin: 0 0 var(--spacing-lg) 0;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  grid-column: 4 / 10;
+  text-align: center;
+  color: var(--color-gray-500);
+  font-family: var(--font-family-sans);
+  font-size: var(--text-lg);
+  font-weight: 400;
+  line-height: var(--leading-relaxed);
+  margin: 0 0 var(--spacing-3xl) 0;
+}
+
+.imageContainer {
+  grid-column: 1 / 5;
+  grid-row: 3 / 5;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-2xl);
+  display: block;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background-color: var(--color-gray-50);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-2xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholderContent {
+  text-align: center;
+  color: var(--color-gray-400);
+}
+
+.placeholderIcon {
+  font-size: var(--text-4xl);
+  display: block;
+  margin-bottom: var(--spacing-sm);
+}
+
+.placeholderText {
+  font-family: var(--font-family-sans);
+  font-size: var(--text-sm);
+  margin: 0;
+}
+
+.testimonialTag {
+  position: absolute;
+  bottom: var(--spacing-md);
+  left: var(--spacing-md);
+  right: var(--spacing-md);
+  background-color: var(--color-white);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-border-light);
+}
+
+.testimonialName {
+  font-family: var(--font-family-bold);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-gray-900);
+  margin-bottom: var(--spacing-xs);
+}
+
+.testimonialCompany {
+  font-family: var(--font-family-sans);
+  font-size: var(--text-sm);
+  color: var(--color-gray-600);
+  margin-bottom: var(--spacing-xs);
+}
+
+.testimonialSince {
+  font-family: var(--font-family-sans);
+  font-size: var(--text-xs);
+  color: var(--color-gray-500);
+}
+
+.cardsContainer {
+  grid-column: 5 / -1;
+  grid-row: 3 / 5;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-sm);
+}
+
+.card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  transition: all var(--transition-fast);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-color: var(--color-primary);
+}
+
+.cardIcon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-gray-50);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-light);
+}
+
+.cardTitle {
+  color: var(--color-gray-900);
+  font-family: var(--font-family-bold);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  margin: 0;
+  line-height: var(--leading-tight);
+}
+
+.cardDescription {
+  color: var(--color-gray-500);
+  font-family: var(--font-family-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
+.statsContainer {
+  grid-column: 1 / -1;
+  margin-top: var(--spacing-xl);
+}
+
+.statsCard {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-2xl);
+  padding: var(--spacing-2xl) var(--spacing-3xl);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-2xl);
+  align-items: center;
+  justify-items: center;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.statNumber {
+  color: var(--color-primary);
+  font-family: var(--font-family-black);
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 0.95;
+  margin: 0;
+  letter-spacing: -0.03em;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.statPlus {
+  font-size: 72px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.statDigit {
+  font-size: 72px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.statUnit {
+  font-size: 72px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.statDescription {
+  color: var(--color-gray-800);
+  font-family: var(--font-family-sans);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: var(--leading-normal);
+  margin: 0;
+}
+
+.ctaContainer {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ctaButton {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  padding: var(--spacing-md) var(--spacing-2xl);
+  border-radius: var(--radius-full);
+  font-family: var(--font-family-sans);
+  font-size: var(--text-base);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 1px 3px rgba(68, 203, 198, 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ctaButton:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(68, 203, 198, 0.3);
+}
+
+/* Tablet */
+@media (max-width: 1023px) {
+  .grid {
+    gap: var(--spacing-lg);
+  }
+
+  .title {
+    font-size: var(--text-3xl);
+  }
+
+  .subtitle {
+    grid-column: 3 / 11;
+    font-size: var(--text-base);
+  }
+
+  .imageContainer {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .cardsContainer {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+  }
+
+  .statsCard {
+    grid-template-columns: repeat(2, 1fr);
+    padding: var(--spacing-xl) var(--spacing-2xl);
+    gap: var(--spacing-xl);
+  }
+
+  .statNumber {
+    font-size: 56px;
+  }
+
+  .statPlus {
+    font-size: 56px;
+  }
+
+  .statDigit {
+    font-size: 56px;
+  }
+
+  .statUnit {
+    font-size: 56px;
+  }
+
+  .statDescription {
+    font-size: 18px;
+  }
+
+  .ctaContainer {
+    margin-top: var(--spacing-lg);
+  }
+
+  .ctaButton {
+    padding: var(--spacing-sm) var(--spacing-xl);
+    font-size: var(--text-sm);
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .root {
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .container {
+    padding: 0 var(--spacing-lg);
+  }
+
+  .grid {
+    gap: var(--spacing-lg);
+  }
+
+  .title {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .subtitle {
+    grid-column: 1 / -1;
+    font-size: var(--text-base);
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .imageContainer {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .cardsContainer {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+
+  .card {
+    padding: var(--spacing-lg);
+  }
+
+  .statsCard {
+    grid-template-columns: 1fr;
+    padding: var(--spacing-xl);
+    gap: var(--spacing-xl);
+  }
+
+  .statNumber {
+    font-size: 48px;
+  }
+
+  .statPlus {
+    font-size: 48px;
+  }
+
+  .statDigit {
+    font-size: 48px;
+  }
+
+  .statUnit {
+    font-size: 48px;
+  }
+
+  .statDescription {
+    font-size: 16px;
+  }
+
+  .ctaContainer {
+    margin-top: var(--spacing-md);
+  }
+
+  .ctaButton {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: var(--text-sm);
+    width: 100%;
+    max-width: 280px;
+  }
+}
+

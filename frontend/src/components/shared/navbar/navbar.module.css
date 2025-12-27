@@ -1,97 +1,164 @@
 .root {
-  flex-direction: column;
   background-color: var(--color-white);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
   z-index: 1000;
+  width: 100%;
 }
 
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: var(--spacing-md) var(--spacing-lg);
-  font-size: var(--text-sm);
+  padding: var(--spacing-sm) var(--spacing-xl) var(--spacing-sm) var(--spacing-md);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--spacing-xl);
 }
 
 .mobileContainer {
   display: none;
   width: 100%;
   padding: var(--spacing-md) var(--spacing-lg);
-  font-size: var(--text-sm);
   align-items: center;
   justify-content: space-between;
 }
 
 .logo {
   display: flex;
-  flex-grow: 1;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .logoImg {
-  width: 180px;
-  height: 45px;
+  width: 140px;
+  height: auto;
   transition: transform var(--transition-fast);
 }
 
 .logoImg:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
-.dropDownMenu a {
-  text-decoration: none;
-  color: var(--color-text-secondary);
-  transition: color var(--transition-fast);
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex: 1;
+  justify-content: flex-start;
+  margin-left: 0;
 }
 
-.dropDownMenu a:hover {
-  color: var(--color-primary);
+.mainIcon {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  filter: contrast(1.1);
 }
 
-.loginButton {
-  cursor: pointer;
-  color: var(--color-primary);
-  border: 2px solid var(--color-primary);
-  background-color: transparent;
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border-radius: var(--radius-full);
-  font-family: var(--font-family-bold);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: all var(--transition-fast);
-}
-
-.loginButton:hover {
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-}
-
-.tabNavLink {
+.navLink {
   color: var(--color-text-primary);
   font-family: var(--font-family-sans);
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  position: relative;
+  padding: var(--spacing-xs) 0;
+}
+
+.navLink:hover {
+  color: var(--color-primary);
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  transition: width var(--transition-fast);
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.ghostButton {
+  background: linear-gradient(135deg, rgba(68, 203, 198, 0.05) 0%, rgba(161, 231, 229, 0.08) 100%);
+  border: 1px solid rgba(68, 203, 198, 0.2);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-sans);
+  font-size: var(--text-base);
+  font-weight: 500;
+  padding: var(--spacing-xs) var(--spacing-md);
+  cursor: pointer;
   transition: all var(--transition-fast);
   text-decoration: none;
 }
 
-.tabNavLink:hover {
+.ghostButton:hover {
   color: var(--color-primary);
-  background-color: var(--color-gray-50);
+  background: linear-gradient(135deg, rgba(68, 203, 198, 0.1) 0%, rgba(161, 231, 229, 0.15) 100%);
+  border-color: rgba(68, 203, 198, 0.3);
+}
+
+.primaryButton {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  font-family: var(--font-family-sans);
+  font-size: var(--text-base);
+  font-weight: 600;
+  padding: var(--spacing-xs) var(--spacing-lg);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 1px 3px rgba(68, 203, 198, 0.2);
+}
+
+.primaryButton:hover {
+  background-color: var(--color-primary-dark);
   transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(68, 203, 198, 0.3);
+}
+
+.primaryButton:active {
+  transform: translateY(0);
+}
+
+.mobileActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.menuButton {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.menuButton:hover {
+  background-color: var(--color-gray-50);
+  border-color: var(--color-primary);
 }
 
 .sideBarLogo {
@@ -106,21 +173,23 @@
   .desktopContainer {
     display: none;
   }
-  .loginButton {
-    margin-right: var(--spacing-sm);
-    font-size: var(--text-xs);
-    padding: var(--spacing-xs) var(--spacing-sm);
+  .ghostButton {
+    font-size: var(--text-sm);
+    padding: var(--spacing-xs) var(--spacing-md);
   }
 }
 
 @media (max-width: 480px) {
-  .container,
   .mobileContainer {
     padding: var(--spacing-sm) var(--spacing-md);
   }
   
-  .loginButton {
+  .ghostButton {
     font-size: var(--text-xs);
     padding: var(--spacing-xs) var(--spacing-sm);
+  }
+  
+  .logoImg {
+    width: 120px;
   }
 }
