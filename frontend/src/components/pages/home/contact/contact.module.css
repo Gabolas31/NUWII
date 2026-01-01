@@ -6,6 +6,7 @@
   width: 100%;
   background: linear-gradient(135deg, #ECEFF1 0%, #F5F5F5 50%, #FAFAFA 100%);
   min-height: 100vh;
+  transition: background 0.8s ease-in-out;
 }
 
 .gridContainer {

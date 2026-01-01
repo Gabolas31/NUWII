@@ -379,57 +379,81 @@ export function Contact() {
         </Grid>
 
         {/* Address Section */}
-        <Paper
-          elevation={4}
+        <Box
           sx={{
             mt: 8,
-            background: 'linear-gradient(135deg, #F5F5F5 0%, #FAFAFA 100%)',
-            borderRadius: '16px',
-            border: '2px solid #1565C020',
-            overflow: 'hidden'
+            background: 'linear-gradient(135deg, #a1e7e5 0%, rgba(161, 231, 229, 0.4) 100%)',
+            borderRadius: '24px',
+            border: '1px solid rgba(68, 203, 198, 0.2)',
+            overflow: 'hidden',
+            position: 'relative',
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.3) 0%, transparent 50%)',
+              pointerEvents: 'none',
+            }
           }}
         >
-          <Box sx={{ p: 5, textAlign: 'center' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2, mb: 3 }}>
+          <Box sx={{ p: { xs: 4, md: 6 }, textAlign: 'center', position: 'relative', zIndex: 1 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, mb: 3 }}>
               <Box
                 sx={{
-                  width: 50,
-                  height: 50,
-                  borderRadius: '12px',
-                  backgroundColor: '#1565C015',
+                  width: 64,
+                  height: 64,
+                  borderRadius: '50%',
+                  backgroundColor: 'rgba(255, 255, 255, 0.95)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: '2px solid #1565C030',
+                  boxShadow: '0 4px 12px rgba(68, 203, 198, 0.2)',
+                  mb: 1,
                 }}
               >
-                <LocationOnIcon sx={{ color: '#1565C0', fontSize: 28 }} />
+                <LocationOnIcon sx={{ color: '#44cbc6', fontSize: 32 }} />
               </Box>
               <Typography 
                 variant="h4" 
                 sx={{ 
-                  color: '#263238',
-                  fontWeight: 600
+                  color: '#1c1c1e',
+                  fontFamily: 'var(--font-family-bold)',
+                  fontWeight: 700,
+                  fontSize: { xs: '1.5rem', md: '2rem' },
+                  letterSpacing: '-0.02em',
                 }}
               >
                 Nosso Escritório
               </Typography>
             </Box>
-            <Divider sx={{ my: 3, backgroundColor: '#1565C030' }} />
+            <Box
+              sx={{
+                width: 60,
+                height: 2,
+                background: 'linear-gradient(90deg, transparent, #44cbc6, transparent)',
+                mx: 'auto',
+                mb: 4,
+              }}
+            />
             <Typography 
-              variant="h6"
+              variant="body1"
               sx={{ 
-                color: '#455A64',
-                fontSize: '1rem',
-                lineHeight: 1.8,
-                maxWidth: 600,
-                mx: 'auto'
+                color: '#343a40',
+                fontFamily: 'var(--font-family-sans)',
+                fontSize: { xs: '0.95rem', md: '1.05rem' },
+                lineHeight: 1.7,
+                maxWidth: 700,
+                mx: 'auto',
+                fontWeight: 400,
               }}
             >
               {config.address}
             </Typography>
           </Box>
-        </Paper>
+        </Box>
       </Container>
       <Footer/>
     </Box>

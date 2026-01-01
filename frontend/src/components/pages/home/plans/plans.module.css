@@ -65,6 +65,7 @@
   align-items: center;
   justify-content: center;
   padding: var(--spacing-5xl) 0;
+  transition: background-color 0.8s ease-in-out;
 }
 
 .root::before {

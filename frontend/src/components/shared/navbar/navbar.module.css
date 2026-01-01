@@ -5,13 +5,14 @@
   top: 0;
   z-index: 1000;
   width: 100%;
+  min-height: auto;
 }
 
 .container {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: var(--spacing-sm) var(--spacing-xl) var(--spacing-sm) var(--spacing-md);
+  padding: var(--spacing-xs) var(--spacing-xl) var(--spacing-xs) var(--spacing-md);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -21,7 +22,7 @@
 .mobileContainer {
   display: none;
   width: 100%;
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: var(--spacing-xs) var(--spacing-lg);
   align-items: center;
   justify-content: space-between;
 }
@@ -33,7 +34,7 @@
 }
 
 .logoImg {
-  width: 140px;
+  width: 120px;
   height: auto;
   transition: transform var(--transition-fast);
 }
@@ -52,8 +53,8 @@
 }
 
 .mainIcon {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   object-fit: contain;
   mix-blend-mode: multiply;
   filter: contrast(1.1);
@@ -121,9 +122,9 @@
   color: var(--color-white);
   border: none;
   font-family: var(--font-family-sans);
-  font-size: var(--text-base);
+  font-size: var(--text-sm);
   font-weight: 600;
-  padding: var(--spacing-xs) var(--spacing-lg);
+  padding: var(--spacing-xs) var(--spacing-md);
   border-radius: var(--radius-full);
   cursor: pointer;
   transition: all var(--transition-fast);
@@ -181,7 +182,7 @@
 
 @media (max-width: 480px) {
   .mobileContainer {
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-md);
   }
   
   .ghostButton {
@@ -190,6 +191,6 @@
   }
   
   .logoImg {
-    width: 120px;
+    width: 100px;
   }
 }

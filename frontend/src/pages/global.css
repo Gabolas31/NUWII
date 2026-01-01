@@ -169,6 +169,7 @@ html, body {
   line-height: var(--leading-normal);
   color: var(--color-text-primary);
   background-color: var(--color-background);
+  transition: background-color 0.8s ease-in-out;
 }
 
 #__next, main {
@@ -206,14 +207,17 @@ html, body {
 
 .section {
   padding: var(--spacing-3xl) 0;
+  transition: background-color 0.8s ease-in-out, background 0.8s ease-in-out;
 }
 
 .section-sm {
   padding: var(--spacing-2xl) 0;
+  transition: background-color 0.8s ease-in-out, background 0.8s ease-in-out;
 }
 
 .section-lg {
   padding: var(--spacing-3xl) 0;
+  transition: background-color 0.8s ease-in-out, background 0.8s ease-in-out;
 }
 
 /* Button Base Styles */

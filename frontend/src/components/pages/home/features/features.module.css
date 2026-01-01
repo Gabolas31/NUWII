@@ -3,6 +3,7 @@
   background-color: var(--color-white);
   padding: var(--spacing-5xl) 0;
   position: relative;
+  transition: background-color 0.8s ease-in-out;
 }
 
 .root::before {
@@ -248,12 +249,14 @@
   font-weight: 900;
   letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
+  margin-right: 0.05em;
 }
 
 .statUnit {
   font-size: 72px;
   font-weight: 900;
   letter-spacing: -0.02em;
+  margin-left: 0.1em;
 }
 
 .statDescription {

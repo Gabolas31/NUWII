@@ -3,6 +3,7 @@
   background-color: var(--color-white);
   padding: var(--spacing-5xl) 0;
   position: relative;
+  transition: background-color 0.8s ease-in-out;
 }
 
 .root::before {

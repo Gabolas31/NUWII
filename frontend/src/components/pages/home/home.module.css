@@ -53,4 +53,5 @@
 .colorBreak {
   width: 100%;
   background-color: var(--color-gray-200);
+  transition: background-color 0.8s ease-in-out;
 }

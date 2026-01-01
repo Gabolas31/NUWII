@@ -2,8 +2,22 @@
   width: 100%;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--color-primary-light) 0%, rgba(161, 231, 229, 0.3) 100%);
+  background: linear-gradient(135deg, rgba(161, 231, 229, 0.25) 0%, rgba(161, 231, 229, 0.12) 50%, rgba(255, 255, 255, 0.4) 100%);
   padding: var(--spacing-5xl) 0;
+  transition: background 0.8s ease-in-out;
+}
+
+.root::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.4;
 }
 
 .root::after {
@@ -33,6 +47,11 @@
 .headerSection {
   text-align: center;
   margin-bottom: var(--spacing-3xl);
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-2xl);
+  padding: var(--spacing-3xl) var(--spacing-2xl);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 .subtitle {
