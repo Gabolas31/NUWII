@@ -220,28 +220,28 @@ const Footer: React.FC = () => {
 
 const contactInfo = [
   {
-    label: 'Telefone Comercial',
+    label: 'WhatsApp',
     value: config.formattedPhoneNumber,
     href: `https://wa.me/${config.phoneNumber}?text=Olá! Venho pelo site da NUWII e preciso de mais informações :)`,
     icon: <PhoneIcon />,
-    color: '#1565C0',
+    color: '#48BB78',
     description: 'Atendimento comercial via WhatsApp'
   },
   {
-    label: 'E-mail Corporativo',
+    label: 'E-mail',
     value: config.email,
     href: 'mailto:' + config.email,
     icon: <EmailIcon />,
-    color: '#D32F2F',
+    color: '#48BB78',
     description: 'Contato profissional direto'
   },
   {
-    label: 'Instagram Oficial',
-    value: "@" + config.instagram,
-    href: 'https://instagram.com/' + config.instagram,
-    icon: <InstagramIcon />,
-    color: '#7B1FA2',
-    description: 'Acompanhe nossas atualizações'
+    label: 'Telefone',
+    value: config.formattedPhoneNumber,
+    href: `tel:${config.phoneNumber}`,
+    icon: <PhoneIcon />,
+    color: '#48BB78',
+    description: 'Ligação direta'
   },
 ];
 
@@ -256,33 +256,188 @@ export function Contact() {
             component="h1"
             sx={{
               fontWeight: 700,
-              color: BusinessColors.Blue,
+              color: '#FFFFFF',
               mt: 5,
               mb: 2,
-              fontSize: { xs: '2rem', md: '3rem' }
+              fontSize: { xs: '2rem', md: '3rem' },
+              fontFamily: 'var(--font-family-bold)'
             }}
           >
-            Entre em Contato 💬
-          </Typography>
-          <Typography 
-            variant="h5" 
-            sx={{ 
-              color: '#455A64',
-              maxWidth: 700, 
-              mx: 'auto',
-              lineHeight: 1.6,
-              fontWeight: 400,
-              fontSize: { xs: '1.1rem', md: '1.3rem' }
-            }}
-          >
-            Soluções contábeis personalizadas para o crescimento do seu negócio. 
-            <strong style={{color: BusinessColors.DarkGray}}> Nossa equipe está pronta para atendê-lo!</strong>
+            Entre em contato
           </Typography>
         </Box>
         {/* Main Content Grid */}
         <Grid className={styles.gridContainer} container spacing={6} alignItems="stretch">
-          {/* Left Side - Contact Cards */}
-          <Grid item xs={12} md={7}>
+          {/* Left Side - Form */}
+          <Grid item xs={12} md={6}>
+            <Box 
+              component="form"
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 2.5,
+                p: 4,
+                backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                borderRadius: '12px',
+              }}
+            >
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                <Typography sx={{ color: '#1A202C', fontSize: '0.875rem', fontWeight: 500, mb: 0.5 }}>
+                  Nome
+                </Typography>
+                <Box
+                  component="input"
+                  type="text"
+                  placeholder="Seu nome"
+                  sx={{
+                    height: '48px',
+                    padding: '0 16px',
+                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                    border: '1px solid #E2E8F0',
+                    borderRadius: '8px',
+                    fontSize: '1rem',
+                    fontFamily: 'var(--font-family-sans)',
+                    transition: 'all 0.3s ease',
+                    '&:hover': {
+                      border: '1px solid #0A3D62',
+                      backgroundColor: '#FFFFFF',
+                      boxShadow: '0 2px 8px rgba(10, 61, 98, 0.1)',
+                    },
+                    '&:focus': {
+                      outline: 'none',
+                      border: '2px solid #0A3D62',
+                      backgroundColor: '#FFFFFF',
+                      boxShadow: '0 4px 12px rgba(10, 61, 98, 0.15)',
+                    }
+                  }}
+                />
+              </Box>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                <Typography sx={{ color: '#1A202C', fontSize: '0.875rem', fontWeight: 500, mb: 0.5 }}>
+                  E-mail
+                </Typography>
+                <Box
+                  component="input"
+                  type="email"
+                  placeholder="seu@email.com"
+                  sx={{
+                    height: '48px',
+                    padding: '0 16px',
+                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                    border: '1px solid #E2E8F0',
+                    borderRadius: '8px',
+                    fontSize: '1rem',
+                    fontFamily: 'var(--font-family-sans)',
+                    transition: 'all 0.3s ease',
+                    '&:hover': {
+                      border: '1px solid #0A3D62',
+                      backgroundColor: '#FFFFFF',
+                      boxShadow: '0 2px 8px rgba(10, 61, 98, 0.1)',
+                    },
+                    '&:focus': {
+                      outline: 'none',
+                      border: '2px solid #0A3D62',
+                      backgroundColor: '#FFFFFF',
+                      boxShadow: '0 4px 12px rgba(10, 61, 98, 0.15)',
+                    }
+                  }}
+                />
+              </Box>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                <Typography sx={{ color: '#1A202C', fontSize: '0.875rem', fontWeight: 500, mb: 0.5 }}>
+                  Telefone
+                </Typography>
+                <Box
+                  component="input"
+                  type="tel"
+                  placeholder="(00) 00000-0000"
+                  sx={{
+                    height: '48px',
+                    padding: '0 16px',
+                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                    border: '1px solid #E2E8F0',
+                    borderRadius: '8px',
+                    fontSize: '1rem',
+                    fontFamily: 'var(--font-family-sans)',
+                    transition: 'all 0.3s ease',
+                    '&:hover': {
+                      border: '1px solid #0A3D62',
+                      backgroundColor: '#FFFFFF',
+                      boxShadow: '0 2px 8px rgba(10, 61, 98, 0.1)',
+                    },
+                    '&:focus': {
+                      outline: 'none',
+                      border: '2px solid #0A3D62',
+                      backgroundColor: '#FFFFFF',
+                      boxShadow: '0 4px 12px rgba(10, 61, 98, 0.15)',
+                    }
+                  }}
+                />
+              </Box>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                <Typography sx={{ color: '#1A202C', fontSize: '0.875rem', fontWeight: 500, mb: 0.5 }}>
+                  Mensagem
+                </Typography>
+                <Box
+                  component="textarea"
+                  placeholder="Sua mensagem..."
+                  rows={5}
+                  sx={{
+                    padding: '16px',
+                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                    border: '1px solid #E2E8F0',
+                    borderRadius: '8px',
+                    fontSize: '1rem',
+                    fontFamily: 'var(--font-family-sans)',
+                    resize: 'vertical',
+                    minHeight: '120px',
+                    transition: 'all 0.3s ease',
+                    '&:hover': {
+                      border: '1px solid #0A3D62',
+                      backgroundColor: '#FFFFFF',
+                      boxShadow: '0 2px 8px rgba(10, 61, 98, 0.1)',
+                    },
+                    '&:focus': {
+                      outline: 'none',
+                      border: '2px solid #0A3D62',
+                      backgroundColor: '#FFFFFF',
+                      boxShadow: '0 4px 12px rgba(10, 61, 98, 0.15)',
+                    }
+                  }}
+                />
+              </Box>
+              <Box
+                component="a"
+                href={`https://wa.me/${config.phoneNumber}?text=Olá! Venho pelo site da NUWII e preciso de mais informações :)`}
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{
+                  backgroundColor: '#FFFFFF',
+                  color: '#0A3D62',
+                  fontFamily: 'var(--font-family-bold)',
+                  fontSize: '1rem',
+                  fontWeight: 700,
+                  padding: '14px 32px',
+                  borderRadius: '8px',
+                  textDecoration: 'none',
+                  textAlign: 'center',
+                  transition: 'all 0.3s ease',
+                  cursor: 'pointer',
+                  display: 'inline-block',
+                  '&:hover': {
+                    backgroundColor: '#0A3D62',
+                    color: '#FFFFFF',
+                    transform: 'translateY(-3px) scale(1.02)',
+                    boxShadow: '0 8px 24px rgba(10, 61, 98, 0.4)',
+                  }
+                }}
+              >
+                Enviar mensagem
+              </Box>
+            </Box>
+          </Grid>
+          {/* Right Side - Contact Info */}
+          <Grid item xs={12} md={6}>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, height: '100%' }}>
               {contactInfo.map((item, index) => (
                 <Paper
@@ -291,21 +446,21 @@ export function Contact() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  elevation={3}
+                  elevation={0}
                   sx={{
-                    background: '#fff',
-                    border: `2px solid ${item.color}20`,
+                    background: 'rgba(255, 255, 255, 0.95)',
+                    border: '1px solid rgba(255, 255, 255, 0.3)',
                     borderRadius: '12px',
-                    p: 4,
+                    p: 3,
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 3,
+                    gap: 2.5,
                     textDecoration: 'none',
-                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    transition: 'all 0.3s ease',
                     '&:hover': {
-                      transform: 'translateY(-3px)',
-                      boxShadow: `0 12px 24px ${item.color}30`,
-                      border: `2px solid ${item.color}`,
+                      transform: 'translateY(-4px)',
+                      boxShadow: '0 8px 20px rgba(0, 0, 0, 0.2)',
+                      border: '1px solid rgba(255, 255, 255, 0.5)',
                     }
                   }}
                 >
@@ -314,14 +469,14 @@ export function Contact() {
                       width: 70,
                       height: 70,
                       borderRadius: '12px',
-                      backgroundColor: `${item.color}15`,
+                      backgroundColor: 'rgba(72, 187, 120, 0.1)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      border: `2px solid ${item.color}30`,
+                      border: '1px solid rgba(72, 187, 120, 0.2)',
                     }}
                   >
-                    <Box sx={{ color: item.color, fontSize: 32 }}>
+                    <Box sx={{ color: '#48BB78', fontSize: 32 }}>
                       {item.icon}
                     </Box>
                   </Box>
@@ -329,7 +484,7 @@ export function Contact() {
                     <Typography 
                       variant="h6" 
                       sx={{ 
-                        color: '#263238', 
+                        color: '#FFFFFF', 
                         fontWeight: 600,
                         mb: 0.5 
                       }}
@@ -338,7 +493,7 @@ export function Contact() {
                     </Typography>
                     <Typography 
                       sx={{ 
-                        color: item.color,
+                        color: '#FFFFFF',
                         fontSize: '1.1rem',
                         fontWeight: 500,
                         mb: 0.5
@@ -348,7 +503,7 @@ export function Contact() {
                     </Typography>
                     <Typography 
                       sx={{ 
-                        color: '#607D8B',
+                        color: 'rgba(255, 255, 255, 0.8)',
                         fontSize: '0.9rem'
                       }}
                     >

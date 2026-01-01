@@ -2,38 +2,23 @@
   width: 100%;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(161, 231, 229, 0.25) 0%, rgba(161, 231, 229, 0.12) 50%, rgba(255, 255, 255, 0.4) 100%);
-  padding: var(--spacing-5xl) 0;
+  background: linear-gradient(135deg, #0A3D62 0%, #1A5A8A 100%);
+  padding: 120px 0;
   transition: background 0.8s ease-in-out;
 }
 
 .root::before {
   content: '';
   position: absolute;
-  top: -20%;
-  right: -10%;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: 0.4;
-}
-
-.root::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--color-gray-300) 20%,
-    var(--color-gray-300) 80%,
-    transparent 100%
-  );
+  bottom: 0;
+  background-image: 
+    repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.05) 10px, rgba(255, 255, 255, 0.05) 20px);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .container {
@@ -42,336 +27,121 @@
   padding: 0 var(--spacing-xl);
   position: relative;
   z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.headerSection {
-  text-align: center;
-  margin-bottom: var(--spacing-3xl);
-  background-color: rgba(255, 255, 255, 0.6);
+.card {
+  max-width: 800px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
-  border-radius: var(--radius-2xl);
-  padding: var(--spacing-3xl) var(--spacing-2xl);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border-radius: 24px;
+  padding: 48px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
 }
 
-.subtitle {
-  color: var(--color-primary);
-  font-family: var(--font-family-bold);
-  font-size: var(--text-sm);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin: 0 0 var(--spacing-lg) 0;
+.iconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.icon {
+  font-size: 64px !important;
+  color: #48BB78;
 }
 
 .title {
-  color: var(--color-gray-900);
-  font-family: var(--font-family-black);
-  font-size: var(--text-5xl);
-  font-weight: 900;
-  line-height: var(--leading-tight);
-  margin: 0 0 var(--spacing-xl) 0;
-  letter-spacing: -0.03em;
-}
-
-.title strong {
-  color: var(--color-primary);
-}
-
-.intro {
-  color: var(--color-gray-600);
-  font-family: var(--font-family-sans);
-  font-size: var(--text-lg);
-  line-height: var(--leading-relaxed);
-  margin: 0;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.stepsSection {
-  margin-bottom: var(--spacing-3xl);
-  position: relative;
-}
-
-.stepsContainer {
-  display: flex;
-  gap: 24px;
-  position: relative;
-  padding: var(--spacing-xl) 0;
-  justify-content: center;
-  align-items: stretch;
-}
-
-.stepCard {
-  background-color: var(--color-white);
-  border: 2px solid var(--color-gray-300);
-  border-radius: var(--radius-2xl);
-  padding: var(--spacing-3xl);
-  box-shadow: var(--shadow-lg);
-  text-align: center;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-xl);
-  flex: 1;
-  transition: all var(--transition-normal);
-  min-height: 300px;
-}
-
-.stepCard:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-xl);
-  border-color: var(--color-primary);
-}
-
-.stepNumberWrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin-bottom: var(--spacing-md);
-}
-
-.stepNumberCircle {
-  width: 100px;
-  height: 100px;
-  background-color: var(--color-primary);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 2;
-  box-shadow: var(--shadow-primary);
-}
-
-.stepNumber {
-  font-family: var(--font-family-black);
-  font-size: 40px;
-  font-weight: 900;
   color: var(--color-white);
-  line-height: 1;
-  position: relative;
-  z-index: 3;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
-}
-
-.stepArrow {
-  position: absolute;
-  bottom: 60px;
-  right: -72px;
-  z-index: 10;
-  width: 119px;
-  height: 47px;
-  pointer-events: none;
-}
-
-.stepText {
-  color: var(--color-gray-700);
-  font-family: var(--font-family-sans);
-  font-size: var(--text-base);
-  line-height: var(--leading-relaxed);
-  margin: 0;
-  font-weight: 400;
-}
-
-.stepText .highlight {
-  background-color: var(--color-primary-light);
-  padding: 2px 4px;
-  border-radius: 4px;
-}
-
-.rulesSection {
-  text-align: center;
-  margin-bottom: var(--spacing-3xl);
-  padding: var(--spacing-2xl);
-  background-color: var(--color-white);
-  border-radius: var(--radius-xl);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-.rulesTitle {
-  color: var(--color-primary);
   font-family: var(--font-family-bold);
-  font-size: var(--text-lg);
+  font-size: 36px;
   font-weight: 700;
+  line-height: var(--leading-tight);
   margin: 0 0 var(--spacing-lg) 0;
+  letter-spacing: -0.5px;
 }
 
-.rulesText {
-  color: var(--color-gray-600);
+.description {
+  color: rgba(255, 255, 255, 0.9);
   font-family: var(--font-family-sans);
-  font-size: var(--text-base);
+  font-size: var(--text-lg);
   line-height: var(--leading-relaxed);
-  margin: 0;
-  max-width: 900px;
+  margin: 0 0 var(--spacing-2xl) 0;
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.ctaSection {
-  text-align: center;
-  padding: var(--spacing-3xl) var(--spacing-2xl);
+.ctaButton {
   background-color: var(--color-white);
-  border-radius: var(--radius-xl);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-.ctaTitle {
-  color: var(--color-gray-900);
+  color: #0A3D62;
   font-family: var(--font-family-bold);
-  font-size: var(--text-2xl);
+  font-size: var(--text-base);
   font-weight: 700;
-  line-height: var(--leading-tight);
-  margin: 0 0 var(--spacing-2xl) 0;
-}
-
-.ctaTitle strong {
-  color: var(--color-primary);
-}
-
-.ctaButtons {
-  display: flex;
-  gap: var(--spacing-lg);
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.ctaButtonPrimary {
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  font-family: var(--font-family-bold);
-  font-size: var(--text-base);
-  font-weight: 600;
   padding: var(--spacing-md) var(--spacing-2xl);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   text-decoration: none;
-  transition: all var(--transition-fast);
+  transition: all var(--transition-normal);
   display: inline-block;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.ctaButtonPrimary:hover {
-  background-color: var(--color-primary-dark);
+.ctaButton:hover {
+  background-color: rgba(255, 255, 255, 0.95);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(68, 203, 198, 0.3);
-}
-
-.ctaButtonSecondary {
-  background-color: var(--color-white);
-  color: var(--color-gray-900);
-  border: 2px solid var(--color-gray-900);
-  font-family: var(--font-family-bold);
-  font-size: var(--text-base);
-  font-weight: 600;
-  padding: var(--spacing-md) var(--spacing-2xl);
-  border-radius: var(--radius-lg);
-  text-decoration: none;
-  transition: all var(--transition-fast);
-  display: inline-block;
-}
-
-.ctaButtonSecondary:hover {
-  background-color: var(--color-gray-900);
-  color: var(--color-white);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Tablet */
 @media (max-width: 1023px) {
-  .stepsContainer {
-    flex-wrap: wrap;
-    gap: var(--spacing-lg);
+  .root {
+    padding: 80px 0;
   }
-  
-  .stepCard {
-    flex: 0 0 calc(50% - 12px);
-  }
-  
-  .stepArrow {
-    display: none;
+
+  .card {
+    padding: 40px;
   }
 
   .title {
-    font-size: var(--text-3xl);
-  }
-
-  .ctaTitle {
-    font-size: var(--text-xl);
-  }
-
-  .ctaButtons {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .ctaButtonPrimary,
-  .ctaButtonSecondary {
-    width: 100%;
-    text-align: center;
+    font-size: 30px;
   }
 }
 
 /* Mobile */
 @media (max-width: 767px) {
   .root {
-    padding: var(--spacing-2xl) 0;
+    padding: 64px 0;
   }
 
   .container {
     padding: 0 var(--spacing-lg);
   }
 
-  .stepsContainer {
-    flex-direction: column;
-    gap: var(--spacing-lg);
+  .card {
+    padding: 32px;
   }
-  
-  .stepCard {
-    flex: 1;
-    width: 100%;
+
+  .icon {
+    font-size: 48px !important;
   }
 
   .title {
-    font-size: var(--text-2xl);
+    font-size: 24px;
   }
 
-  .intro {
+  .description {
     font-size: var(--text-base);
   }
 
-  .stepCard {
-    padding: var(--spacing-xl);
-  }
-
-  .stepNumberCircle {
-    width: 100px;
-    height: 100px;
-  }
-
-  .stepNumber {
-    font-size: 40px;
-  }
-
-  .stepArrowTop,
-  .stepArrowBottom {
-    display: none;
-  }
-
-  .rulesSection {
-    padding: var(--spacing-xl);
-  }
-
-  .ctaSection {
-    padding: var(--spacing-2xl) var(--spacing-lg);
-  }
-
-  .ctaTitle {
-    font-size: var(--text-lg);
+  .ctaButton {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-xl);
   }
 }
-

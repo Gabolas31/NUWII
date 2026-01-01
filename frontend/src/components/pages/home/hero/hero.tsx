@@ -4,6 +4,11 @@ import { BusinessColors, config } from "@/lib";
 import { LoadingScreen } from "./LoadingScreen";
 import heroImg from "./assets/hero.jpg";
 import styles from "./hero.module.css";
+import { 
+  CheckCircleOutline,
+  SpeedOutlined,
+  SecurityOutlined
+} from "@mui/icons-material";
 
 interface HeroProps {
   onLoaded?: () => void;
@@ -11,8 +16,23 @@ interface HeroProps {
 
 export function Hero({ onLoaded }: HeroProps) {
   const [typewriterText, setTypewriterText] = useState("");
-  const fullText = "A Nuwii cuida da sua contabilidade.";
+  const fullText = "Contabilidade moderna para empresas em crescimento";
   const typewriterSpeed = 50; // milissegundos por caractere
+  
+  const benefits = [
+    {
+      icon: CheckCircleOutline,
+      text: "Sua empresa regularizada e sem multas indesejadas"
+    },
+    {
+      icon: SpeedOutlined,
+      text: "Economia no pagamento de impostos"
+    },
+    {
+      icon: SecurityOutlined,
+      text: "Suporte com contadores especialistas"
+    }
+  ];
   // Checa se fontes estão carregadas
   function checkFontsLoaded() {
     if (document.fonts) {
@@ -92,12 +112,7 @@ export function Hero({ onLoaded }: HeroProps) {
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.textContent}>
-            <p className={styles.preheadline}>
-              CONTABILIDADE MODERNA PARA EMPRESAS EM CRESCIMENTO
-            </p>
             <h1 className={styles.title}>
-              Você cuida do crescimento da sua empresa.
-              <br />
               <span className={styles.typewriter}>
                 {typewriterText}
                 {typewriterText.length < fullText.length && (
@@ -105,16 +120,16 @@ export function Hero({ onLoaded }: HeroProps) {
                 )}
               </span>
             </h1>
-            <h2 className={styles.subtitle}>
-              Cuidamos da contabilidade da sua empresa com tecnologia e proximidade.
-              <br />
-              Da abertura do CNPJ à rotina do dia a dia.
-            </h2>
             <ul className={styles.highlights}>
-              <li className={styles.highlight}>Sua empresa regularizada e sem multas indesejadas</li>
-              <li className={styles.highlight}>Economia no pagamento de impostos</li>
-              <li className={styles.highlight}>Suporte com contadores especialistas</li>
-              <li className={styles.highlight}>Atendimento 100% online e humanizado</li>
+              {benefits.map((benefit, index) => {
+                const Icon = benefit.icon;
+                return (
+                  <li key={index} className={styles.highlight}>
+                    <Icon className={styles.highlightIcon} />
+                    <span>{benefit.text}</span>
+                  </li>
+                );
+              })}
             </ul>
             <div className={styles.ctaContainer}>
               <a

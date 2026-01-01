@@ -187,14 +187,14 @@ const CardPlan: React.FC<CardPlanProps> = ({ title, items, info, description, is
       className={`${styles.planCard} ${isHighlighted ? styles.planCardHighlighted : ''}`}
       sx={{
         position: 'relative',
-        borderRadius: 3,
-        border: isHighlighted ? `2px solid ${BusinessColors.Primary}` : '1px solid var(--color-border)',
+        borderRadius: '12px',
+        border: isHighlighted ? '2px solid #0A3D62' : '1px solid var(--color-border)',
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
         boxShadow: isHighlighted 
-          ? `0 4px 16px rgba(68, 203, 198, 0.15)` 
-          : '0 2px 8px rgba(0, 0, 0, 0.08)',
+          ? '0 10px 15px rgba(10, 61, 98, 0.2)' 
+          : '0 4px 6px rgba(0, 0, 0, 0.05)',
         overflow: 'visible',
       }}
     >
@@ -205,7 +205,7 @@ const CardPlan: React.FC<CardPlanProps> = ({ title, items, info, description, is
             top: -12,
             left: '50%',
             transform: 'translateX(-50%)',
-            bgcolor: BusinessColors.Primary,
+            bgcolor: '#0A3D62',
             color: 'white',
             px: 2,
             py: 0.5,
@@ -216,7 +216,7 @@ const CardPlan: React.FC<CardPlanProps> = ({ title, items, info, description, is
             letterSpacing: '0.05em',
           }}
         >
-          DESTAQUE
+          Mais Popular
         </Box>
       )}
       
@@ -225,9 +225,11 @@ const CardPlan: React.FC<CardPlanProps> = ({ title, items, info, description, is
         <Typography 
           variant="h5" 
           align="center" 
-          color={BusinessColors.Primary} 
-          fontWeight="bold"
-          sx={{ mb: 1 }}
+          sx={{ 
+            color: '#0A3D62',
+            fontWeight: 'bold',
+            mb: 1 
+          }}
         >
           {title}
         </Typography>
@@ -280,14 +282,14 @@ const CardPlan: React.FC<CardPlanProps> = ({ title, items, info, description, is
               >
                 {!isHeader && (
                   <ListItemIcon sx={{ minWidth: 28, mt: 0.5 }}>
-                    <CheckCircleIcon sx={{ color: green[500], fontSize: '20px' }} />
+                    <CheckCircleIcon sx={{ color: '#48BB78', fontSize: '20px' }} />
                   </ListItemIcon>
                 )}
                 <ListItemText 
                   primary={item}
                   sx={{
                     fontWeight: isHeader ? 600 : 400,
-                    color: isHeader ? BusinessColors.Primary : 'var(--color-gray-700)',
+                    color: isHeader ? '#0A3D62' : 'var(--color-gray-700)',
                     fontSize: isHeader ? '0.9rem' : '0.875rem',
                     '& .MuiListItemText-primary': {
                       fontSize: isHeader ? '0.9rem' : '0.875rem',
@@ -304,10 +306,10 @@ const CardPlan: React.FC<CardPlanProps> = ({ title, items, info, description, is
       {/* Footer with Button */}
       <Box 
         sx={{ 
-          bgcolor: BusinessColors.Primary,
+          bgcolor: '#0A3D62',
           p: 2,
-          borderBottomLeftRadius: 12,
-          borderBottomRightRadius: 12,
+          borderBottomLeftRadius: '12px',
+          borderBottomRightRadius: '12px',
         }}
       >
         <Button
@@ -433,7 +435,7 @@ export function Plans() {
       <Flex className={styles.container}>
         <div className={styles.headerSection}>
           <h2 className={styles.mainTitle}>
-            Escolha o plano que melhor se adequa à sua necessidade!
+            Escolha o plano ideal para sua empresa
           </h2>
           <p className={styles.mainDescription}>
             Planos completos, com suporte humano e tecnologia para simplificar sua rotina. Escolha o que mais faz sentido para você:

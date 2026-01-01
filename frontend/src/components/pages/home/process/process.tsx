@@ -118,7 +118,7 @@ export function Process() {
       <div className={styles.container}>
         <div className={styles.header}>
           <h2 className={styles.title}>
-            Uma contabilidade que te acompanha em cada momento
+            Como funciona?
           </h2>
           <p className={styles.description}>
             Desde a escolha do melhor regime tributário para sua empresa até a rotina contábil do dia a dia, vamos cuidar de tudo para que você possa empreender com segurança e sem preocupações. Veja como é simples abrir sua empresa ou migrar sua contabilidade para a Nuwii.

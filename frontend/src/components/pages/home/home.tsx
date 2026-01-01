@@ -8,7 +8,6 @@ import styles from "./home.module.css";
 import { Plans } from "./plans";
 import { Features } from "./features";
 import { Process } from "./process";
-import { Location } from "./location";
 import { Referral } from "./referral";
 import { Partners } from "./partners";
 
@@ -29,7 +28,6 @@ export function HomePage() {
               <Hero />
               <Features imageSrc="/assets/new-images/contabilidade-completa.b08d43d.png" />
               <Process />
-              <Location />
               <Referral />
               <section className={styles.section} id="plans">
                 <Plans />

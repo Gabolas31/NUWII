@@ -140,12 +140,6 @@ export function NavBar() {
           </div>
           
           <div className={styles.navLinks}>
-            <img 
-              src="/logo.png"
-              alt="Logo"
-              className={styles.mainIcon}
-              draggable="false"
-            />
             <a href="#services" className={styles.navLink}>Serviços</a>
             <a href="#plans" className={styles.navLink}>Planos</a>
             <a href="#about" className={styles.navLink}>Sobre</a>

@@ -206,7 +206,7 @@ export function Features({
               return (
                 <div key={index} className={styles.card}>
                   <div className={styles.cardIcon}>
-                    <Icon sx={{ fontSize: 28, color: BusinessColors.Primary }} />
+                    <Icon sx={{ fontSize: 32, color: '#0A3D62' }} />
                   </div>
                   <h3 className={styles.cardTitle}>{feature.title}</h3>
                   <p className={styles.cardDescription}>{feature.description}</p>
@@ -253,7 +253,10 @@ export function Features({
               rel="noopener noreferrer"
               className={styles.ctaButton}
             >
-              Contrate a Nuwii
+              <span>
+                Contrate a Nuwii
+                <span className={styles.ctaSubtext}>Fale com um especialista</span>
+              </span>
             </a>
           </div>
         </div>

@@ -1,37 +1,39 @@
  /* CSS Variables for Design System */
 :root {
-  /* NUWII Brand Colors */
-  --color-primary: #44cbc6;
-  --color-primary-light: #a1e7e5;
-  --color-primary-dark: #2a9d98;
+  /* NUWII Brand Colors - Redesign */
+  --color-primary: #0A3D62; /* Azul Corporativo */
+  --color-primary-light: #E6F7FF; /* Azul Claro */
+  --color-primary-dark: #083150; /* Azul Escuro */
+  --color-secondary: #48BB78; /* Verde Menta */
+  --color-accent: #E6F7FF; /* Azul Claro */
   
   /* Neutral Colors */
   --color-white: #ffffff;
-  --color-gray-50: #f8f9fa;
-  --color-gray-100: #e9ecef;
-  --color-gray-200: #dee2e6;
-  --color-gray-300: #ced4da;
-  --color-gray-400: #adb5bd;
-  --color-gray-500: #6c757d;
-  --color-gray-600: #495057;
-  --color-gray-700: #343a40;
-  --color-gray-800: #212529;
-  --color-gray-900: #1c1c1e;
+  --color-gray-50: #F7FAFC;
+  --color-gray-100: #EDF2F7;
+  --color-gray-200: #E2E8F0;
+  --color-gray-300: #CBD5E0;
+  --color-gray-400: #A0AEC0;
+  --color-gray-500: #718096;
+  --color-gray-600: #4A5568;
+  --color-gray-700: #2D3748;
+  --color-gray-800: #1A202C;
+  --color-gray-900: #171923;
   
   /* Semantic Colors */
-  --color-success: #28a745;
+  --color-success: #48BB78;
   --color-warning: #ffc107;
   --color-error: #dc3545;
-  --color-info: #17a2b8;
+  --color-info: #0A3D62;
   
   /* Background Colors */
-  --color-background: #ffffff;
-  --color-background-secondary: #f8f9fa;
-  --color-background-dark: #1c1c1e;
+  --color-background: #FFFFFF;
+  --color-background-secondary: #F7FAFC;
+  --color-background-dark: #1A202C;
   
   /* Text Colors */
-  --color-text-primary: #212529;
-  --color-text-secondary: #6c757d;
+  --color-text-primary: #1A202C; /* Cinza Escuro */
+  --color-text-secondary: #718096; /* Cinza Médio */
   --color-text-light: #ffffff;
   
   /* Border Colors */
@@ -45,18 +47,18 @@
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  --shadow-primary: 0 8px 24px rgba(68, 203, 198, 0.25);
-  --shadow-primary-lg: 0 12px 32px rgba(68, 203, 198, 0.3);
+  --shadow-primary: 0 8px 24px rgba(10, 61, 98, 0.25);
+  --shadow-primary-lg: 0 12px 32px rgba(10, 61, 98, 0.3);
   
   /* Spacing - Sistema baseado em múltiplos de 8px */
   --spacing-xs: 0.25rem;    /* 4px */
   --spacing-sm: 0.5rem;     /* 8px */
   --spacing-md: 1rem;       /* 16px */
   --spacing-lg: 1.5rem;     /* 24px */
-  --spacing-xl: 2rem;       /* 32px */
-  --spacing-2xl: 3rem;      /* 48px */
-  --spacing-3xl: 4rem;      /* 64px */
-  --spacing-4xl: 5rem;      /* 80px */
+  --spacing-xl: 3rem;       /* 48px */
+  --spacing-2xl: 4rem;      /* 64px */
+  --spacing-3xl: 6rem;      /* 96px */
+  --spacing-4xl: 7.5rem;    /* 120px */
   --spacing-5xl: 6.25rem;   /* 100px */
   --spacing-6xl: 7.5rem;    /* 120px */
   
@@ -74,17 +76,26 @@
   --font-family-black: 'LinearGrotesk-Black', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-family-light: 'LinearGrotesk-Light', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   
-  /* Font Sizes */
+  /* Font Sizes - Redesign */
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
-  --text-base: 1rem;
+  --text-base: 1rem; /* 16px - Body */
   --text-lg: 1.125rem;
   --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 1.875rem;
-  --text-4xl: 2.25rem;
-  --text-5xl: 3rem;
-  --text-6xl: 3.75rem;
+  --text-2xl: 1.5rem; /* 24px - H3 mobile */
+  --text-3xl: 1.875rem; /* 30px - H2 mobile */
+  --text-4xl: 2.25rem; /* 36px - H1 mobile */
+  --text-5xl: 3rem; /* 48px - H1 desktop */
+  --text-6xl: 3.75rem; /* 60px - H2 desktop */
+  
+  /* Typography Scale - Redesign */
+  --h1-desktop: 3rem; /* 48px */
+  --h1-mobile: 2.25rem; /* 36px */
+  --h2-desktop: 2.25rem; /* 36px */
+  --h2-mobile: 1.875rem; /* 30px */
+  --h3-desktop: 1.5rem; /* 24px */
+  --h3-mobile: 1.25rem; /* 20px */
+  --body: 1rem; /* 16px */
   
   /* Line Heights - Otimizados para legibilidade */
   --leading-tight: 1.2;
@@ -95,8 +106,8 @@
   
   /* Transitions */
   --transition-fast: 150ms ease-in-out;
-  --transition-normal: 250ms ease-in-out;
-  --transition-slow: 350ms ease-in-out;
+  --transition-normal: 300ms ease-in-out;
+  --transition-slow: 500ms ease-in-out;
 }
 
 @font-face {
@@ -259,10 +270,10 @@ html, body {
   color: var(--color-white);
 }
 
-/* Card Styles */
+/* Card Styles - Redesign */
 .card {
   background-color: var(--color-white);
-  border-radius: var(--radius-lg);
+  border-radius: 12px;
   box-shadow: var(--shadow);
   padding: var(--spacing-xl);
   transition: all var(--transition-normal);
@@ -281,6 +292,37 @@ html, body {
 
 /* Selection Styles */
 ::selection {
-  background-color: var(--color-primary-light);
+  background-color: var(--color-accent);
   color: var(--color-text-primary);
+}
+
+/* Button Secondary - Redesign */
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+.btn-secondary:hover {
+  background-color: #38a169;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   ANIMAÇÕES
+   ============================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn var(--transition-normal) ease-out;
 }

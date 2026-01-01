@@ -12,17 +12,17 @@
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: var(--spacing-xs) var(--spacing-xl) var(--spacing-xs) var(--spacing-md);
-  display: flex;
+  padding: 20px var(--spacing-xl);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
   gap: var(--spacing-xl);
 }
 
 .mobileContainer {
   display: none;
   width: 100%;
-  padding: var(--spacing-xs) var(--spacing-lg);
+  padding: 20px var(--spacing-lg);
   align-items: center;
   justify-content: space-between;
 }
@@ -34,7 +34,7 @@
 }
 
 .logoImg {
-  width: 120px;
+  width: 180px;
   height: auto;
   transition: transform var(--transition-fast);
 }
@@ -46,18 +46,13 @@
 .navLinks {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
-  flex: 1;
-  justify-content: flex-start;
-  margin-left: 0;
+  gap: var(--spacing-lg);
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .mainIcon {
-  width: 70px;
-  height: 70px;
-  object-fit: contain;
-  mix-blend-mode: multiply;
-  filter: contrast(1.1);
+  display: none;
 }
 
 .navLink {
@@ -182,7 +177,7 @@
 
 @media (max-width: 480px) {
   .mobileContainer {
-    padding: var(--spacing-xs) var(--spacing-md);
+    padding: 20px var(--spacing-md);
   }
   
   .ghostButton {
@@ -191,6 +186,6 @@
   }
   
   .logoImg {
-    width: 100px;
+    width: 140px;
   }
 }
