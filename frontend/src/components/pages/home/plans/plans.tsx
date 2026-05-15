@@ -1,494 +1,289 @@
-import { CenterFocusStrong as CenterFocusStrongIcon, InfoOutline as InfoOutlineIcon } from '@mui/icons-material';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { Box, Button,Card, CardContent, List, ListItem, ListItemIcon, ListItemText,
-Typography  } from '@mui/material';
-import { green } from '@mui/material/colors';
-import { Flex } from "@radix-ui/themes";
-// import Image, { StaticImageData } from 'next/image';
-import React from 'react';
-
-import { BusinessColors, config } from "@/lib";
-
-// import person1Image from "./assets/juliana.png"
-// import person2Image from "./assets/nadja.png"
+import { useState } from "react";
+import { waLink, waMessages } from "@/lib";
+import { useReveal } from "@/lib/hooks/useReveal";
 import styles from "./plans.module.css";
 
-// Lista de planos por categoria
-const servicoPlans = [
-  {
-    title: "Business Standard",
-    features: [
-      'Abertura de empresa grátis',
-      'Atendimento via WhatsApp',
-      'Contabilidade completa',
-      'Relatórios contábeis',
-      'Conta PJ gratuita',
-      'Aplicativo e portal do cliente (web)',
-    ],
-    info: "Ideal para quem está começando ou quer uma contabilidade simples e eficiente.",
-    description: "Para quem quer resolver a contabilidade com agilidade e autonomia."
-  },
-  {
-    title: "Business Unique",
-    features: [
-      'Tudo do plano Standard, mais:',
-      'Certificado digital grátis',
-      'Emissão de notas fiscais: até 5 NFs/mês',
-      'Pró-labore: 1 sócio',
-      'Endereço fiscal',
-    ],
-    info: "Perfeito para quem já tem operação rodando e quer mais estrutura sem ir para um plano avançado.",
-    description: "Para empresas em crescimento que precisam de mais apoio no dia a dia.",
-    isHighlighted: true
-  },
-  {
-    title: "Business Plus",
-    features: [
-      'Tudo do plano Unique, mais:',
-      'Atendimento telefônico',
-      'Reunião mensal via Meet ou Zoom',
-      'Consultoria contábil com especialistas',
-      'Emissão de notas fiscais: até 20 NFs/mês',
-      'Pró-labore: 2 sócios',
-      'Folha de pagamento: até 2 funcionários grátis',
-      'Endereço fiscal',
-      'Gerente de conta exclusivo',
-    ],
-    info: "Indicado para quem precisa de acompanhamento constante e visão financeira mais estratégica.",
-    description: "Para empresas com operação maior e demandas financeiras mais frequentes."
-  },
-];
+type PlanType = "servico" | "comercio";
 
-const comercioPlans = [
-  {
-    title: "Commerce Standard",
-    features: [
-      'Abertura de empresa grátis',
-      'Atendimento via WhatsApp',
-      'Contabilidade completa',
-      'Relatórios contábeis',
-      'Conta PJ gratuita',
-      'Aplicativo e portal do cliente (web)',
-    ],
-    info: "Ideal para quem está começando ou quer uma contabilidade simples e eficiente.",
-    description: "Para quem quer resolver a contabilidade com agilidade e autonomia."
-  },
-  {
-    title: "Commerce Unique",
-    features: [
-      'Tudo do plano Standard, mais:',
-      'Certificado digital grátis',
-      'Emissão de notas fiscais: até 5 NFs/mês',
-      'Pró-labore: 1 sócio',
-      'Endereço fiscal',
-    ],
-    info: "Perfeito para quem já tem operação rodando e quer mais estrutura sem ir para um plano avançado.",
-    description: "Para empresas em crescimento que precisam de mais apoio no dia a dia.",
-    isHighlighted: true
-  },
-  {
-    title: "Commerce Plus",
-    features: [
-      'Tudo do plano Unique, mais:',
-      'Atendimento telefônico',
-      'Reunião mensal via Meet ou Zoom',
-      'Consultoria contábil com especialistas',
-      'Emissão de notas fiscais: até 20 NFs/mês',
-      'Pró-labore: 2 sócios',
-      'Folha de pagamento: até 2 funcionários grátis',
-      'Endereço fiscal',
-      'Gerente de conta exclusivo',
-    ],
-    info: "Indicado para quem precisa de acompanhamento constante e visão financeira mais estratégica.",
-    description: "Para empresas com operação maior e demandas financeiras mais frequentes."
-  },
-];
-
-const otherPlans = [
-  {
-    title: "CARNÊ LEÃO",
-    features: [
-      'INSS do profissional',
-      'Contabilidade completa',
-      'Abertura ou migração grátis',
-      'Baixa do MEI grátis (pra quem está com atividade irregular no MEI e quer mudar pra modelo autônomo)',
-      'Apuração de impostos e calendário',
-      'Aplicativo e portal do cliente web',
-    ],
-    info: "Plano ideal para Autônomo PF com rendimentos até R$81 mil/ano."
-  },
-  {
-    title: "PERSONALIZADO",
-    features: [
-      'Lucro Presumido ou Lucro Real',
-      'Analista dedicado por departamento',
-      'Contabilidade completa',
-      'Abertura ou migração grátis',
-      'Planejamento tributário grátis',
-      'Apuração de impostos e calendário',
-      'Aplicativo e portal do cliente web',
-    ],
-    info: "Para empresas com faturamento acima do limite dos planos. Suporte personalizado."
-  }
-];
-
-// function highlightText(text: string, substrings: string[]) {
-//   if (!substrings || substrings.length === 0) return text;
-
-//   const pattern = substrings
-//     .map(str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
-//     .join('|');
-//   const regex = new RegExp(`(${pattern})`, 'gi');
-
-//   return text.split(regex).map((part, i) =>
-//     substrings.some(sub =>
-//       part.toLowerCase() === sub.toLowerCase()
-//     ) ? (
-//       <strong key={i} style={{color: BusinessColors.Blue}}>{part}</strong>
-//     ) : (
-//       part
-//     )
-//   );
-// }
-
-function highlightTextBold(text: string, substrings: string[]) {
-  if (!substrings || substrings.length === 0) return text;
-
-  const pattern = substrings
-    .map(str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
-    .join('|');
-  const regex = new RegExp(`(${pattern})`, 'gi');
-
-  return text.split(regex).map((part, i) =>
-    substrings.some(sub =>
-      part.toLowerCase() === sub.toLowerCase()
-    ) ? (
-      <strong key={i} style={{fontWeight: "bold"}}>{part}</strong>
-    ) : (
-      part
-    )
-  );
-}
-
-interface CardPlanProps {
+type Plan = {
+  name: string;
   title: string;
-  items: string[];
-  info: string;
-  description?: string;
-  isHighlighted?: boolean;
-}
-
-const CardPlan: React.FC<CardPlanProps> = ({ title, items, info, description, isHighlighted }) => {
-  const message = `Olá! Venho pelo site da NUWII e estou interessado(a) no plano ${title}.`;
-  const whatsappLink = `https://wa.me/${config.phoneNumber}?text=${encodeURIComponent(message)}`;
-
-  return (
-    <Card
-      className={`${styles.planCard} ${isHighlighted ? styles.planCardHighlighted : ''}`}
-      sx={{
-        position: 'relative',
-        borderRadius: '12px',
-        border: isHighlighted ? '2px solid #0A3D62' : '1px solid var(--color-border)',
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        boxShadow: isHighlighted 
-          ? '0 10px 15px rgba(10, 61, 98, 0.2)' 
-          : '0 4px 6px rgba(0, 0, 0, 0.05)',
-        overflow: 'visible',
-      }}
-    >
-      {isHighlighted && (
-        <Box
-          sx={{
-            position: 'absolute',
-            top: -12,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            bgcolor: '#0A3D62',
-            color: 'white',
-            px: 2,
-            py: 0.5,
-            borderRadius: 2,
-            fontSize: '0.75rem',
-            fontWeight: 'bold',
-            zIndex: 2,
-            letterSpacing: '0.05em',
-          }}
-        >
-          Mais Popular
-        </Box>
-      )}
-      
-      <CardContent sx={{ flexGrow: 1, p: 3, display: 'flex', flexDirection: 'column' }}>
-        {/* Title */}
-        <Typography 
-          variant="h5" 
-          align="center" 
-          sx={{ 
-            color: '#0A3D62',
-            fontWeight: 'bold',
-            mb: 1 
-          }}
-        >
-          {title}
-        </Typography>
-
-        {/* Description */}
-        {description && (
-          <Typography 
-            variant="body2" 
-            align="center" 
-            sx={{ 
-              color: 'var(--color-gray-600)', 
-              mb: 2,
-              fontSize: '0.9rem',
-              lineHeight: 1.5
-            }}
-          >
-            {description}
-          </Typography>
-        )}
-
-        {/* Info */}
-        <Box 
-          sx={{ 
-            display: 'flex', 
-            alignItems: 'flex-start', 
-            mb: 3,
-            p: 1.5,
-            bgcolor: 'var(--color-gray-50)',
-            borderRadius: 1,
-          }}
-        >
-          <InfoOutlineIcon sx={{ fontSize: "16px", color: BusinessColors.Primary, mr: 1, mt: 0.5, flexShrink: 0 }} />
-          <Typography variant="body2" sx={{ color: 'var(--color-gray-700)', fontSize: '0.85rem', lineHeight: 1.5 }}>
-            {info}
-          </Typography>
-        </Box>
-
-        {/* Features List */}
-        <List sx={{ flexGrow: 1, py: 0 }}>
-          {items.map((item, index) => {
-            const isHeader = item.startsWith('Tudo do plano');
-            return (
-              <ListItem 
-                key={index} 
-                disableGutters
-                sx={{ 
-                  py: 0.5,
-                  alignItems: isHeader ? 'flex-start' : 'flex-start'
-                }}
-              >
-                {!isHeader && (
-                  <ListItemIcon sx={{ minWidth: 28, mt: 0.5 }}>
-                    <CheckCircleIcon sx={{ color: '#48BB78', fontSize: '20px' }} />
-                  </ListItemIcon>
-                )}
-                <ListItemText 
-                  primary={item}
-                  sx={{
-                    fontWeight: isHeader ? 600 : 400,
-                    color: isHeader ? '#0A3D62' : 'var(--color-gray-700)',
-                    fontSize: isHeader ? '0.9rem' : '0.875rem',
-                    '& .MuiListItemText-primary': {
-                      fontSize: isHeader ? '0.9rem' : '0.875rem',
-                      lineHeight: 1.5,
-                    }
-                  }}
-                />
-              </ListItem>
-            );
-          })}
-        </List>
-      </CardContent>
-
-      {/* Footer with Button */}
-      <Box 
-        sx={{ 
-          bgcolor: '#0A3D62',
-          p: 2,
-          borderBottomLeftRadius: '12px',
-          borderBottomRightRadius: '12px',
-        }}
-      >
-        <Button
-          fullWidth
-          variant="contained"
-          href={whatsappLink}
-          target="_blank"
-          endIcon={<CenterFocusStrongIcon/>}
-          sx={{ 
-            backgroundColor: "#fff", 
-            color: "#000", 
-            border: '1px solid #000',
-            borderRadius: "30px",
-            textTransform: 'uppercase',
-            fontWeight: 600,
-            fontSize: '0.875rem',
-            '&:hover': {
-              backgroundColor: 'var(--color-gray-50)',
-            }
-          }}
-        >
-          Saiba mais
-        </Button>
-      </Box>
-    </Card>
-  );
+  description: string;
+  priceServico: number;
+  priceComercio: number;
+  dailyServico: number;
+  dailyComercio: number;
+  capacityNote: string;
+  features: { text: string; tooltip?: string; heading?: boolean }[];
+  featured?: boolean;
+  uniqueCopy?: boolean;
+  whatsappMessage: string;
 };
 
-// interface RecommendationCardProps {
-//   photo: StaticImageData;
-//   name: string;
-//   title: string;
-//   text: string;
-// }
-
-// const RecommendationCard: React.FC<RecommendationCardProps> = ({ photo, title, name, text }) => {
-//   return (
-//     <Paper
-//       elevation={0}
-//       sx={{
-//         backgroundColor: '#1c1c1e',
-//         color: '#fff',
-//         borderRadius: '12px',
-//         padding: '32px 24px 48px',
-//         border: '1px solid #444',
-//         position: 'relative',
-//         maxWidth: 400,
-//         boxShadow: '0 0 10px 0 #1976d2',
-//         animation: 'shadow-move 2s ease-in-out infinite alternate',
-//         '@keyframes shadow-move': {
-//           '0%': {
-//             boxShadow: '0 0 15px 0 #1976d2',
-//           },
-//           '100%': {
-//             boxShadow: '0 0 15px 3px #1976d2',
-//           },
-//         },
-//       }}
-//     >
-//       {/* Aspas */}
-//       <Box sx={{ fontSize: 120, color: '#fff', position: 'absolute', top: -20, left: 16 }}>
-//         “
-//       </Box>
-
-//       {/* Título */}
-//       <Typography variant="h6" fontWeight="bold" sx={{ mt: 4 }}>
-//         {title}
-//       </Typography>
-
-//       {/* Texto */}
-//       <Typography variant="body2" sx={{ mt: 2, lineHeight: 1.6, whiteSpace: 'pre-line' }}>
-//         {text}
-//       </Typography>
-
-//       {/* Rodapé com imagem e nome */}
-//       <Box
-//         sx={{
-//           position: 'absolute',
-//           bottom: -24,
-//           left: '50%',
-//           transform: 'translateX(-50%)',
-//           backgroundColor: '#1c1c1e',
-//           border: '1px solid #444',
-//           borderRadius: '999px',
-//           padding: '4px 12px',
-//           display: 'flex',
-//           alignItems: 'center',
-//           gap: 1,
-//         }}
-//       >
-//         <Image
-//           src={photo}
-//           alt={name}
-//           width={24}
-//           height={24}
-//           style={{ borderRadius: '50%' }}
-//         />
-//         <Typography variant="caption" color="#b19cd9">@{name}</Typography>
-//       </Box>
-//     </Paper>
-//   );
-// };
-
-const GradientBar: React.FC = () => {
-  return (
-    <Box
-      sx={{
-        width: '100%',
-        height: '8px',
-        borderRadius: '8px',
-        background: 'linear-gradient(90deg, #00CFE8, #5F6DF8, #C636F8)',
-      }}
-    />
-  );
-};
-
+const PLANS: Plan[] = [
+  {
+    name: "Start",
+    title: "Business Start",
+    description: "Pra empresa que fatura até R$ 20 mil/mês e quer o essencial bem feito.",
+    priceServico: 397,
+    priceComercio: 497,
+    dailyServico: 13,
+    dailyComercio: 17,
+    capacityNote: "Faturamento ideal até R$ 20.000",
+    features: [
+      { text: "Contabilidade completa" },
+      { text: "Conta Digital PJ + Maquininha de cartão" },
+      {
+        text: "Certificado digital A1 incluso",
+        tooltip: "Certificado digital (e-CNPJ A1) é sua identidade eletrônica — usada para assinar documentos e acessar sistemas com validade jurídica.",
+      },
+      { text: "Painel contábil completo" },
+      { text: "Atendimento WhatsApp, telefone, e-mail e chat" },
+    ],
+    whatsappMessage: waMessages.planStart,
+  },
+  {
+    name: "Unique",
+    title: "Business Unique",
+    description: "Pra empresa crescendo: consultoria, conciliação e gestão de certidões.",
+    priceServico: 497,
+    priceComercio: 597,
+    dailyServico: 17,
+    dailyComercio: 20,
+    capacityNote: "Faturamento ideal até R$ 60.000",
+    featured: true,
+    uniqueCopy: true,
+    features: [
+      { text: "Tudo do Start, mais:", heading: true },
+      { text: "Consultoria contábil com Contador" },
+      {
+        text: "Conciliação financeira automática",
+        tooltip: "Cruzamento automático entre seus lançamentos e o extrato bancário, identificando divergências.",
+      },
+      { text: "Importação de extrato: até 2 contas" },
+      { text: "Pró-labore: 1 folha" },
+      { text: "Gestão de certidões" },
+    ],
+    whatsappMessage: waMessages.planUnique,
+  },
+  {
+    name: "Plus",
+    title: "Business Plus",
+    description: "Pra empresa com sócios, funcionários e movimento mensal alto.",
+    priceServico: 856,
+    priceComercio: 997,
+    dailyServico: 29,
+    dailyComercio: 33,
+    capacityNote: "Operação avançada · atendimento prioritário",
+    features: [
+      { text: "Tudo do Unique, mais:", heading: true },
+      { text: "Pró-labore: 2 folhas + até 3 funcionários" },
+      { text: "Emissão de até 10 NFs de serviço" },
+      { text: "Abertura ou alteração contratual incluída" },
+      { text: "Gestão de parcelamentos e acordos" },
+      { text: "Apoio contábil pra preenchimento de documentos" },
+      {
+        text: "Serviços prioritários",
+        tooltip: "Atendimento WhatsApp até 22h e demandas executadas com prazo reduzido.",
+      },
+      { text: "Importação de extrato: até 3 contas" },
+      { text: "Balanço e DRE" },
+    ],
+    whatsappMessage: waMessages.planPlus,
+  },
+];
 
 export function Plans() {
-  const [selectedType, setSelectedType] = React.useState<'servico' | 'comercio'>('servico');
+  const [type, setType] = useState<PlanType>("servico");
+  const [starterOpen, setStarterOpen] = useState(false);
+  const head = useReveal<HTMLDivElement>();
 
   return (
-    <Flex className={styles.root}>
-      <Flex className={styles.container}>
-        <div className={styles.headerSection}>
-          <h2 className={styles.mainTitle}>
-            Escolha o plano ideal para sua empresa
+    <section className={styles.root}>
+      <div className={styles.container}>
+        <div ref={head.ref} className={styles.head}>
+          <div className={`reveal in`}>
+            <span className={styles.eyebrow}>Planos</span>
+          </div>
+          <h2 className={`${styles.h2} reveal ${head.inView ? "in" : ""} reveal-d1`}>
+            Mensalidade fixa. <em>Cancele quando quiser.</em>
           </h2>
-          <p className={styles.mainDescription}>
-            Planos completos, com suporte humano e tecnologia para simplificar sua rotina. Escolha o que mais faz sentido para você:
+          <p className={`${styles.p} reveal ${head.inView ? "in" : ""} reveal-d2`}>
+            Sem taxa de adesão. Sem cobrar extra por NF, declaração ou
+            consultoria. Migração de outra contabilidade sem custo.
           </p>
-          
-          {/* Toggle Selector */}
-          <div className={styles.toggleContainer}>
-            <button
-              className={`${styles.toggleButton} ${selectedType === 'servico' ? styles.toggleActive : ''}`}
-              onClick={() => setSelectedType('servico')}
-            >
-              Serviço
-            </button>
-            <button
-              className={`${styles.toggleButton} ${selectedType === 'comercio' ? styles.toggleActive : ''}`}
-              onClick={() => setSelectedType('comercio')}
-            >
-              Comércio
-            </button>
+          <div className={`reveal ${head.inView ? "in" : ""} reveal-d3`}>
+            <div className={styles.toggle}>
+              <button
+                className={type === "servico" ? styles.toggleOn : ""}
+                onClick={() => setType("servico")}
+              >
+                Serviço
+              </button>
+              <button
+                className={type === "comercio" ? styles.toggleOn : ""}
+                onClick={() => setType("comercio")}
+              >
+                Comércio
+              </button>
+            </div>
           </div>
         </div>
-        <Flex className={styles.plansContainer}>
-          {(selectedType === 'servico' ? servicoPlans : comercioPlans).map((plan, index) => (
-            <CardPlan 
-              key={index} 
-              title={plan.title} 
-              items={plan.features} 
-              info={plan.info}
-              description={plan.description}
-              isHighlighted={plan.isHighlighted}
-            />
+
+        <div className={styles.grid}>
+          {PLANS.map((plan, i) => (
+            <PlanCard key={plan.name} plan={plan} type={type} index={i} />
           ))}
-        </Flex>
-        <Flex style={{marginTop: "70px", width: "100%", alignItems: "center", justifyContent: "center"}}>
-          <div style={{width: "60%"}}>
-            <GradientBar/>
+        </div>
+
+        {/* Tudo incluso callout */}
+        <div className={`${styles.included} reveal`}>
+          {["Abertura de empresa grátis", "Migração de contador grátis", "Sem taxa de adesão", "Cancele a qualquer momento"].map((t) => (
+            <span key={t} className={styles.includedItem}>
+              <span className={styles.includedIcon}>
+                <CheckSm />
+              </span>
+              {t}
+            </span>
+          ))}
+        </div>
+
+        {/* Starter accordion */}
+        <div className={styles.starterWrap}>
+          <div className={`${styles.starterCard} ${starterOpen ? styles.starterOpen : ""}`}>
+            <button
+              type="button"
+              className={styles.starterHead}
+              onClick={() => setStarterOpen((v) => !v)}
+              aria-expanded={starterOpen}
+            >
+              <h3>
+                Procurando um plano mais simples <em>pra dar o primeiro passo?</em>
+              </h3>
+              <div className={styles.starterToggle}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </div>
+            </button>
+            <div className={styles.starterBody}>
+              <div className={styles.starterInner}>
+                <div>
+                  <p className={styles.starterName}>Starter</p>
+                  <h4 className={styles.starterTitle}>Business Starter</h4>
+                  <div className={styles.starterPrice}>
+                    <span className={styles.starterCur}>R$</span>
+                    <span className={styles.starterAmt}>298</span>
+                    <span className={styles.starterPm}>/mês</span>
+                  </div>
+                  <p className={styles.starterDaily}>≈ <strong>R$ 10</strong>/dia</p>
+                </div>
+                <ul className={styles.starterFx}>
+                  {["Contabilidade completa", "Conta PJ", "Aplicativo de gestão", "Atendimento WhatsApp"].map((t) => (
+                    <li key={t}>
+                      <CheckSm />
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href={waLink(waMessages.planStarter)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.starterBtn}
+                >
+                  Falar com Corujão
+                  <Arr />
+                </a>
+              </div>
+            </div>
           </div>
-        </Flex>
-        {/* <Flex className={styles.recommendationComponent}>
-          <RecommendationCard
-            photo={person1Image}
-            name="Ju.fraccaroli"
-            title="Atendimento Ágil e de Confiança"
-            text={`Ter uma equipe dedicada para atender e cuidando da minha empresa, sem precisar enfrentar filas ou passar por várias pessoas até encontrar ajuda de verdade.\nEssa é a diferença da contabilidade que tenho hoje, fazem toda a diferença. Recomendo de olhos fechados!`}
-          />
-          <RecommendationCard
-            photo={person2Image}
-            name="profanadjaarruda"
-            title="Contabilidade Organizada e Humanizada"
-            text={`Meu nome é Nadja, sou cliente da NUWII A há 2 anos e foi o Gabriel junto com sua equipe que organizou tooooda a contabilidade da minha empresa. Começamos na modalidade MEI e hoje já somos uma ME, com tudo perfeitamente organizado. Se pudesse recomendar algo a qualquer empresário seria, sem dúvidas, um suporte de contabilidade como eu tenho. Nunca, nesses 2 anos, precisei resolver nenhuma burocracia com relação a impostos ou taxas. O pessoal da NUWII organiza todos os processos e me deixa super tranquila com relação a essa parte tão chata que é a contabilidade de qualquer empresa. Obrigada, de coração, pelo excelente serviço prestado.`}
-          />
-        </Flex> */}
-      </Flex>
-    </Flex>
+        </div>
+
+        <p className={styles.foot}>Sem fidelidade · Sem multa · Migração gratuita</p>
+      </div>
+    </section>
+  );
+}
+
+function PlanCard({ plan, type, index }: { plan: Plan; type: PlanType; index: number }) {
+  const r = useReveal<HTMLDivElement>();
+  const price = type === "servico" ? plan.priceServico : plan.priceComercio;
+  const daily = type === "servico" ? plan.dailyServico : plan.dailyComercio;
+  const delay = index === 1 ? "reveal-d1" : index === 2 ? "reveal-d2" : "";
+
+  return (
+    <div
+      ref={r.ref}
+      className={`${styles.plan} ${plan.featured ? styles.planFeat : ""} reveal ${delay} ${r.inView ? "in" : ""}`}
+    >
+      <p className={styles.planNm}>{plan.name}</p>
+      <h3 className={styles.planT}>{plan.title}</h3>
+      <p className={styles.planD}>{plan.description}</p>
+
+      <div className={styles.priceWrap}>
+        <div className={styles.price}>
+          <span className={styles.currency}>R$</span>
+          <span className={styles.amount}>{price}</span>
+          <span className={styles.month}>/mês</span>
+        </div>
+        <span className={styles.capFat}>{plan.capacityNote}</span>
+        {plan.uniqueCopy ? (
+          <p className={styles.daily}>
+            Menos de <strong>R$ {daily}</strong>/dia · só <strong>+R$ 3,33/dia</strong> vs Start
+          </p>
+        ) : (
+          <p className={styles.daily}>
+            ≈ <strong>R$ {daily}</strong>/dia, com tudo incluso
+          </p>
+        )}
+      </div>
+
+      <div className={styles.divider} />
+
+      <ul className={styles.fx}>
+        {plan.features.map((f, i) => (
+          <li key={i} className={f.heading ? styles.fxHeading : ""}>
+            <span className={styles.check}>
+              <CheckSm />
+            </span>
+            <div className={styles.fxText}>
+              {f.text}
+              {f.tooltip && (
+                <span className={styles.tooltip}>
+                  <span className={styles.tooltipQ}>?</span>
+                  <span className={styles.tooltipTip}>{f.tooltip}</span>
+                </span>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <a
+        href={waLink(plan.whatsappMessage)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.cta}
+      >
+        Falar com Corujão
+        <Arr />
+      </a>
+    </div>
+  );
+}
+
+function CheckSm() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  );
+}
+function Arr() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" aria-hidden="true">
+      <path d="M5 12h14M13 5l7 7-7 7" />
+    </svg>
   );
 }

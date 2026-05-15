@@ -1,0 +1,198 @@
+.root {
+  padding: 120px 0;
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.head {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 56px;
+  align-items: center;
+  margin-bottom: 56px;
+}
+.left {
+  display: flex;
+  flex-direction: column;
+}
+.h2 {
+  font-family: var(--font-family-black);
+  font-weight: 900;
+  font-size: clamp(30px, 3.4vw, 42px);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+.h2 em {
+  font-family: var(--font-family-italic);
+  font-style: italic;
+  color: var(--teal-600);
+}
+.p {
+  font-size: 16px;
+  color: var(--mute);
+  line-height: 1.55;
+  margin: 0;
+  max-width: 460px;
+}
+
+/* Google rating card */
+.googleCard {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--r3);
+  padding: 22px 26px;
+  box-shadow: var(--shadow-sm);
+}
+.gIcon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+.gIcon svg {
+  width: 100%;
+  height: 100%;
+}
+.gInfo {
+  flex: 1;
+  min-width: 0;
+}
+.gRating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.gRating strong {
+  font-family: var(--font-family-black);
+  font-weight: 900;
+  font-size: 28px;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.gStars {
+  display: inline-flex;
+  gap: 2px;
+  color: #F0B90B;
+}
+.gStars svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+}
+.gMeta {
+  font-size: 12.5px;
+  color: var(--mute);
+}
+
+/* Reviews grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--r2);
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s var(--ease);
+}
+.card:hover {
+  transform: translateY(-3px);
+  border-color: var(--teal-200);
+  box-shadow: var(--shadow);
+}
+
+.stars {
+  display: inline-flex;
+  gap: 2px;
+  color: #F0B90B;
+  margin-bottom: 14px;
+}
+.stars svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.text {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  margin: 0 0 22px;
+  flex-grow: 1;
+}
+
+.author {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+  padding-top: 18px;
+  border-top: 1px solid var(--line-2);
+}
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal-400), var(--teal-700));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.time {
+  font-size: 12px;
+  color: var(--mute);
+  margin-top: 2px;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .root {
+    padding: 72px 0;
+  }
+  .head {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .container {
+    padding: 0 20px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .googleCard {
+    padding: 18px 22px;
+  }
+}

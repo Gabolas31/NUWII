@@ -1,58 +1,51 @@
-import { useState } from "react";
-import { Flex } from "@radix-ui/themes";
+import { useEffect, useState } from "react";
 import Header from "@/pages/header";
-import { Contact } from "./contact";
 import { Hero } from "./hero";
-import { LoadingScreen } from "./hero/LoadingScreen";
-import styles from "./home.module.css";
-import { Plans } from "./plans";
 import { Features } from "./features";
-import { Process } from "./process";
-import { Referral } from "./referral";
+import { Stats } from "./stats";
+import { Plans } from "./plans";
 import { Partners } from "./partners";
+import { Reviews } from "./reviews";
+import { Referral } from "./referral";
+import { Contact } from "./contact";
+import styles from "./home.module.css";
 
 export function HomePage() {
-  const [heroLoaded, setHeroLoaded] = useState(false);
+  const [showTop, setShowTop] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 600);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
-      {!heroLoaded ? (
-        <LoadingScreen />
-      ) : (
-        <>
-          <section className={styles.section} id="home">
-            <Header />
-          </section>
-          <main className={styles.homePage}>
-            <Flex className={styles.root} direction="column">
-              <Hero />
-              <Features imageSrc="/assets/new-images/contabilidade-completa.b08d43d.png" />
-              <Process />
-              <Referral />
-              <section className={styles.section} id="plans">
-                <Plans />
-              </section>
-              <div className={styles.colorBreak}>
-                <Partners />
-              </div>
-              <section className={styles.section} id="contact">
-                <Contact />
-              </section>
-            </Flex>
-            {/* Botão flutuante para voltar ao topo */}
-            <button
-              className={styles.floatingTopButton}
-              aria-label="Voltar ao topo"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            >
-              {/* Ícone seta para cima, sem texto */}
-              <span style={{fontSize: "1.5rem", lineHeight: 1}}>↑</span>
-            </button>
-          </main>
-        </>
+      <Header />
+      <main className={styles.main} id="home">
+        <Hero />
+        <Partners />
+        <Features />
+        <Stats />
+        <section id="plans">
+          <Plans />
+        </section>
+        <Reviews />
+        <Referral />
+        <Contact />
+      </main>
+
+      {showTop && (
+        <button
+          className={styles.toTop}
+          aria-label="Voltar ao topo"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <polyline points="18 15 12 9 6 15" />
+          </svg>
+        </button>
       )}
-      {/* O Hero será renderizado oculto para disparar o carregamento, mas só mostra as seções após o carregamento */}
-      {!heroLoaded && <Hero onLoaded={() => setHeroLoaded(true)} />}
     </>
   );
 }

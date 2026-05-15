@@ -1,13 +1,44 @@
- /* CSS Variables for Design System */
+/* ============================================================
+   NUWII — Design System (Redesign)
+   Paleta turquesa do logo + navy de autoridade + neutros quentes
+   ============================================================ */
+
 :root {
-  /* NUWII Brand Colors - Redesign */
-  --color-primary: #0A3D62; /* Azul Corporativo */
-  --color-primary-light: #E6F7FF; /* Azul Claro */
-  --color-primary-dark: #083150; /* Azul Escuro */
-  --color-secondary: #48BB78; /* Verde Menta */
-  --color-accent: #E6F7FF; /* Azul Claro */
-  
-  /* Neutral Colors */
+  /* Marca (turquesa do logo) */
+  --teal-50:  #E6F7F5;
+  --teal-100: #C4ECE7;
+  --teal-200: #8EDAD2;
+  --teal-400: #1FBDB1;
+  --teal-500: #0E9B91;   /* PRIMARY */
+  --teal-600: #0A857C;
+  --teal-700: #076F68;
+  --teal-900: #023F3A;
+
+  /* Navy (autoridade, texto, contraste) */
+  --navy-900: #0B1F3A;
+  --navy-800: #14304F;
+
+  /* Tinta / texto */
+  --ink:      #0F1929;
+  --ink-2:    #2A3447;
+  --mute:     #5B6B7F;
+  --mute-2:   #8C99A8;
+
+  /* Backgrounds */
+  --bg:       #FAFAF7;   /* off-white quente */
+  --surface:  #FFFFFF;
+
+  /* Borders */
+  --line:     #E8E6DF;
+  --line-2:   #F0EFE9;
+  --line-strong: #D5D3CB;
+
+  /* Alias legados (compatibilidade com código antigo) */
+  --color-primary: var(--teal-500);
+  --color-primary-light: var(--teal-50);
+  --color-primary-dark: var(--teal-600);
+  --color-secondary: var(--teal-500);
+  --color-accent: var(--teal-50);
   --color-white: #ffffff;
   --color-gray-50: #F7FAFC;
   --color-gray-100: #EDF2F7;
@@ -19,310 +50,199 @@
   --color-gray-700: #2D3748;
   --color-gray-800: #1A202C;
   --color-gray-900: #171923;
-  
-  /* Semantic Colors */
-  --color-success: #48BB78;
+  --color-background: var(--bg);
+  --color-background-secondary: #F7FAFC;
+  --color-background-dark: var(--ink);
+  --color-text-primary: var(--ink);
+  --color-text-secondary: var(--mute);
+  --color-text-light: #ffffff;
+  --color-border: var(--line);
+  --color-border-light: var(--line-2);
+  --color-border-dark: var(--line-strong);
+  --color-success: #10B981;
   --color-warning: #ffc107;
   --color-error: #dc3545;
-  --color-info: #0A3D62;
-  
-  /* Background Colors */
-  --color-background: #FFFFFF;
-  --color-background-secondary: #F7FAFC;
-  --color-background-dark: #1A202C;
-  
-  /* Text Colors */
-  --color-text-primary: #1A202C; /* Cinza Escuro */
-  --color-text-secondary: #718096; /* Cinza Médio */
-  --color-text-light: #ffffff;
-  
-  /* Border Colors */
-  --color-border: #dee2e6;
-  --color-border-light: #e9ecef;
-  --color-border-dark: #adb5bd;
-  
-  /* Shadow Colors - Sistema aprimorado de profundidade */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  --shadow-primary: 0 8px 24px rgba(10, 61, 98, 0.25);
-  --shadow-primary-lg: 0 12px 32px rgba(10, 61, 98, 0.3);
-  
-  /* Spacing - Sistema baseado em múltiplos de 8px */
-  --spacing-xs: 0.25rem;    /* 4px */
-  --spacing-sm: 0.5rem;     /* 8px */
-  --spacing-md: 1rem;       /* 16px */
-  --spacing-lg: 1.5rem;     /* 24px */
-  --spacing-xl: 3rem;       /* 48px */
-  --spacing-2xl: 4rem;      /* 64px */
-  --spacing-3xl: 6rem;      /* 96px */
-  --spacing-4xl: 7.5rem;    /* 120px */
-  --spacing-5xl: 6.25rem;   /* 100px */
-  --spacing-6xl: 7.5rem;    /* 120px */
-  
-  /* Border Radius */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  --radius-2xl: 1.5rem;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 3rem;
+  --spacing-2xl: 4rem;
+  --spacing-3xl: 6rem;
+  --spacing-4xl: 7.5rem;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-2xl: 28px;
   --radius-full: 9999px;
-  
-  /* Typography */
+  --r:  10px;
+  --r2: 14px;
+  --r3: 20px;
+  --r4: 28px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(15,25,41,.04);
+  --shadow:    0 6px 20px -6px rgba(15,25,41,.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 30px 60px -20px rgba(15,25,41,.2);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-teal: 0 14px 36px -10px rgba(14,155,145,.45);
+  --shadow-primary: var(--shadow-teal);
+
+  /* Tipografia */
   --font-family-sans: 'LinearGrotesk-Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-medium: 'LinearGrotesk-Medium', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-family-bold: 'LinearGrotesk-Bold', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-family-black: 'LinearGrotesk-Black', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-family-light: 'LinearGrotesk-Light', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  
-  /* Font Sizes - Redesign */
+  --font-family-italic: 'LinearGrotesk-BlackItalic', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
-  --text-base: 1rem; /* 16px - Body */
+  --text-base: 1rem;
   --text-lg: 1.125rem;
   --text-xl: 1.25rem;
-  --text-2xl: 1.5rem; /* 24px - H3 mobile */
-  --text-3xl: 1.875rem; /* 30px - H2 mobile */
-  --text-4xl: 2.25rem; /* 36px - H1 mobile */
-  --text-5xl: 3rem; /* 48px - H1 desktop */
-  --text-6xl: 3.75rem; /* 60px - H2 desktop */
-  
-  /* Typography Scale - Redesign */
-  --h1-desktop: 3rem; /* 48px */
-  --h1-mobile: 2.25rem; /* 36px */
-  --h2-desktop: 2.25rem; /* 36px */
-  --h2-mobile: 1.875rem; /* 30px */
-  --h3-desktop: 1.5rem; /* 24px */
-  --h3-mobile: 1.25rem; /* 20px */
-  --body: 1rem; /* 16px */
-  
-  /* Line Heights - Otimizados para legibilidade */
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+
   --leading-tight: 1.2;
   --leading-snug: 1.3;
   --leading-normal: 1.5;
   --leading-relaxed: 1.6;
-  --leading-loose: 2;
-  
-  /* Transitions */
+
+  /* Easing & transições */
+  --ease: cubic-bezier(.2,.7,.2,1);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
   --transition-fast: 150ms ease-in-out;
   --transition-normal: 300ms ease-in-out;
   --transition-slow: 500ms ease-in-out;
 }
 
+/* ============================================================
+   Fontes
+   ============================================================ */
 @font-face {
-    font-family: 'LinearGrotesk-Black';
-    src: url('/fonts/linear-grotesk/LinearGrotesk-Black.otf') format('opentype');
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'LinearGrotesk-Black';
+  src: url('/fonts/linear-grotesk/LinearGrotesk-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'LinearGrotesk-BlackItalic';
+  src: url('/fonts/linear-grotesk/LinearGrotesk-BlackItalic.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'LinearGrotesk-Bold';
+  src: url('/fonts/linear-grotesk/LinearGrotesk-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'LinearGrotesk-Medium';
+  src: url('/fonts/linear-grotesk/LinearGrotesk-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'LinearGrotesk-Light';
+  src: url('/fonts/linear-grotesk/LinearGrotesk-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'LinearGrotesk-Regular';
+  src: url('/fonts/linear-grotesk/LinearGrotesk-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
-@font-face {
-    font-family: 'LinearGrotesk-BlackItalic';
-    src: url('/fonts/linear-grotesk/LinearGrotesk-BlackItalic.otf') format('opentype');
-    font-weight: 900;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'LinearGrotesk-Bold';
-    src: url('/fonts/linear-grotesk/LinearGrotesk-Bold.otf') format('opentype');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'LinearGrotesk-Medium';
-    src: url('/fonts/linear-grotesk/LinearGrotesk-Medium.otf') format('opentype');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'LinearGrotesk-Light';
-    src: url('/fonts/linear-grotesk/LinearGrotesk-Light.otf') format('opentype');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'LinearGrotesk-Regular';
-    src: url('/fonts/linear-grotesk/LinearGrotesk-Regular.otf') format('opentype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-/* Reset and Base Styles */
+/* ============================================================
+   Reset & base
+   ============================================================ */
 * {
   box-sizing: border-box;
 }
-
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 html, body {
   margin: 0;
+  padding: 0;
   width: 100%;
   overflow-x: hidden;
-  padding: 0;
   overscroll-behavior-y: none;
   font-family: var(--font-family-sans);
   font-size: var(--text-base);
   line-height: var(--leading-normal);
-  color: var(--color-text-primary);
-  background-color: var(--color-background);
-  transition: background-color 0.8s ease-in-out;
+  color: var(--ink);
+  background-color: var(--bg);
 }
-
 #__next, main {
   min-height: 100vh;
 }
 
-/* Typography Classes */
-.text-xs { font-size: var(--text-xs); }
-.text-sm { font-size: var(--text-sm); }
-.text-base { font-size: var(--text-base); }
-.text-lg { font-size: var(--text-lg); }
-.text-xl { font-size: var(--text-xl); }
-.text-2xl { font-size: var(--text-2xl); }
-.text-3xl { font-size: var(--text-3xl); }
-.text-4xl { font-size: var(--text-4xl); }
-.text-5xl { font-size: var(--text-5xl); }
-.text-6xl { font-size: var(--text-6xl); }
-
-.font-light { font-family: var(--font-family-light); }
-.font-normal { font-family: var(--font-family-sans); }
-.font-medium { font-family: var(--font-family-medium); }
-.font-bold { font-family: var(--font-family-bold); }
-.font-black { font-family: var(--font-family-black); }
-
-.text-primary { color: var(--color-primary); }
-.text-secondary { color: var(--color-text-secondary); }
-.text-light { color: var(--color-text-light); }
-
-/* Utility Classes */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-md);
+/* Selection */
+::selection {
+  background-color: var(--teal-100);
+  color: var(--ink);
 }
 
-.section {
-  padding: var(--spacing-3xl) 0;
-  transition: background-color 0.8s ease-in-out, background 0.8s ease-in-out;
-}
-
-.section-sm {
-  padding: var(--spacing-2xl) 0;
-  transition: background-color 0.8s ease-in-out, background 0.8s ease-in-out;
-}
-
-.section-lg {
-  padding: var(--spacing-3xl) 0;
-  transition: background-color 0.8s ease-in-out, background 0.8s ease-in-out;
-}
-
-/* Button Base Styles */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border: none;
-  border-radius: var(--radius-md);
-  font-family: var(--font-family-sans);
-  font-size: var(--text-base);
-  font-weight: 500;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  white-space: nowrap;
-}
-
-.btn-primary {
-  background-color: var(--color-primary);
-  color: var(--color-white);
-}
-
-.btn-primary:hover {
-  background-color: var(--color-primary-dark);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-outline {
-  background-color: transparent;
-  color: var(--color-primary);
-  border: 2px solid var(--color-primary);
-}
-
-.btn-outline:hover {
-  background-color: var(--color-primary);
-  color: var(--color-white);
-}
-
-/* Card Styles - Redesign */
-.card {
-  background-color: var(--color-white);
-  border-radius: 12px;
-  box-shadow: var(--shadow);
-  padding: var(--spacing-xl);
-  transition: all var(--transition-normal);
-}
-
-.card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-2px);
-}
-
-/* Focus Styles */
-*:focus {
-  outline: 2px solid var(--color-primary);
+/* Focus */
+*:focus-visible {
+  outline: 2px solid var(--teal-500);
   outline-offset: 2px;
 }
 
-/* Selection Styles */
-::selection {
-  background-color: var(--color-accent);
-  color: var(--color-text-primary);
+/* ============================================================
+   Utilitários — animação de reveal compartilhada
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s var(--ease-out), transform 1s var(--ease-out);
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+.reveal-d4 { transition-delay: 0.4s; }
+
+.scale-in {
+  opacity: 0;
+  transform: scale(.94);
+  transition: opacity 1.2s var(--ease-out), transform 1.2s var(--ease-out);
+}
+.scale-in.in {
+  opacity: 1;
+  transform: scale(1);
 }
 
-/* Button Secondary - Redesign */
-.btn-secondary {
-  background-color: var(--color-secondary);
-  color: var(--color-white);
-}
-
-.btn-secondary:hover {
-  background-color: #38a169;
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-}
-
-/* ============================================
-   ANIMAÇÕES
-   ============================================ */
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .scale-in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.fade-in {
-  animation: fadeIn var(--transition-normal) ease-out;
+  html { scroll-behavior: auto; }
 }

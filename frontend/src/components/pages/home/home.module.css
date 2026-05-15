@@ -1,57 +1,49 @@
-.floatingTopButton:focus {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
+.main {
+  width: 100%;
+  background-color: var(--bg);
+  overflow-x: hidden;
 }
 
-.floatingTopButton {
+/* Botão flutuante voltar ao topo */
+.toTop {
   position: fixed;
-  right: var(--spacing-lg);
-  bottom: var(--spacing-lg);
-  z-index: 1000;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-  color: var(--color-white);
+  bottom: 28px;
+  right: 28px;
+  z-index: 50;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
   border: none;
-  border-radius: var(--radius-full);
-  width: 56px;
-  height: 56px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--text-xl);
-  cursor: pointer;
   box-shadow: var(--shadow-lg);
-  transition: all var(--transition-normal);
-  opacity: 0.9;
+  transition: all 0.25s var(--ease);
+  animation: fadeInUp 0.3s var(--ease-out);
+}
+.toTop:hover {
+  background: var(--teal-500);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-teal);
+}
+.toTop svg {
+  width: 18px;
+  height: 18px;
 }
 
-.floatingTopButton:hover {
-  opacity: 1;
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: var(--shadow-xl);
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.floatingTopButton:active {
-  transform: translateY(-2px) scale(1.02);
-}
-.root {
-  margin: 0;
-  gap: 0;
-  flex-grow: 1;
-  align-items: center;
-  width: 100%;
-}
-
-.homePage {
-  margin: 0;
-  width: 100%;
-}
-
-.section {
-  width: 100%;
-}
-
-.colorBreak {
-  width: 100%;
-  background-color: var(--color-gray-200);
-  transition: background-color 0.8s ease-in-out;
+@media (max-width: 540px) {
+  .toTop {
+    bottom: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+  }
 }

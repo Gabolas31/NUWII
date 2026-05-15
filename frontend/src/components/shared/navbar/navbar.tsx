@@ -1,165 +1,98 @@
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import {
-	HamburgerMenuIcon,
-} from "@radix-ui/react-icons";
-import { Button, Flex } from "@radix-ui/themes";
-import { useState } from "react";
-
-import { Image } from "@/components";
-import { BusinessColors } from "@/lib";
-
-import styles from "./navbar.module.css"
+import { useEffect, useState } from "react";
+import { waLink, waMessages } from "@/lib";
 import { WebsiteLogo } from "./website-logo";
+import styles from "./navbar.module.css";
 
-interface SideBarProps {
-  isOpen: boolean;
-  setIsOpen: (open: boolean) => void;
-}
-
-function SideBar({ isOpen, setIsOpen }: SideBarProps) {
-  const toggleDrawer = (open: boolean) => () => {
-    setIsOpen(open);
-  };
-
-  const drawerItems = [
-    { label: 'Serviços', href: '#services' },
-    { label: 'Planos', href: '#plans' },
-    { label: 'Sobre', href: '#about' },
-  ];
-
-  return (
-    <Drawer 
-      anchor='left' 
-      open={isOpen} 
-      transitionDuration={200}
-      onClose={toggleDrawer(false)}
-      sx={{
-      '& .MuiDrawer-paper': {
-        backgroundColor: BusinessColors.White,
-        color: BusinessColors.TextPrimary,
-        boxShadow: `0 1px 3px ${BusinessColors.ShadowLight}`,
-      }
-    }}>
-      <Box
-        sx={{ width: 250 }}
-        role='presentation'
-        onClick={toggleDrawer(false)}
-        onKeyDown={toggleDrawer(false)}
-      >
-        <ListItem key={'logo'} disablePadding>
-          <div
-            style={{ 
-              background: BusinessColors.White, 
-              display: 'flex', 
-              width: '100%', 
-              paddingLeft: '24px', 
-              paddingBlock: '24px',
-              borderBottom: `1px solid ${BusinessColors.BorderLight}`
-            }}
-          >
-            <Image src="/logo-icon.png" alt="Logo" className={styles.sideBarLogo} />
-          </div>
-        </ListItem>
-        <List>
-          {drawerItems.map((item) => (
-            <ListItem key={item.label} disablePadding>
-              <ListItemButton 
-                component='a' 
-                href={item.href}
-                sx={{
-                  color: BusinessColors.TextPrimary,
-                  '&:hover': {
-                    backgroundColor: BusinessColors.Gray50,
-                    color: BusinessColors.Primary,
-                  }
-                }}
-              >
-                <ListItemText 
-                  primary={item.label}
-                  primaryTypographyProps={{
-                    style: {
-                      fontFamily: 'var(--font-family-sans)',
-                      fontSize: 'var(--text-base)',
-                      fontWeight: 500,
-                    }
-                  }}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Box>
-    </Drawer>
-  );
-}
+const LINKS = [
+  { label: "Serviços", href: "#features" },
+  { label: "Planos", href: "#plans" },
+  { label: "Avaliações", href: "#reviews" },
+];
 
 export function NavBar() {
-  const onClickLogin = () => {
-    window.location.href = "https://passport.nibo.com.br/Account/Login?ReturnUrl=%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3DD2CBFE38-9803-4DA0-8E2C-4E67F26BA9F5%26redirect_uri%3Dhttps%253a%252f%252fempresa.nibo.com.br%252fAuth%252fCallback%253forigin%253d%2526returnUrl%253d%25252fOrganization%2526redirectEmail%253d";
-  }
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-  const handleButtonClick = () => {
-    setSidebarOpen((prev) => !prev);
-  };
+  // Trava scroll do body quando o menu mobile tá aberto
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
+  const closeMobile = () => setMobileOpen(false);
 
   return (
-    <nav className={styles.root}>
-      <div className={styles.mobileContainer}>
-        <div className={styles.logo}>
-          <WebsiteLogo/>
+    <nav className={`${styles.root} ${scrolled ? styles.scrolled : ""}`}>
+      <div className={styles.container}>
+        <a href="#home" className={styles.logo} onClick={closeMobile}>
+          <WebsiteLogo />
+        </a>
+
+        <div className={styles.links}>
+          {LINKS.map((l) => (
+            <a key={l.href} href={l.href} className={styles.link}>
+              {l.label}
+            </a>
+          ))}
         </div>
-        <div className={styles.mobileActions}>
-          <button 
-            className={styles.ghostButton}
-            onClick={onClickLogin}
+
+        <div className={styles.actions}>
+          <a
+            href={waLink(waMessages.default)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.cta}
           >
-            Área do Cliente
-          </button>
-          <Button 
-            variant="outline" 
-            onClick={handleButtonClick}
-            className={styles.menuButton}
-          >
-            <HamburgerMenuIcon />
-          </Button>
+            Falar com Corujão
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </a>
         </div>
-        <SideBar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
+
+        <button
+          type="button"
+          className={styles.burger}
+          aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={mobileOpen}
+          onClick={() => setMobileOpen((v) => !v)}
+        >
+          <span className={mobileOpen ? styles.burgerOpen : ""} />
+          <span className={mobileOpen ? styles.burgerOpen : ""} />
+          <span className={mobileOpen ? styles.burgerOpen : ""} />
+        </button>
       </div>
 
-      <div className={styles.desktopContainer}>
-        <div className={styles.container}>
-          <div className={styles.logo}>
-            <WebsiteLogo/>
-          </div>
-          
-          <div className={styles.navLinks}>
-            <a href="#services" className={styles.navLink}>Serviços</a>
-            <a href="#plans" className={styles.navLink}>Planos</a>
-            <a href="#about" className={styles.navLink}>Sobre</a>
-          </div>
-
-          <div className={styles.actions}>
-            <button 
-              className={styles.ghostButton}
-              onClick={onClickLogin}
-            >
-              Área do Cliente
-            </button>
-            <button 
-              className={styles.primaryButton}
-              onClick={() => window.location.href = '#contact'}
-            >
-              Abra sua empresa
-            </button>
-          </div>
+      {/* Overlay mobile menu */}
+      <div className={`${styles.mobile} ${mobileOpen ? styles.mobileOpen : ""}`}>
+        <div className={styles.mobileLinks}>
+          {LINKS.map((l) => (
+            <a key={l.href} href={l.href} onClick={closeMobile} className={styles.mobileLink}>
+              {l.label}
+            </a>
+          ))}
         </div>
+        <a
+          href={waLink(waMessages.default)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.mobileCta}
+          onClick={closeMobile}
+        >
+          Falar com Corujão
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" aria-hidden="true">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </a>
       </div>
     </nav>
   );
