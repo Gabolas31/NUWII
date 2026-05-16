@@ -180,6 +180,7 @@
 }
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -187,13 +188,14 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  overflow-x: hidden;
-  overscroll-behavior-y: none;
   font-family: var(--font-family-sans);
   font-size: var(--text-base);
   line-height: var(--leading-normal);
   color: var(--ink);
   background-color: var(--bg);
+}
+body {
+  overflow-x: clip;
 }
 #__next, main {
   min-height: 100vh;

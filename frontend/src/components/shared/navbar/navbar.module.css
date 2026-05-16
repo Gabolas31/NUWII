@@ -65,6 +65,25 @@
   flex-shrink: 0;
 }
 
+.clientArea {
+  color: var(--ink-2);
+  text-decoration: none;
+  font-family: var(--font-family-medium);
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: transparent;
+  transition: all 0.2s var(--ease);
+  white-space: nowrap;
+}
+.clientArea:hover {
+  border-color: var(--teal-500);
+  color: var(--teal-700);
+  background: var(--teal-50);
+}
+
 .cta {
   background: var(--teal-500);
   color: #fff;

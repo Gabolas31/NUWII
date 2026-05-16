@@ -634,3 +634,41 @@
     align-items: flex-start;
   }
 }
+
+/* "Saiba mais sobre o MEI" link below MEI cards */
+.meiMoreWrap {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.meiMore {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-family-bold, sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--teal-700);
+  text-decoration: none;
+  padding: 12px 22px;
+  border-radius: 100px;
+  border: 1.5px solid var(--teal-200);
+  background: var(--teal-50);
+  transition: all 0.2s var(--ease, ease);
+}
+
+.meiMore:hover {
+  background: var(--teal-100);
+  border-color: var(--teal-500);
+  transform: translateY(-1px);
+}
+
+.meiMore svg {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.2s var(--ease, ease);
+}
+
+.meiMore:hover svg {
+  transform: translateX(3px);
+}

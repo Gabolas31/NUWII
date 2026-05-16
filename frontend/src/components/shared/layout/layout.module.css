@@ -1,0 +1,52 @@
+.main {
+  position: relative;
+  /* Compensa altura da navbar fixa pra primeiro conteúdo não passar embaixo */
+}
+
+.toTop {
+  position: fixed;
+  bottom: 110px;
+  right: 28px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  z-index: 50;
+  transition: transform 0.2s var(--ease, ease), background 0.2s var(--ease, ease);
+  animation: toTopIn 0.3s var(--ease, ease);
+}
+
+.toTop:hover {
+  background: var(--teal-600);
+  transform: translateY(-2px);
+}
+
+.toTop svg {
+  width: 16px;
+  height: 16px;
+}
+
+@keyframes toTopIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 640px) {
+  .toTop {
+    bottom: 92px;
+    right: 20px;
+    width: 38px;
+    height: 38px;
+  }
+  .toTop svg {
+    width: 14px;
+    height: 14px;
+  }
+}
