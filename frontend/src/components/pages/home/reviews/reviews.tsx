@@ -5,7 +5,7 @@ const REVIEWS = [
   { name: "Juliana M.", time: "há 2 semanas", text: "Ter uma equipe dedicada cuidando da minha empresa, sem precisar enfrentar filas. Recomendo de olhos fechados." },
   { name: "Nadja S.", time: "há 1 mês", text: "Sou cliente há 2 anos, comecei como MEI e hoje sou ME, com tudo perfeitamente organizado. Em 2 anos, zero burocracia pra mim." },
   { name: "André F.", time: "há 3 semanas", text: "Trabalho remoto pra startup no exterior e invoice sempre foi um caos. Migrei pra NUWII e nunca mais me estressei." },
-  { name: "Rafael C.", time: "há 2 meses", text: "Abri minha empresa em 24h direto pelo WhatsApp. O atendimento é absurdamente rápido, ninguém te deixa esperando." },
+  { name: "Rafael C.", time: "há 2 meses", text: "Abri minha empresa direto pelo WhatsApp, sem precisar ir em lugar nenhum. O atendimento é rápido, ninguém te deixa esperando." },
   { name: "Carolina P.", time: "há 5 meses", text: "Saí de um escritório tradicional pra cá. Diferença absurda — economizei R$ 8k em impostos só no primeiro semestre." },
   { name: "Lucas D.", time: "há 3 meses", text: "Tinha pavor de imposto e NF. Hoje o app me avisa dos prazos e fica tudo organizado. Vale cada centavo." },
 ];

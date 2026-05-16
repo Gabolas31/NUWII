@@ -14,7 +14,7 @@ type WpMessage = {
 };
 
 const CONVERSATION: WpMessage[] = [
-  { from: "them", text: "Oi Marcelo, é a Ana da NUWII 😊 Vi que você quer trocar de contador. Pode falar comigo!", time: "10:14", typing: 1500 },
+  { from: "them", text: "Oi Marcelo, é o Pedro da NUWII 😊 Vi que você quer trocar de contador. Pode falar comigo!", time: "10:14", typing: 1500 },
   { from: "me", text: "Que rápido kkkk vai dar trabalho de migrar?", time: "10:15", typing: 900 },
   { from: "them", text: "Zero. A migração é regulada por lei e a gente faz tudo. Você só assina 2 documentos digitais.", time: "10:15", typing: 1700 },
   { from: "me", text: "Top, bora!", time: "10:16", typing: 700 },
@@ -143,7 +143,7 @@ function SplitWhatsApp() {
           </div>
           <div className={styles.wpInfo}>
             <div className={styles.wpName}>
-              NUWII Contabilidade · <span>Ana</span>
+              NUWII Contabilidade · <span>Pedro</span>
             </div>
             <div className={styles.wpStatus}>{status}</div>
           </div>

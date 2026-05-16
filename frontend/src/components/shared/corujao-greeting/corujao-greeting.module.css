@@ -1,0 +1,300 @@
+/* ============================================================
+   Corujão Greeting — aparece no canto inferior direito após 30s
+   ============================================================ */
+
+.root {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  pointer-events: none;
+}
+
+/* AVATAR (Corujão) — ENTRADA SUAVE */
+.owl {
+  display: block;
+  position: relative;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  overflow: visible;
+  background: var(--teal-500);
+  border: 3px solid var(--teal-500);
+  box-shadow: 0 12px 32px rgba(14, 155, 145, 0.32),
+              0 4px 12px rgba(11, 31, 58, 0.15);
+  cursor: pointer;
+  pointer-events: auto;
+  flex-shrink: 0;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transform-origin: center center;
+  /* Estado inicial: invisível e fora da tela pela direita */
+  opacity: 0;
+  transform: translateX(60px) scale(0.7);
+}
+
+.owl img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+/* Fase "appearing": faz a entrada (slide + scale + fade) */
+.appearing .owl {
+  animation: corujao-pop-in 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes corujao-pop-in {
+  0% {
+    opacity: 0;
+    transform: translateX(60px) scale(0.7);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(-4px) scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Fase "settled": fica na posição final com idle bob */
+.settled .owl {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  animation: corujao-idle 3.2s ease-in-out infinite;
+}
+
+@keyframes corujao-idle {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50%      { transform: translateY(-5px) rotate(2deg); }
+}
+
+.settled .owl:hover {
+  transform: scale(1.08);
+  animation: none;
+  box-shadow: 0 16px 40px rgba(14, 155, 145, 0.45),
+              0 6px 16px rgba(11, 31, 58, 0.18);
+}
+
+.settled .owl:hover img {
+  animation: corujao-wiggle 0.5s ease-in-out;
+}
+
+@keyframes corujao-wiggle {
+  0%, 100% { transform: rotate(0); }
+  25%      { transform: rotate(-8deg); }
+  75%      { transform: rotate(8deg); }
+}
+
+/* Indicador de status verde (igual WhatsApp online) */
+.dot {
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #25D366;
+  border: 3px solid var(--surface, #fff);
+  box-shadow: 0 0 0 1px rgba(11, 31, 58, 0.08);
+  /* Pulsa suavemente — chamando atenção sem ser invasivo */
+  animation: corujao-dot-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes corujao-dot-pulse {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(11, 31, 58, 0.08), 0 0 0 0 rgba(37, 211, 102, 0.5); }
+  50%      { box-shadow: 0 0 0 1px rgba(11, 31, 58, 0.08), 0 0 0 8px rgba(37, 211, 102, 0); }
+}
+
+/* BALÃO DE FALA */
+.bubble {
+  position: relative;
+  background: var(--surface, #fff);
+  color: var(--ink);
+  border-radius: 18px 18px 4px 18px;
+  padding: 18px 22px 16px 22px;
+  box-shadow: 0 12px 36px rgba(11, 31, 58, 0.16),
+              0 2px 6px rgba(11, 31, 58, 0.06);
+  max-width: 260px;
+  min-width: 220px;
+  border: 1px solid var(--line);
+  pointer-events: auto;
+  opacity: 0;
+  transform: scale(0.5) translateY(20px);
+  transform-origin: bottom right;
+  transition: none;
+}
+
+.bubble.bubbleIn {
+  animation: bubble-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes bubble-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(15px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.06) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Tail (rabicho do balão apontando pro Corujão) */
+.bubble::after {
+  content: "";
+  position: absolute;
+  bottom: 8px;
+  right: -10px;
+  width: 0;
+  height: 0;
+  border-left: 12px solid var(--surface, #fff);
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  filter: drop-shadow(2px 1px 0 var(--line));
+}
+
+.bubbleText {
+  margin: 0 0 12px;
+  font-family: var(--font-family-bold, sans-serif);
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 700;
+  color: var(--ink);
+  padding-right: 20px;
+}
+
+.bubbleText em {
+  font-style: italic;
+  color: var(--teal-600);
+  font-family: var(--font-family-black-italic, sans-serif);
+  font-weight: 900;
+}
+
+.bubbleCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  font-family: var(--font-family-bold, sans-serif);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 9px 16px;
+  border-radius: 100px;
+  background: var(--teal-500);
+  color: #fff;
+  transition: all 0.18s ease;
+  box-shadow: 0 4px 12px rgba(14, 155, 145, 0.28);
+}
+
+.bubbleCta:hover {
+  background: var(--teal-600);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(14, 155, 145, 0.4);
+}
+
+.bubbleCta svg {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.18s ease;
+}
+
+.bubbleCta:hover svg {
+  transform: translateX(2px);
+}
+
+.bubbleClose {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: var(--mute);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, color 0.15s ease;
+  padding: 0;
+}
+
+.bubbleClose:hover {
+  background: var(--line-2);
+  color: var(--ink);
+}
+
+/* Respeitar prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .appearing .owl,
+  .settled .owl {
+    animation: corujao-fade-in 0.4s ease-out forwards;
+  }
+  .settled .owl:hover img {
+    animation: none;
+  }
+  .bubble.bubbleIn {
+    animation: corujao-fade-in 0.3s ease-out forwards;
+  }
+  .dot {
+    animation: none;
+  }
+}
+
+@keyframes corujao-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  .root {
+    bottom: 16px;
+    right: 16px;
+    gap: 10px;
+  }
+  .owl {
+    width: 68px;
+    height: 68px;
+  }
+  .dot {
+    width: 13px;
+    height: 13px;
+    border-width: 2.5px;
+  }
+  .bubble {
+    max-width: 200px;
+    min-width: 180px;
+    padding: 14px 18px 12px 18px;
+  }
+  .bubbleText {
+    font-size: 13.5px;
+  }
+  .bubbleCta {
+    font-size: 12.5px;
+    padding: 8px 14px;
+  }
+}
+
+/* Em telas bem pequenas (< 380px), some o balão e deixa só o Corujão */
+@media (max-width: 380px) {
+  .bubble {
+    display: none;
+  }
+}

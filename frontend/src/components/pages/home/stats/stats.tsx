@@ -31,7 +31,7 @@ export function Stats() {
               <span>{c3}</span>
               <span>h</span>
             </div>
-            <p className={styles.desc}>é o tempo médio pra emitir um CNPJ</p>
+            <p className={styles.desc}>de suporte pelo WhatsApp todos os dias</p>
           </div>
         </div>
       </div>

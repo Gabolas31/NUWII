@@ -1,3 +1,5 @@
 export * from './colors'
 export * from './config'
 export * from './hooks/useReveal'
+export * from './services-data'
+export * from './mei-plans'
