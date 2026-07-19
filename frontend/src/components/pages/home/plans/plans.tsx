@@ -106,6 +106,7 @@ export function Plans() {
   const [type, setType] = useState<PlanType>("servico");
   const [starterOpen, setStarterOpen] = useState(false);
   const head = useReveal<HTMLDivElement>();
+  const included = useReveal<HTMLDivElement>();
 
   const isMei = type === "mei";
   const isBusiness = !isMei;
@@ -175,7 +176,7 @@ export function Plans() {
         )}
 
         {/* Tudo incluso callout */}
-        <div className={`${styles.included} reveal`}>
+        <div ref={included.ref} className={`${styles.included} reveal ${included.inView ? "in" : ""}`}>
           {(isMei
             ? [
                 "Sem fidelidade",
