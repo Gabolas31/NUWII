@@ -19,9 +19,8 @@ export const config = {
   cnpj: "66.785.560/0001-07",
   // Link pública do Google Calendar Appointment Schedule
   calendarUrl: "https://calendar.app.google/FWMKmtkkT4YHYcqX7",
-  // Portal de cliente (Nibo)
-  clientPortalUrl:
-    "https://passport.nibo.com.br/Account/Login?ReturnUrl=%2Fauthorize%3Fresponse_type%3Dcode%26client_id%3DD2CBFE38-9803-4DA0-8E2C-4E67F26BA9F5%26redirect_uri%3Dhttps%253a%252f%252fempresa.nibo.com.br%252fAuth%252fCallback%253forigin%253d%2526returnUrl%253d%25252fOrganization%2526redirectEmail%253d",
+  // Portal de cliente (Hub NUWII)
+  clientPortalUrl: "https://portal.hubnuwii.com.br/",
   address: {
     street: "Av. Tancredo Neves, 2539",
     complement: "Sala 2609 · Edif. CEO Salvador Shopping, Torre Londres",

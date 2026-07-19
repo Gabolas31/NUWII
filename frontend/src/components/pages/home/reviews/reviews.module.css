@@ -2,6 +2,7 @@
   padding: 120px 0;
   background: var(--surface);
   border-top: 1px solid var(--line);
+  overflow: hidden;
 }
 
 .container {
@@ -15,7 +16,7 @@
   grid-template-columns: 1.5fr 1fr;
   gap: 56px;
   align-items: center;
-  margin-bottom: 56px;
+  margin-bottom: 48px;
 }
 .left {
   display: flex;
@@ -96,78 +97,34 @@
   color: var(--mute);
 }
 
-/* Reviews grid */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.card {
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: var(--r2);
-  padding: 26px 24px;
+/* Animated testimonial columns */
+.columns {
   display: flex;
-  flex-direction: column;
-  transition: all 0.3s var(--ease);
-}
-.card:hover {
-  transform: translateY(-3px);
-  border-color: var(--teal-200);
-  box-shadow: var(--shadow);
-}
-
-.stars {
-  display: inline-flex;
-  gap: 2px;
-  color: #F0B90B;
-  margin-bottom: 14px;
-}
-.stars svg {
-  width: 16px;
-  height: 16px;
-  fill: currentColor;
-}
-
-.text {
-  font-size: 14.5px;
-  line-height: 1.55;
-  color: var(--ink-2);
-  margin: 0 0 22px;
-  flex-grow: 1;
-}
-
-.author {
-  display: flex;
-  gap: 11px;
-  align-items: center;
-  padding-top: 18px;
-  border-top: 1px solid var(--line-2);
-}
-.avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--teal-400), var(--teal-700));
-  color: #fff;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: 14px;
-  flex-shrink: 0;
+  gap: 24px;
+  margin-top: 8px;
+  max-height: 720px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
 }
-.name {
-  font-size: 13.5px;
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1.2;
+
+/* Column 2 shows from tablet up, column 3 from desktop up */
+.colMd {
+  display: none;
 }
-.time {
-  font-size: 12px;
-  color: var(--mute);
-  margin-top: 2px;
+.colLg {
+  display: none;
+}
+@media (min-width: 768px) {
+  .colMd {
+    display: block;
+  }
+}
+@media (min-width: 1024px) {
+  .colLg {
+    display: block;
+  }
 }
 
 /* Responsive */
@@ -179,20 +136,16 @@
     grid-template-columns: 1fr;
     gap: 24px;
   }
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 540px) {
   .container {
     padding: 0 20px;
   }
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
   .googleCard {
     padding: 18px 22px;
+  }
+  .columns {
+    max-height: 620px;
   }
 }
