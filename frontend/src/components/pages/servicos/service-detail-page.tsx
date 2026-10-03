@@ -7,12 +7,55 @@ interface ServiceDetailPageProps {
   service: Service;
 }
 
+/** Separa "A partir de R$ 149,00" em rótulo pequeno + valor grande. */
+function splitPrice(price: string): { label?: string; value: string } {
+  const match = price.match(/^(A partir de)\s+(.+)$/i);
+  if (match) return { label: match[1], value: match[2] };
+  return { value: price };
+}
+
+function Arrow() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2.5}
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <path d="M5 12h14M13 5l7 7-7 7" />
+    </svg>
+  );
+}
+
+/** Lista de variações de preço (e-CPF / e-CNPJ), com linha pontilhada ligando rótulo e valor. */
+function PriceTiers({
+  tiers,
+  className,
+}: {
+  tiers: NonNullable<Service["priceTiers"]>;
+  className: string;
+}) {
+  return (
+    <ul className={className}>
+      {tiers.map((tier) => (
+        <li key={tier.label}>
+          <span>{tier.label}</span>
+          <b>{tier.value}</b>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
   const headerReveal = useReveal();
   const bodyReveal = useReveal();
   const ctaReveal = useReveal();
 
   const isCalendar = service.ctaType === "calendar";
+  const price = splitPrice(service.price);
 
   return (
     <Layout>
@@ -39,31 +82,33 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
             <h1 className={styles.title}>{service.title}</h1>
             <p className={styles.subtitle}>{service.shortDescription}</p>
 
-            <div className={styles.priceCard}>
-              <div className={styles.priceLine}>
-                <span className={styles.priceVal}>{service.price}</span>
-                {service.priceNote && (
-                  <span className={styles.priceNote}>{service.priceNote}</span>
-                )}
-              </div>
-              <a
-                href={service.ctaHref}
-                target={isCalendar ? "_blank" : "_blank"}
-                rel="noopener noreferrer"
-                className={styles.ctaBtn}
-              >
-                {service.ctaLabel}
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2.5}
-                  strokeLinecap="round"
-                  aria-hidden="true"
+            <div className={styles.offer}>
+              <div className={styles.offerTop}>
+                <div className={styles.offerPrice}>
+                  {price.label && (
+                    <span className={styles.offerLabel}>{price.label}</span>
+                  )}
+                  <span className={styles.offerValue}>{price.value}</span>
+                  {service.priceNote && (
+                    <span className={styles.offerNote}>{service.priceNote}</span>
+                  )}
+                </div>
+                <a
+                  href={service.ctaHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.offerCta}
                 >
-                  <path d="M5 12h14M13 5l7 7-7 7" />
-                </svg>
-              </a>
+                  {service.ctaLabel}
+                  <Arrow />
+                </a>
+              </div>
+              {service.ctaNote && (
+                <p className={styles.offerNoteFoot}>{service.ctaNote}</p>
+              )}
+              {service.priceTiers && (
+                <PriceTiers className={styles.tiers} tiers={service.priceTiers} />
+              )}
             </div>
           </div>
         </div>
@@ -119,13 +164,26 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
 
             <aside className={styles.bodyAside}>
               <div className={styles.asideCard}>
+                <span className={styles.asideCat}>{service.category}</span>
                 <h4 className={styles.asideTitle}>{service.title}</h4>
+
                 <div className={styles.asidePrice}>
-                  <span className={styles.priceVal}>{service.price}</span>
+                  {price.label && (
+                    <span className={styles.offerLabel}>{price.label}</span>
+                  )}
+                  <span className={styles.asidePriceVal}>{price.value}</span>
                   {service.priceNote && (
-                    <span className={styles.priceNote}>{service.priceNote}</span>
+                    <span className={styles.offerNote}>{service.priceNote}</span>
                   )}
                 </div>
+
+                {service.priceTiers && (
+                  <PriceTiers
+                    className={styles.asideTiers}
+                    tiers={service.priceTiers}
+                  />
+                )}
+
                 <a
                   href={service.ctaHref}
                   target="_blank"
@@ -133,31 +191,26 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
                   className={styles.asideCta}
                 >
                   {service.ctaLabel}
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2.5}
-                    strokeLinecap="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M5 12h14M13 5l7 7-7 7" />
-                  </svg>
+                  <Arrow />
                 </a>
-                {isCalendar && (
-                  <p className={styles.asideHelp}>
-                    Você é redirecionado pro Google Agenda pra escolher o horário que funciona pra você.
-                  </p>
-                )}
+
+                <p className={styles.asideHelp}>
+                  {service.ctaNote ??
+                    (isCalendar
+                      ? "Você escolhe o horário direto no Google Agenda."
+                      : "Resposta de um contador, sem chatbot e sem fila.")}
+                </p>
+
                 <div className={styles.asideContact}>
-                  <p>Tem dúvidas antes de agendar?</p>
+                  <p>Prefere tirar uma dúvida antes?</p>
                   <a
                     href={waLink(waMessages.default)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.asideWhatsapp}
                   >
-                    Falar com Corujão no WhatsApp →
+                    Falar no WhatsApp
+                    <Arrow />
                   </a>
                 </div>
               </div>
@@ -173,35 +226,47 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
             ref={ctaReveal.ref}
             className={`${styles.finalCtaInner} ${ctaReveal.inView ? styles.in : ""}`}
           >
-            <h3>
-              Pronto pra <em>começar?</em>
-            </h3>
-            <p>
-              {isCalendar
-                ? "Agende seu horário no Google Agenda. Em poucos passos você reserva a consulta direto na sua agenda."
-                : "Manda mensagem no WhatsApp que o Corujão te responde. Sem chatbot, sem fila."}
-            </p>
-            <a
-              href={service.ctaHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.finalCtaBtn}
-            >
-              {service.ctaLabel}
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2.5}
-                strokeLinecap="round"
-                aria-hidden="true"
+            <div className={styles.finalCtaText}>
+              <h3>
+                {service.finalCtaTitle ? (
+                  service.finalCtaTitle
+                ) : (
+                  <>
+                    Pronto pra <em>começar?</em>
+                  </>
+                )}
+              </h3>
+              <p>
+                {service.finalCtaText ??
+                  (isCalendar
+                    ? "Escolha o horário no Google Agenda e a consulta já entra no seu calendário."
+                    : "Manda mensagem no WhatsApp que um contador te responde. Sem chatbot e sem fila.")}
+              </p>
+            </div>
+            <div className={styles.finalCtaActions}>
+              <a
+                href={service.ctaHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.finalCtaBtn}
               >
-                <path d="M5 12h14M13 5l7 7-7 7" />
-              </svg>
-            </a>
-            <Link href="/servicos" className={styles.backLink}>
-              ← Ver todos os serviços
-            </Link>
+                {service.ctaLabel}
+                <Arrow />
+              </a>
+              <Link href="/servicos" className={styles.backLink}>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                  strokeLinecap="round"
+                  aria-hidden="true"
+                >
+                  <path d="M19 12H5M11 19l-7-7 7-7" />
+                </svg>
+                Ver todos os serviços
+              </Link>
+            </div>
           </div>
         </div>
       </section>

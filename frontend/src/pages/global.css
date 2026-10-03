@@ -1,3 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Tokens shadcn — apontam para a paleta NUWII definida logo abaixo.
+   Ficam aqui no topo de propósito: o CSS do site vem depois e continua
+   vencendo o preflight do Tailwind por ordem de cascata.
+   ============================================================ */
+@layer base {
+  :root {
+    --background: 60 23% 98%;        /* --bg  #FAFAF7 */
+    --foreground: 217 46% 11%;       /* --ink #0F1929 */
+    --card: 0 0% 100%;
+    --card-foreground: 217 46% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 217 46% 11%;
+    --primary: 176 83% 33%;          /* --teal-500 #0E9B91 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 48 16% 96%;
+    --secondary-foreground: 217 46% 11%;
+    --muted: 48 20% 95%;
+    --muted-foreground: 213 17% 43%; /* --mute #5B6B7F */
+    --accent: 173 51% 94%;           /* --teal-50 #E6F7F5 */
+    --accent-foreground: 176 88% 23%;/* --teal-700 #076F68 */
+    --border: 47 16% 89%;            /* --line #E8E6DF */
+    --input: 47 16% 89%;
+    --ring: 176 83% 33%;
+    --radius: 0.875rem;
+  }
+}
+
 /* ============================================================
    NUWII — Design System (Redesign)
    Paleta turquesa do logo + navy de autoridade + neutros quentes

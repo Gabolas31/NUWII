@@ -49,7 +49,7 @@ export function Hero() {
               rel="noopener noreferrer"
               className={styles.ctaPrimary}
             >
-              Falar com Corujão
+              Fale com o Especialista
               <Arrow />
             </a>
             <a

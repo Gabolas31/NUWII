@@ -73,7 +73,7 @@ export function CorujaoGreeting({ onVisibleChange }: CorujaoGreetingProps) {
     <div
       className={`${styles.root} ${styles[phase]}`}
       role="complementary"
-      aria-label="Corujão pergunta se você quer trocar um papo"
+      aria-label="Convite para falar com um especialista no WhatsApp"
     >
       <div className={`${styles.bubble} ${isSettled ? styles.bubbleIn : ""}`}>
         <button
@@ -112,7 +112,7 @@ export function CorujaoGreeting({ onVisibleChange }: CorujaoGreetingProps) {
         target="_blank"
         rel="noopener noreferrer"
         className={styles.owl}
-        aria-label="Falar com Corujão no WhatsApp"
+        aria-label="Fale com o Especialista no WhatsApp"
         tabIndex={isSettled ? 0 : -1}
       >
         <img src="/corujao-avatar.png" alt="" />

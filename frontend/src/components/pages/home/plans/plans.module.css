@@ -1,5 +1,5 @@
 .root {
-  padding: 120px 0;
+  padding: 84px 0;
   background: var(--bg);
   position: relative;
 }
@@ -14,7 +14,7 @@
 .head {
   text-align: center;
   max-width: 720px;
-  margin: 0 auto 56px;
+  margin: 0 auto 34px;
 }
 .eyebrow {
   display: inline-flex;

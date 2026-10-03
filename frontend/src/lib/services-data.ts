@@ -1,7 +1,12 @@
 import { config } from "./config";
 import { waLink, waMessages } from "./config";
 
-export type ServiceCategory = "Espaço" | "Consultoria" | "Avulso";
+export type ServiceCategory =
+  | "Abertura"
+  | "Espaço"
+  | "Consultoria"
+  | "Certificado"
+  | "Avulso";
 export type ServiceCtaType = "whatsapp" | "calendar";
 
 export interface Service {
@@ -9,20 +14,62 @@ export interface Service {
   category: ServiceCategory;
   title: string;
   shortDescription: string;
+  /** Uma linha curta, usada no submenu da navbar (sem truncar). */
+  menuDescription: string;
   longDescription: string;
   details?: string;
   bullets: string[];
   importante?: string;
   price: string;
   priceNote?: string;
+  /** Variações de preço exibidas como lista, no lugar de uma nota corrida. */
+  priceTiers?: { label: string; value: string }[];
   ctaType: ServiceCtaType;
   ctaLabel: string;
   ctaHref: string;
+  /** Linha curta abaixo do botão, dizendo o que acontece depois do clique. */
+  ctaNote?: string;
+  /** Título e texto do bloco de CTA no fim da página. Sem isso, usa o padrão. */
+  finalCtaTitle?: string;
+  finalCtaText?: string;
 }
 
 export const SERVICES: Service[] = [
   {
+    slug: "abrir-empresa",
+    menuDescription: "Abertura de CNPJ com contador",
+    category: "Abertura",
+    title: "Abertura de Empresa",
+    shortDescription:
+      "Abertura de CNPJ conduzida por contador, da análise de viabilidade à primeira nota fiscal. Custo fechado por escrito antes de você assinar.",
+    longDescription:
+      "Abrir empresa não é só preencher formulário: é escolher o CNAE certo, conferir se o endereço aceita a atividade e enquadrar o regime tributário que vai definir quanto você paga de imposto pelos próximos anos. A NUWII conduz o processo inteiro em seis etapas — viabilidade, proposta, contrato, documentação, abertura e entrega — e você acompanha em qual delas o seu CNPJ está.",
+    bullets: [
+      "Consulta de viabilidade na Junta Comercial e na prefeitura",
+      "Escolha do CNAE e enquadramento tributário com simulação",
+      "Contrato social elaborado e registrado",
+      "CNPJ, inscrição municipal e estadual, alvará e liberação de nota",
+      "Certificado digital e-CNPJ A1 incluso",
+      "Entrega dos documentos e acessos organizados",
+    ],
+    importante:
+      "As taxas dos órgãos (Junta Comercial, prefeitura e eventuais licenças) são pagas aos órgãos e variam por estado e atividade. Elas entram discriminadas na proposta comercial, antes da assinatura.",
+    price: "A partir de R$ 350,00",
+    priceTiers: [
+      { label: "Com plano NUWII", value: "R$ 350,00" },
+      { label: "Sem assinatura", value: "R$ 1.200,00" },
+    ],
+    ctaType: "whatsapp",
+    ctaLabel: "Quero abrir minha empresa",
+    ctaHref: waLink(waMessages.openCompanyPlano),
+    ctaNote: "A viabilidade vem antes da cobrança — você só segue se fizer sentido.",
+    finalCtaTitle: "Vamos começar pela viabilidade?",
+    finalCtaText:
+      "Conta o que você pretende fazer e onde. A gente checa se o CNPJ sai nesse endereço e volta com a proposta fechada.",
+  },
+  {
     slug: "escritorio-virtual",
+    menuDescription: "Endereço comercial em Salvador",
     category: "Espaço",
     title: "Escritório Virtual",
     shortDescription:
@@ -37,11 +84,15 @@ export const SERVICES: Service[] = [
     ],
     price: "Sob consulta",
     ctaType: "whatsapp",
-    ctaLabel: "Falar com Corujão",
+    ctaLabel: "Quero meu endereço fiscal",
     ctaHref: waLink(waMessages.virtualOffice),
+    ctaNote: "Resposta em até 1 hora útil, sem compromisso.",
+    finalCtaTitle: "Pronto pra tirar sua casa do CNPJ?",
+    finalCtaText: "Manda mensagem que a gente explica como o endereço entra no contrato social, o que chega de correspondência e quanto fica no seu caso.",
   },
   {
     slug: "escritorio-virtual-numero",
+    menuDescription: "Endereço + telefone da empresa",
     category: "Espaço",
     title: "Escritório Virtual + Número Virtual",
     shortDescription:
@@ -57,11 +108,45 @@ export const SERVICES: Service[] = [
     ],
     price: "Sob consulta",
     ctaType: "whatsapp",
-    ctaLabel: "Falar com Corujão",
+    ctaLabel: "Quero endereço e número",
     ctaHref: waLink(waMessages.virtualOfficeNumber),
+    ctaNote: "A gente passa o valor do combo na mesma conversa.",
+    finalCtaTitle: "Endereço e telefone da empresa, num pacote só.",
+    finalCtaText: "Fala com a gente que explicamos como o número funciona, como as ligações chegam até você e quanto fica o combo completo.",
+  },
+  {
+    slug: "certificado-digital",
+    menuDescription: "e-CPF e e-CNPJ a partir de R$ 149",
+    category: "Certificado",
+    title: "Certificado Digital",
+    shortDescription:
+      "Seu e-CPF ou e-CNPJ emitido por videoconferência, sem sair de casa e sem fila em cartório. Assine com validade jurídica no mesmo dia.",
+    longDescription:
+      "O certificado digital é a sua assinatura de próprio punho na versão eletrônica: é ele que abre o e-CAC da Receita Federal, o Conectividade Social, a emissão de nota fiscal e a assinatura de contratos sem papel. A NUWII cuida da emissão do começo ao fim — você agenda o horário, valida sua identidade numa videochamada de poucos minutos e recebe o arquivo pronto, com a gente do lado na hora de instalar.",
+    details:
+      "A validação é feita por videoconferência com agente de registro credenciado pela ICP-Brasil. Separe um documento oficial com foto e, no caso do e-CNPJ, o contrato social ou o requerimento de empresário. Depois da chamada, o arquivo é liberado no mesmo dia útil.",
+    bullets: [
+      "Emissão 100% online, em videochamada agendada no seu horário",
+      "e-CPF A1 para você e e-CNPJ A1 para a sua empresa",
+      "Validade de 1 ano, instalado no computador ou no celular",
+      "Acesso ao e-CAC, ao Conectividade Social e à emissão de notas",
+      "Assinatura de contratos e declarações com validade jurídica",
+      "Suporte da NUWII na instalação e no primeiro uso",
+    ],
+    importante:
+      "Trabalhamos com o modelo A1, que é um arquivo instalado no seu dispositivo e vale 1 ano — diferente do A3, que vem em cartão ou token. Clientes dos planos Business já têm o e-CNPJ A1 incluso na mensalidade, sem custo adicional.",
+    price: "A partir de R$ 149,00",
+    priceTiers: [
+      { label: "e-CPF A1 · pessoa física", value: "R$ 149,00" },
+      { label: "e-CNPJ A1 · empresa", value: "R$ 199,00" },
+    ],
+    ctaType: "whatsapp",
+    ctaLabel: "Fale com o Especialista",
+    ctaHref: waLink(waMessages.digitalCertificate),
   },
   {
     slug: "consultoria-com-contador",
+    menuDescription: "Consulta online com relatório",
     category: "Consultoria",
     title: "Consultoria com Contador Especializado",
     shortDescription:
@@ -85,6 +170,7 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "consultoria-checkup",
+    menuDescription: "Diagnóstico contábil completo",
     category: "Consultoria",
     title: "Consultoria + Check-up Contábil",
     shortDescription:
@@ -112,6 +198,7 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "declaracao-irpf",
+    menuDescription: "Declaração feita por contador",
     category: "Avulso",
     title: "Declaração de Imposto de Renda (IRPF)",
     shortDescription:
@@ -133,11 +220,12 @@ export const SERVICES: Service[] = [
     price: "A partir de R$ 200",
     priceNote: "Orçamento exato após análise dos documentos",
     ctaType: "whatsapp",
-    ctaLabel: "Falar com Corujão",
+    ctaLabel: "Fale com o Especialista",
     ctaHref: waLink(waMessages.irpf),
   },
   {
     slug: "servicos-avulsos",
+    menuDescription: "Demandas pontuais e regularização",
     category: "Avulso",
     title: "Serviços Avulsos",
     shortDescription:
@@ -155,8 +243,11 @@ export const SERVICES: Service[] = [
     price: "A partir de R$ 94",
     priceNote: "Orçamento por demanda",
     ctaType: "whatsapp",
-    ctaLabel: "Falar com Corujão",
+    ctaLabel: "Pedir um orçamento",
     ctaHref: waLink(waMessages.oneOffServices),
+    ctaNote: "Conta o que você precisa e a gente volta com prazo e valor.",
+    finalCtaTitle: "Precisa de uma coisa só, sem mensalidade?",
+    finalCtaText: "Descreve a demanda — regularização, parcelamento, certidão, alteração cadastral — e a gente responde com o prazo e o valor daquele serviço.",
   },
 ];
 

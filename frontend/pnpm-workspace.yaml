@@ -1,0 +1,7 @@
+# pnpm 10+ bloqueia scripts de instalação e faz o `pnpm dev` falhar com
+# ERR_PNPM_IGNORED_BUILDS até alguém aprovar manualmente. A decisão fica
+# registrada aqui: o resolver do eslint compila; o binário do Cypress não
+# precisa ser baixado numa instalação comum (só para rodar os testes e2e).
+allowBuilds:
+  cypress: false
+  unrs-resolver: true

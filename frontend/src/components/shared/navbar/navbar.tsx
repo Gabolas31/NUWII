@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { config, waLink, waMessages } from "@/lib";
+import { MainNav } from "./main-nav";
 import { WebsiteLogo } from "./website-logo";
 import styles from "./navbar.module.css";
 
@@ -12,11 +13,11 @@ interface NavLink {
   isPage?: boolean;
 }
 
+/** Menu do mobile — espelha o NavigationMenu do desktop, sem submenu suspenso. */
 const LINKS: NavLink[] = [
   { label: "Início", href: "/", isPage: true },
   { label: "Serviços", href: "/servicos", isPage: true },
   { label: "Planos", href: "/#plans" },
-  { label: "Avaliações", href: "/#reviews" },
 ];
 
 export function NavBar() {
@@ -56,17 +57,7 @@ export function NavBar() {
         </Link>
 
         <div className={styles.links}>
-          {LINKS.map((l) =>
-            l.isPage ? (
-              <Link key={l.href} href={l.href} className={styles.link}>
-                {l.label}
-              </Link>
-            ) : (
-              <a key={l.href} href={l.href} className={styles.link}>
-                {l.label}
-              </a>
-            )
-          )}
+          <MainNav />
         </div>
 
         <div className={styles.actions}>
@@ -84,7 +75,7 @@ export function NavBar() {
             rel="noopener noreferrer"
             className={styles.cta}
           >
-            Falar com Corujão
+            Fale com o Especialista
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" aria-hidden="true">
               <path d="M5 12h14M13 5l7 7-7 7" />
             </svg>
@@ -145,7 +136,7 @@ export function NavBar() {
           className={styles.mobileCta}
           onClick={closeMobile}
         >
-          Falar com Corujão
+          Fale com o Especialista
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" aria-hidden="true">
             <path d="M5 12h14M13 5l7 7-7 7" />
           </svg>

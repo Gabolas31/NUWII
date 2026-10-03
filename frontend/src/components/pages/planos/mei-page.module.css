@@ -21,12 +21,22 @@
 }
 
 .heroInner {
-  max-width: 780px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: 56px;
+  align-items: center;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.7s var(--ease, ease-out), transform 0.7s var(--ease, ease-out);
 }
 .heroInner.in { opacity: 1; transform: translateY(0); }
+
+.heroText { max-width: 620px; }
+
+@media (max-width: 980px) {
+  .heroInner { grid-template-columns: 1fr; gap: 40px; }
+  .heroText { max-width: none; }
+}
 
 .eyebrow {
   display: inline-block;
@@ -271,7 +281,7 @@
   flex: 1;
 }
 
-.planFeat {
+.featItem {
   display: flex;
   align-items: flex-start;
   gap: 9px;
@@ -503,24 +513,86 @@
 
 /* FAQ */
 .faqSection {
-  padding: 70px 0;
+  padding: 84px 0 90px;
+  background: var(--bg);
+  border-top: 1px solid var(--line-2);
 }
 
-.faqHead {
-  margin-bottom: 32px;
-  text-align: center;
+.faqGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  gap: 64px;
+  align-items: start;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.7s var(--ease, ease-out), transform 0.7s var(--ease, ease-out);
 }
-.faqHead.in { opacity: 1; transform: translateY(0); }
+.faqGrid.in { opacity: 1; transform: translateY(0); }
+
+.faqAside {
+  position: sticky;
+  top: 110px;
+}
+
+.faqTitle {
+  font-family: var(--font-family-black, sans-serif);
+  font-weight: 900;
+  font-size: clamp(28px, 3.4vw, 40px);
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  margin: 0 0 16px;
+  color: var(--ink);
+}
+
+.faqTitle em {
+  font-style: italic;
+  font-family: var(--font-family-black-italic, sans-serif);
+  color: var(--teal-600);
+}
+
+.faqAsideText {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--mute);
+  margin: 0 0 22px;
+  max-width: 34ch;
+}
+
+.faqAsideCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-family-bold, sans-serif);
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--teal-700);
+  text-decoration: none;
+  padding: 13px 22px;
+  border-radius: 100px;
+  border: 1.5px solid var(--teal-200);
+  background: var(--surface);
+  transition: border-color 0.2s var(--ease, ease), background 0.2s var(--ease, ease),
+    transform 0.2s var(--ease, ease);
+}
+
+.faqAsideCta:hover {
+  border-color: var(--teal-500);
+  background: var(--teal-50);
+  transform: translateY(-2px);
+}
+
+.faqAsideCta svg { width: 13px; height: 13px; }
 
 .faqList {
-  max-width: 760px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+}
+
+@media (max-width: 960px) {
+  .faqGrid { grid-template-columns: 1fr; gap: 32px; }
+  .faqAside { position: static; }
+  .faqAsideText { max-width: none; }
 }
 
 .faqItem {
@@ -539,12 +611,12 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  padding: 20px 24px;
+  padding: 22px 26px;
   background: transparent;
   border: 0;
   cursor: pointer;
   font-family: var(--font-family-bold, sans-serif);
-  font-size: 15.5px;
+  font-size: 16.5px;
   font-weight: 700;
   text-align: left;
   color: var(--ink);
@@ -591,11 +663,16 @@
 }
 
 .finalCtaInner {
-  background: var(--ink);
+  background: linear-gradient(135deg, var(--navy-900, #0B1F3A), var(--ink) 55%, #0d2a2a);
   color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 24px;
-  padding: 56px 48px;
-  text-align: center;
+  padding: 46px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 44px;
+  text-align: left;
   position: relative;
   overflow: hidden;
   opacity: 0;
@@ -631,13 +708,40 @@
   color: var(--teal-400);
 }
 
+.finalCtaText {
+  position: relative;
+  max-width: 46ch;
+}
+
 .finalCtaInner p {
   font-size: 16px;
   line-height: 1.55;
-  color: rgba(255, 255, 255, 0.8);
-  margin: 0 auto 30px;
-  max-width: 520px;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0;
   position: relative;
+}
+
+.finalCtaActions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: none;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 860px) {
+  .finalCtaInner {
+    flex-direction: column;
+    text-align: center;
+    gap: 26px;
+    padding: 38px 24px;
+  }
+  .finalCtaText { max-width: none; }
+  .finalCtaActions { width: 100%; flex-direction: column; align-items: stretch; }
+  .finalCtaActions .finalCtaBtn,
+  .finalCtaActions .backLink { width: 100%; }
 }
 
 .finalCtaBtn {
@@ -659,15 +763,39 @@
 .finalCtaBtn svg { width: 14px; height: 14px; }
 
 .backLink {
-  display: inline-block;
-  margin-top: 20px;
-  font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.7);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px 28px;
+  border-radius: 100px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-family: var(--font-family-bold, sans-serif);
+  font-size: 15px;
+  font-weight: 700;
   text-decoration: none;
-  position: relative;
-  transition: color 0.15s var(--ease, ease);
+  white-space: nowrap;
+  transition: border-color 0.2s var(--ease, ease), background 0.2s var(--ease, ease),
+    transform 0.2s var(--ease, ease);
 }
-.backLink:hover { color: #fff; }
+
+.backLink:hover {
+  border-color: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+.backLink svg {
+  width: 13px;
+  height: 13px;
+  transition: transform 0.2s var(--ease, ease);
+}
+
+.backLink:hover svg { transform: translateY(-3px); }
+
 
 @media (max-width: 768px) {
   .hero { padding: 100px 0 50px; }
@@ -677,3 +805,293 @@
   .faqQ { padding: 16px 18px; font-size: 14.5px; }
   .faqA p { padding: 0 18px 18px; font-size: 13.5px; }
 }
+
+/* Linha de preço e de CTA no fim do comparativo — depois que os cards de
+   plano saíram, a tabela passou a ser a própria vitrine de preço. */
+.priceRow .dataCell strong {
+  font-family: var(--font-family-bold, sans-serif);
+  font-size: 26px;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.ctaRow .dataCell {
+  padding: 18px 16px 22px;
+}
+
+.tableCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 190px;
+  padding: 12px 18px;
+  border-radius: 100px;
+  border: 1.5px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-family-bold, sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s var(--ease, ease), border-color 0.2s var(--ease, ease),
+    color 0.2s var(--ease, ease), transform 0.2s var(--ease, ease);
+}
+
+.tableCta:hover {
+  border-color: var(--teal-500);
+  color: var(--teal-700);
+  transform: translateY(-2px);
+}
+
+.tableCtaFeat {
+  background: var(--teal-500);
+  border-color: var(--teal-500);
+  color: #fff;
+  box-shadow: 0 14px 28px -14px rgba(14, 155, 145, 0.9);
+}
+
+.tableCtaFeat:hover {
+  background: var(--teal-600);
+  border-color: var(--teal-600);
+  color: #fff;
+}
+
+/* ============================================================
+   HERO — efeito de máquina de escrever
+   ============================================================ */
+/* O trecho digitado ocupa a própria linha e tem altura reservada para duas
+   linhas de texto: a frase troca de tamanho, mas o bloco não pula. */
+.typed {
+  font-style: italic;
+  font-family: var(--font-family-black-italic, sans-serif);
+  display: block;
+  /* Em tela estreita a frase pode quebrar em duas linhas; reservar as duas
+     evita o bloco pular na troca de frase. */
+  min-height: 2.1em;
+}
+
+@media (min-width: 1100px) {
+  /* No desktop toda frase cabe em uma linha — sem buraco embaixo do título. */
+  .typed { min-height: 1.06em; }
+}
+
+.typed [data-tone="a"] { color: var(--teal-600); }
+.typed [data-tone="b"] { color: var(--navy-900, #0B1F3A); }
+
+.typed [data-typewriter-caret] {
+  display: inline-block;
+  width: 3px;
+  height: 0.82em;
+  margin-left: 4px;
+  vertical-align: baseline;
+  border-radius: 2px;
+  background: var(--teal-500);
+  animation: meiCaret 1s steps(1, end) infinite;
+}
+
+@keyframes meiCaret {
+  0%, 45% { opacity: 1; }
+  50%, 95% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typed [data-typewriter-caret] { animation: none; opacity: 0; }
+}
+
+/* ============================================================
+   HERO — CTAs
+   ============================================================ */
+.heroCtas {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 28px 0 24px;
+}
+
+.heroCtaPrimary,
+.heroCtaGhost {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 15px 28px;
+  border-radius: 100px;
+  font-family: var(--font-family-bold, sans-serif);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s var(--ease, ease), border-color 0.2s var(--ease, ease),
+    transform 0.2s var(--ease, ease);
+}
+
+.heroCtaPrimary {
+  background: var(--teal-500);
+  color: #fff;
+  box-shadow: 0 16px 32px -14px rgba(14, 155, 145, 0.9);
+}
+
+.heroCtaPrimary:hover { background: var(--teal-600); transform: translateY(-2px); }
+.heroCtaPrimary svg { width: 14px; height: 14px; }
+
+.heroCtaGhost {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--line-strong);
+}
+
+.heroCtaGhost:hover { border-color: var(--ink); background: rgba(15, 25, 41, 0.03); }
+
+/* ============================================================
+   HERO — painel de acompanhamento
+   ============================================================ */
+.heroPanel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 22px 22px 20px;
+  box-shadow: 0 34px 70px -34px rgba(11, 31, 58, 0.4);
+}
+
+.panelHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line-2);
+}
+
+.panelTitle {
+  font-family: var(--font-family-bold, sans-serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.panelTag {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--teal-700);
+  background: var(--teal-50);
+  border: 1px solid var(--teal-100);
+  border-radius: 100px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+.panelList {
+  list-style: none;
+  margin: 0;
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  border-bottom: 1px solid var(--line-2);
+}
+
+.panelList li {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.panelCheck {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--teal-50);
+  color: var(--teal-600);
+}
+
+.panelCheck svg { width: 11px; height: 11px; }
+
+.panelItemName {
+  flex: 1;
+  font-size: 14.5px;
+  color: var(--ink-2);
+}
+
+.panelStatus {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--teal-700);
+  background: var(--teal-50);
+  border-radius: 100px;
+  padding: 3px 9px;
+  white-space: nowrap;
+}
+
+.panelMeter {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line-2);
+}
+
+.panelMeterTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--mute);
+  margin-bottom: 9px;
+}
+
+.panelMeterTop strong {
+  font-family: var(--font-family-bold, sans-serif);
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.panelBar {
+  height: 7px;
+  border-radius: 100px;
+  background: var(--line-2);
+  overflow: hidden;
+}
+
+.panelBar i {
+  display: block;
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--teal-500), var(--teal-400));
+}
+
+.panelMeterFoot {
+  margin: 9px 0 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--mute-2);
+}
+
+.panelFoot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 16px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+.panelFootIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex: none;
+  border-radius: 7px;
+  background: var(--teal-500);
+  color: #fff;
+}
+
+.panelFootIcon svg { width: 12px; height: 12px; }

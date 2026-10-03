@@ -1,109 +1,29 @@
 import { useState } from "react";
 import Link from "next/link";
-import { waLink, waMessages, MEI_PLANS } from "@/lib";
+import { waLink, waMessages, MEI_PLANS, BUSINESS_PLANS } from "@/lib";
 import type { MeiPlan } from "@/lib";
+import { Pricing, type PricingPlan } from "@/components/ui/pricing";
 import { useReveal } from "@/lib/hooks/useReveal";
 import styles from "./plans.module.css";
 
-type PlanType = "servico" | "comercio" | "mei";
+type PlanType = "business" | "mei";
 
-// ============================================================
-// BUSINESS PLANS (Serviço / Comércio)
-// ============================================================
-type BusinessPlan = {
-  name: string;
-  title: string;
-  description: string;
-  priceServico: number;
-  priceComercio: number;
-  dailyServico: number;
-  dailyComercio: number;
-  capacityNote: string;
-  features: { text: string; tooltip?: string; heading?: boolean }[];
-  featured?: boolean;
-  uniqueCopy?: boolean;
-  whatsappMessage: string;
-};
-
-const BUSINESS_PLANS: BusinessPlan[] = [
-  {
-    name: "Start",
-    title: "Business Start",
-    description: "Pra empresa que fatura até R$ 20 mil/mês e quer o essencial bem feito.",
-    priceServico: 397,
-    priceComercio: 497,
-    dailyServico: 13,
-    dailyComercio: 17,
-    capacityNote: "Faturamento ideal até R$ 20.000",
-    features: [
-      { text: "Contabilidade completa" },
-      { text: "Conta Digital PJ + Maquininha de cartão" },
-      {
-        text: "Certificado digital A1 incluso",
-        tooltip:
-          "Certificado digital (e-CNPJ A1) é sua identidade eletrônica — usada para assinar documentos e acessar sistemas com validade jurídica.",
-      },
-      { text: "Painel contábil completo" },
-      { text: "Atendimento WhatsApp, telefone, e-mail e chat" },
-    ],
-    whatsappMessage: waMessages.planStart,
-  },
-  {
-    name: "Unique",
-    title: "Business Unique",
-    description: "Pra empresa crescendo: consultoria, conciliação e gestão de certidões.",
-    priceServico: 497,
-    priceComercio: 597,
-    dailyServico: 17,
-    dailyComercio: 20,
-    capacityNote: "Faturamento ideal até R$ 60.000",
-    featured: true,
-    uniqueCopy: true,
-    features: [
-      { text: "Tudo do Start, mais:", heading: true },
-      { text: "Consultoria contábil com Contador" },
-      {
-        text: "Conciliação financeira automática",
-        tooltip:
-          "Cruzamento automático entre seus lançamentos e o extrato bancário, identificando divergências.",
-      },
-      { text: "Importação de extrato: até 2 contas" },
-      { text: "Pró-labore: 1 folha" },
-      { text: "Gestão de certidões" },
-    ],
-    whatsappMessage: waMessages.planUnique,
-  },
-  {
-    name: "Plus",
-    title: "Business Plus",
-    description: "Pra empresa com sócios, funcionários e movimento mensal alto.",
-    priceServico: 856,
-    priceComercio: 997,
-    dailyServico: 29,
-    dailyComercio: 33,
-    capacityNote: "Operação avançada · atendimento prioritário",
-    features: [
-      { text: "Tudo do Unique, mais:", heading: true },
-      { text: "Pró-labore: 2 folhas + até 3 funcionários" },
-      { text: "Emissão de até 10 NFs de serviço" },
-      { text: "Abertura ou alteração contratual incluída" },
-      { text: "Gestão de parcelamentos e acordos" },
-      { text: "Apoio contábil pra preenchimento de documentos" },
-      {
-        text: "Serviços prioritários",
-        tooltip:
-          "Atendimento WhatsApp até 22h e demandas executadas com prazo reduzido.",
-      },
-      { text: "Importação de extrato: até 3 contas" },
-      { text: "Balanço e DRE" },
-    ],
-    whatsappMessage: waMessages.planPlus,
-  },
-];
-
+/** BUSINESS_PLANS no formato do bloco de pricing (src/components/ui/pricing.tsx). */
+const PRICING_PLANS: PricingPlan[] = BUSINESS_PLANS.map((plan) => ({
+  name: plan.title,
+  price: plan.priceServico,
+  altPrice: plan.priceComercio,
+  period: "mês",
+  capacityNote: plan.capacityNote,
+  features: plan.features.filter((f) => !f.heading).map((f) => f.text),
+  description: plan.description,
+  buttonText: "Quero este plano",
+  href: waLink(plan.whatsappMessage),
+  isPopular: Boolean(plan.featured),
+}));
 
 export function Plans() {
-  const [type, setType] = useState<PlanType>("servico");
+  const [type, setType] = useState<PlanType>("business");
   const [starterOpen, setStarterOpen] = useState(false);
   const head = useReveal<HTMLDivElement>();
   const included = useReveal<HTMLDivElement>();
@@ -128,33 +48,29 @@ export function Plans() {
           <div className={`reveal ${head.inView ? "in" : ""} reveal-d3`}>
             <div className={styles.toggle}>
               <button
-                className={type === "servico" ? styles.toggleOn : ""}
-                onClick={() => setType("servico")}
+                className={isBusiness ? styles.toggleOn : ""}
+                onClick={() => setType("business")}
               >
-                Serviço
+                Tenho empresa
               </button>
               <button
-                className={type === "comercio" ? styles.toggleOn : ""}
-                onClick={() => setType("comercio")}
-              >
-                Comércio
-              </button>
-              <button
-                className={type === "mei" ? styles.toggleOn : ""}
+                className={isMei ? styles.toggleOn : ""}
                 onClick={() => setType("mei")}
               >
-                MEI
+                Sou MEI
               </button>
             </div>
           </div>
         </div>
 
         {isBusiness && (
-          <div className={styles.grid}>
-            {BUSINESS_PLANS.map((plan, i) => (
-              <BusinessPlanCard key={plan.name} plan={plan} type={type as "servico" | "comercio"} index={i} />
-            ))}
-          </div>
+          <Pricing
+            altLabel="Comércio"
+            hint="Vende hora de trabalho, consultoria ou projeto? É Serviço. Vende produto, revende ou tem estoque? É Comércio."
+            plans={PRICING_PLANS}
+            primaryLabel="Serviço"
+            title=""
+          />
         )}
 
         {isMei && (
@@ -185,7 +101,7 @@ export function Plans() {
                 "Cancele a qualquer momento",
               ]
             : [
-                "Abertura de empresa grátis",
+                "Abertura de empresa por R$ 350",
                 "Migração de contador grátis",
                 "Sem taxa de adesão",
                 "Cancele a qualquer momento",
@@ -245,7 +161,7 @@ export function Plans() {
                     rel="noopener noreferrer"
                     className={styles.starterBtn}
                   >
-                    Falar com Corujão
+                    Fale com o Especialista
                     <Arr />
                   </a>
                 </div>
@@ -261,84 +177,6 @@ export function Plans() {
         </p>
       </div>
     </section>
-  );
-}
-
-// ============================================================
-// CARDS
-// ============================================================
-function BusinessPlanCard({
-  plan,
-  type,
-  index,
-}: {
-  plan: BusinessPlan;
-  type: "servico" | "comercio";
-  index: number;
-}) {
-  const r = useReveal<HTMLDivElement>();
-  const price = type === "servico" ? plan.priceServico : plan.priceComercio;
-  const daily = type === "servico" ? plan.dailyServico : plan.dailyComercio;
-  const delay = index === 1 ? "reveal-d1" : index === 2 ? "reveal-d2" : "";
-
-  return (
-    <div
-      ref={r.ref}
-      className={`${styles.plan} ${plan.featured ? styles.planFeat : ""} reveal ${delay} ${r.inView ? "in" : ""}`}
-    >
-      <p className={styles.planNm}>{plan.name}</p>
-      <h3 className={styles.planT}>{plan.title}</h3>
-      <p className={styles.planD}>{plan.description}</p>
-
-      <div className={styles.priceWrap}>
-        <div className={styles.price}>
-          <span className={styles.currency}>R$</span>
-          <span className={styles.amount}>{price}</span>
-          <span className={styles.month}>/mês</span>
-        </div>
-        <span className={styles.capFat}>{plan.capacityNote}</span>
-        {plan.uniqueCopy ? (
-          <p className={styles.daily}>
-            Menos de <strong>R$ {daily}</strong>/dia · só <strong>+R$ 3,33/dia</strong> vs Start
-          </p>
-        ) : (
-          <p className={styles.daily}>
-            ≈ <strong>R$ {daily}</strong>/dia, com tudo incluso
-          </p>
-        )}
-      </div>
-
-      <div className={styles.divider} />
-
-      <ul className={styles.fx}>
-        {plan.features.map((f, i) => (
-          <li key={i} className={f.heading ? styles.fxHeading : ""}>
-            <span className={styles.check}>
-              <CheckSm />
-            </span>
-            <div className={styles.fxText}>
-              {f.text}
-              {f.tooltip && (
-                <span className={styles.tooltip}>
-                  <span className={styles.tooltipQ}>?</span>
-                  <span className={styles.tooltipTip}>{f.tooltip}</span>
-                </span>
-              )}
-            </div>
-          </li>
-        ))}
-      </ul>
-
-      <a
-        href={waLink(plan.whatsappMessage)}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={styles.cta}
-      >
-        Falar com Corujão
-        <Arr />
-      </a>
-    </div>
   );
 }
 
@@ -400,7 +238,7 @@ function MeiPlanCard({ plan, index }: { plan: MeiPlan; index: number }) {
         rel="noopener noreferrer"
         className={styles.cta}
       >
-        Falar com Corujão
+        Fale com o Especialista
         <Arr />
       </a>
     </div>

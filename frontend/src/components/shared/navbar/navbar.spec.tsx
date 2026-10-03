@@ -18,7 +18,7 @@ describe("<NavBar />", () => {
     expect(screen.getAllByText("Planos").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Serviços").length).toBeGreaterThan(0);
 
-    // CTA "Falar com Corujão" (desktop + mobile)
-    expect(screen.getAllByText("Falar com Corujão").length).toBeGreaterThan(0);
+    // CTA "Fale com o Especialista" (desktop + mobile)
+    expect(screen.getAllByText("Fale com o Especialista").length).toBeGreaterThan(0);
   });
 });

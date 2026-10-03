@@ -36,15 +36,27 @@ export const waLink = (message: string) =>
   `https://wa.me/${config.phoneNumber}?text=${encodeURIComponent(message)}`;
 
 export const waMessages = {
-  default: "Olá! Venho pelo site da NUWII e quero falar com o Corujão 🦉",
+  default: "Olá! Venho pelo site da NUWII e quero falar com um especialista",
   openCompany: "Olá! Venho pelo site da NUWII e quero abrir minha empresa",
+  openCompanyAvulso:
+    "Olá! Quero abrir minha empresa com a NUWII na modalidade avulsa (R$ 1.200,00). Como faço?",
+  openCompanyPlano:
+    "Olá! Quero abrir minha empresa com a NUWII junto com um plano de contabilidade (R$ 350,00). Como faço?",
+  openCompanyDoubt:
+    "Olá! Tenho uma dúvida sobre abertura de empresa antes de contratar.",
   changeAccountant: "Olá! Venho pelo site da NUWII e quero trocar de contador",
+  accountingComplete:
+    "Olá! Quero contratar a contabilidade completa da NUWII. Pode me ajudar?",
   planStart: "Olá! Tenho interesse no plano Business Start da NUWII",
   planUnique: "Olá! Tenho interesse no plano Business Unique da NUWII",
   planPlus: "Olá! Tenho interesse no plano Business Plus da NUWII",
   planStarter: "Olá! Tenho interesse no plano Business Starter da NUWII",
   virtualOffice: "Olá! Tenho interesse no serviço de Escritório Virtual da NUWII",
   virtualOfficeNumber: "Olá! Tenho interesse no serviço de Escritório Virtual + Número Virtual da NUWII",
+  digitalCertificate: "Olá! Venho pelo site da NUWII e quero emitir meu certificado digital",
+  certificateCpf: "Olá! Quero comprar o certificado digital e-CPF A1 (R$ 149,00). Como faço?",
+  certificateCnpj: "Olá! Quero comprar o certificado digital e-CNPJ A1 (R$ 199,00). Como faço?",
+  certificateDoubt: "Olá! Tenho uma dúvida sobre certificado digital antes de comprar.",
   oneOffServices: "Olá! Preciso de um serviço avulso (declaração, parcelamento, regularização, etc)",
   irpf: "Olá! Quero fazer minha declaração de Imposto de Renda (IRPF) com a NUWII",
   planMeiStarter: "Olá! Tenho interesse no plano MEI Starter da NUWII",

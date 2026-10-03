@@ -91,66 +91,139 @@
   max-width: 640px;
 }
 
-.priceCard {
-  display: inline-flex;
-  align-items: center;
-  gap: 24px;
+.offer {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 18px 24px;
+  border-radius: 20px;
+  box-shadow: 0 18px 46px -26px rgba(11, 31, 58, 0.3);
+  overflow: hidden;
+  max-width: 560px;
+}
+
+.offerTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 22px 24px;
   flex-wrap: wrap;
 }
 
-.priceLine {
+.offerPrice {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
 }
 
-.priceVal {
+.offerLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mute-2);
+}
+
+.offerValue {
   font-family: var(--font-family-bold, sans-serif);
   font-weight: 700;
-  font-size: 24px;
+  font-size: 30px;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   color: var(--ink);
-  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
 }
 
-.priceNote {
-  font-size: 12px;
+.offerNote {
+  font-size: 12.5px;
   color: var(--mute);
 }
 
-.ctaBtn {
+.offerCta {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
   text-decoration: none;
   font-family: var(--font-family-bold, sans-serif);
   font-size: 15px;
   font-weight: 700;
-  padding: 14px 24px;
+  padding: 15px 26px;
   border-radius: 100px;
   background: var(--teal-500);
   color: #fff;
-  transition: all 0.2s var(--ease, ease);
-  box-shadow: 0 8px 20px rgba(14, 155, 145, 0.25);
+  white-space: nowrap;
+  box-shadow: 0 14px 28px -12px rgba(14, 155, 145, 0.9);
+  transition: background 0.2s var(--ease, ease), transform 0.2s var(--ease, ease);
 }
 
-.ctaBtn:hover {
+.offerCta:hover {
   background: var(--teal-600);
   transform: translateY(-2px);
-  box-shadow: 0 12px 24px rgba(14, 155, 145, 0.3);
 }
 
-.ctaBtn svg {
+.offerCta svg,
+.asideCta svg {
   width: 14px;
   height: 14px;
   transition: transform 0.2s var(--ease, ease);
 }
 
-.ctaBtn:hover svg {
+.offerCta:hover svg,
+.asideCta:hover svg {
   transform: translateX(3px);
+}
+
+.offerNoteFoot {
+  margin: 0;
+  padding: 0 24px 20px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--mute);
+}
+
+/* Lista de variações de preço, com linha pontilhada entre rótulo e valor */
+.tiers,
+.asideTiers {
+  list-style: none;
+  margin: 0;
+  padding: 16px 24px 18px;
+  border-top: 1px dashed var(--line);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tiers li,
+.asideTiers li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--mute);
+}
+
+.tiers li::after,
+.asideTiers li::after {
+  content: "";
+  flex: 1;
+  order: 1;
+  border-bottom: 1px dotted var(--line-strong);
+  transform: translateY(-3px);
+}
+
+.tiers li b,
+.asideTiers li b {
+  order: 2;
+  font-family: var(--font-family-bold, sans-serif);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 560px) {
+  .offerTop { flex-direction: column; align-items: stretch; gap: 18px; }
+  .offerCta { justify-content: center; }
 }
 
 /* BODY */
@@ -308,15 +381,31 @@
 .asideCard {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 28px 24px;
-  box-shadow: 0 4px 20px rgba(11, 31, 58, 0.04);
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 26px 24px 24px;
+  box-shadow: 0 18px 46px -28px rgba(11, 31, 58, 0.35);
+}
+
+.asideCat {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal-700);
+  background: var(--teal-50);
+  border-radius: 100px;
+  padding: 5px 11px;
+  margin-bottom: 12px;
 }
 
 .asideTitle {
   font-family: var(--font-family-bold, sans-serif);
   font-weight: 700;
-  font-size: 17px;
+  font-size: 19px;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
   margin: 0 0 18px;
   color: var(--ink);
 }
@@ -324,41 +413,56 @@
 .asidePrice {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
   padding-bottom: 18px;
-  margin-bottom: 18px;
   border-bottom: 1px solid var(--line-2);
+}
+
+.asidePriceVal {
+  font-family: var(--font-family-bold, sans-serif);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.asideTiers {
+  margin: 0 -24px;
+  border-top: 0;
+  border-bottom: 1px solid var(--line-2);
+  background: transparent;
+  padding: 16px 24px;
 }
 
 .asideCta {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 9px;
   width: 100%;
+  margin-top: 20px;
   text-decoration: none;
   font-family: var(--font-family-bold, sans-serif);
   font-size: 15px;
   font-weight: 700;
-  padding: 14px 20px;
-  border-radius: 12px;
+  padding: 15px 20px;
+  border-radius: 100px;
   background: var(--teal-500);
   color: #fff;
-  transition: all 0.2s var(--ease, ease);
+  box-shadow: 0 14px 28px -14px rgba(14, 155, 145, 0.9);
+  transition: background 0.2s var(--ease, ease), transform 0.2s var(--ease, ease);
   box-sizing: border-box;
 }
 
 .asideCta:hover {
   background: var(--teal-600);
-}
-
-.asideCta svg {
-  width: 14px;
-  height: 14px;
+  transform: translateY(-2px);
 }
 
 .asideHelp {
-  margin: 14px 0 0;
+  margin: 12px 0 0;
   font-size: 12.5px;
   line-height: 1.5;
   color: var(--mute);
@@ -366,8 +470,8 @@
 }
 
 .asideContact {
-  margin-top: 22px;
-  padding-top: 22px;
+  margin-top: 20px;
+  padding-top: 18px;
   border-top: 1px solid var(--line-2);
   text-align: center;
 }
@@ -375,20 +479,33 @@
 .asideContact p {
   font-size: 13px;
   color: var(--mute);
-  margin: 0 0 8px;
+  margin: 0 0 6px;
 }
 
 .asideWhatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-family: var(--font-family-bold, sans-serif);
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 700;
   color: var(--teal-700);
   text-decoration: none;
   transition: color 0.15s var(--ease, ease);
 }
 
+.asideWhatsapp svg {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.2s var(--ease, ease);
+}
+
 .asideWhatsapp:hover {
   color: var(--teal-500);
+}
+
+.asideWhatsapp:hover svg {
+  transform: translateX(3px);
 }
 
 /* FINAL CTA */
@@ -397,11 +514,16 @@
 }
 
 .finalCtaInner {
-  background: var(--ink);
+  background: linear-gradient(135deg, var(--navy-900, #0B1F3A), var(--ink) 55%, #0d2a2a);
   color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 24px;
-  padding: 56px 48px;
-  text-align: center;
+  padding: 46px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 44px;
+  text-align: left;
   position: relative;
   overflow: hidden;
   opacity: 0;
@@ -429,7 +551,7 @@
 .finalCtaInner h3 {
   font-family: var(--font-family-black, sans-serif);
   font-weight: 900;
-  font-size: clamp(26px, 4vw, 38px);
+  font-size: clamp(25px, 3.2vw, 34px);
   letter-spacing: -0.025em;
   line-height: 1.1;
   margin: 0 0 14px;
@@ -442,54 +564,112 @@
   color: var(--teal-400);
 }
 
+.finalCtaText {
+  position: relative;
+  max-width: 46ch;
+}
+
 .finalCtaInner p {
   font-size: 16px;
   line-height: 1.55;
-  color: rgba(255, 255, 255, 0.8);
-  margin: 0 auto 30px;
-  max-width: 520px;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0;
   position: relative;
+}
+
+/* Empilha as ações: antes o botão e o link ficavam lado a lado na mesma
+   linha, porque os dois eram inline dentro de um bloco centralizado. */
+.finalCtaActions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: none;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 860px) {
+  .finalCtaInner {
+    flex-direction: column;
+    text-align: center;
+    gap: 28px;
+    padding: 40px 26px;
+  }
+  .finalCtaText { max-width: none; }
+  .finalCtaActions { width: 100%; flex-direction: column; align-items: stretch; }
+  .finalCtaActions .finalCtaBtn,
+  .finalCtaActions .backLink { width: 100%; }
 }
 
 .finalCtaBtn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   text-decoration: none;
   font-family: var(--font-family-bold, sans-serif);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
-  padding: 16px 32px;
+  letter-spacing: -0.01em;
+  padding: 17px 36px;
   border-radius: 100px;
   background: var(--teal-500);
   color: #fff;
-  position: relative;
-  transition: all 0.2s var(--ease, ease);
+  box-shadow: 0 16px 34px -14px rgba(14, 155, 145, 0.85);
+  transition: background 0.2s var(--ease, ease), transform 0.2s var(--ease, ease),
+    box-shadow 0.2s var(--ease, ease);
 }
 
 .finalCtaBtn:hover {
   background: var(--teal-400);
   transform: translateY(-2px);
+  box-shadow: 0 22px 42px -16px rgba(31, 189, 177, 0.95);
 }
 
 .finalCtaBtn svg {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
+  transition: transform 0.2s var(--ease, ease);
+}
+
+.finalCtaBtn:hover svg {
+  transform: translateX(3px);
 }
 
 .backLink {
-  display: inline-block;
-  margin-top: 20px;
-  font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.7);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px 28px;
+  border-radius: 100px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-family: var(--font-family-bold, sans-serif);
+  font-size: 15px;
+  font-weight: 700;
   text-decoration: none;
-  position: relative;
-  transition: color 0.15s var(--ease, ease);
+  white-space: nowrap;
+  transition: border-color 0.2s var(--ease, ease), background 0.2s var(--ease, ease),
+    transform 0.2s var(--ease, ease);
 }
 
 .backLink:hover {
+  border-color: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-2px);
   color: #fff;
 }
+
+.backLink svg {
+  width: 13px;
+  height: 13px;
+  transition: transform 0.2s var(--ease, ease);
+}
+
+.backLink:hover svg { transform: translateX(-3px); }
+
 
 @media (max-width: 768px) {
   .hero { padding: 90px 0 30px; }

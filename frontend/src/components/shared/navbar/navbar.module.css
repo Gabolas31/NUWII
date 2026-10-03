@@ -34,6 +34,10 @@
 }
 .logoImg {
   height: 30px;
+  /* O componente <Image> usa next/image com `fill`, então o wrapper não herda
+     largura do conteúdo: com `width: auto` ele colapsa para 0 e o logo some.
+     A proporção do arquivo logo.png é 720x180 (4:1). */
+  aspect-ratio: 4 / 1;
   width: auto;
   display: block;
 }
@@ -155,8 +159,13 @@
   top: 70px;
   left: 0;
   right: 0;
-  bottom: 0;
+  /* O `backdrop-filter` da .root transforma a <nav> em bloco contentor dos
+     filhos `position: fixed`, então `bottom: 0` resolvia contra a altura da
+     barra (70px) e o painel abria com 64px de altura, deixando os links
+     vazando por cima da página. Altura explícita resolve. */
+  height: calc(100dvh - 70px);
   background: var(--bg);
+  overflow-y: auto;
   padding: 32px 28px;
   display: flex;
   flex-direction: column;
